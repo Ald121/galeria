@@ -1,8 +1,6 @@
 <!-- Slider Start -->
 <div style="margin: 0 5% 0 5%;  padding: 7px;" >
-    <ul class="dynamic-grid" angular-grid="currentFiles" ag-grid-width="300" ag-gutter-size="40"
-        ag-id="gallery" ag-scroll-container="body" ag-infinite-scroll-distance="700"
-        ag-infinite-scroll="LoadMore()" ag-infinite-scroll-delay="1500">
+    <ul class="dynamic-grid" angular-grid="pics" ag-infinite-scroll="LoadMore()">
         <li data-ng-repeat="pic in imgs" class="grid">
             <img src="{{pic.dir}}" class="grid-img" />
         </li>
