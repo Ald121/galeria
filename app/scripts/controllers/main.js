@@ -11,19 +11,19 @@ angular.module('fotosApp')
   .controller('MainCtrl', function ($scope,$location) {
 
      $scope.menuSuperior=[
-                      {nombre:'Inicio',link:'/',icon:'',child:[]},
-                      {nombre:'Contactos',link:'/Contactos',icon:'',child:[]},
-                      {nombre:'Fotografias',link:'/',icon:'',child:[
-                        {nombre:'Corportivas',link:'/fotografia/Corportivas',icon:'',child:[]},
-                        {nombre:'Bodas',link:'/fotografia/Bodas',icon:'',child:[]},
-                        {nombre:'Retratos',link:'/fotografia/Retratos',icon:'',child:[]},
-                        {nombre:'Fashion',link:'/fotografia/Fashion',icon:'',child:[]},
-                        {nombre:'Editorial',link:'/fotografia/Editorial',icon:'',child:[]}
+                      {nombre:'Inicio',link:'/',icon:'fa-home',child:[]},
+                      {nombre:'Contactos',link:'/Contactos',icon:'fa-envelope',child:[]},
+                      {nombre:'Fotografias',link:'/',icon:'fa-camera-retro',child:[
+                        {nombre:'Corportivas',link:'/fotografia/Corportivas',icon:'fa-picture-o',child:[]},
+                        {nombre:'Bodas',link:'/fotografia/Bodas',icon:'fa-picture-o',child:[]},
+                        {nombre:'Retratos',link:'/fotografia/Retratos',icon:'fa-picture-o',child:[]},
+                        {nombre:'Fashion',link:'/fotografia/Fashion',icon:'fa-picture-o',child:[]},
+                        {nombre:'Editorial',link:'/fotografia/Editorial',icon:'fa-picture-o',child:[]}
                       ]},
-                      {nombre:'Workshop',link:'/',icon:'',child:[]},
-                      {nombre:'Videos',link:'/',icon:'',child:[]},
-                      {nombre:'Productos',link:'/',icon:'',child:[]},
-                      {nombre:'Ingreso ',link:'/',icon:'',child:[]},
+                      {nombre:'Workshop',link:'/',icon:'fa-home',child:[]},
+                      {nombre:'Videos',link:'/',icon:'fa-video-camera',child:[]},
+                      {nombre:'Productos',link:'/',icon:'fa-product-hunt',child:[]},
+                      {nombre:'Ingreso ',link:'/',icon:'fa-user-circle',child:[]},
                     ];
     $scope.goTo=function(link){
       $location.path(link);
