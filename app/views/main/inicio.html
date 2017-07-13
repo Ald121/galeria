@@ -1,143 +1,131 @@
-
-    <!-- Slider Start -->
-    <div style="     margin: 0 5% 0 5%;
-    padding: 7px; border-radius: 10px 10px 10px 10px;
--moz-border-radius: 10px 10px 10px 10px;
--webkit-border-radius: 10px 10px 10px 10px;
-
--webkit-box-shadow: 0px 0px 11px 0px rgba(54,50,148,1);
--moz-box-shadow: 0px 0px 11px 0px rgba(54,50,148,1);
-box-shadow: 0px 0px 11px 0px rgba(54,50,148,1);">
-        <md-grid-list
-               md-cols-gt-md="12" md-cols-sm="3" md-cols-md="8"
-               md-row-height-gt-md="1:1" md-row-height="4:9"
-               md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
-               <md-grid-tile
-                  ng-repeat="img in imgs"
-                  ng-style="{'background-image': 'url(' + img.dir + ')','background-position-y': 0,'background-size': '100% 100%'}"
-                  md-colspan-gt-sm="{{img.colspan}}"
-                  md-rowspan-gt-sm="{{img.rowspan}}">
-                  <md-grid-tile-footer>
-                </md-grid-tile-footer>
-               </md-grid-tile>
-            </md-grid-list>
-      </div>
-    <!-- Wrapper Start -->
-    <section id="intro">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7 col-sm-12">
-            <div class="block">
-              <div class="section-title">
-                <h2>QUIENES SOMOS?</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id </p>
-            </div>
-          </div><!-- .col-md-7 close -->
-          <div class="col-md-5 col-sm-12">
-            <div class="block">
-              <img src="styles/img/wrapper-img.gif" alt="Img">
-            </div>
-          </div><!-- .col-md-5 close -->
-        </div>
-      </div>
-    </section>
-
-  <section id="feature">
+<!-- Slider Start -->
+<div style="margin: 0 5% 0 5%;  padding: 7px;" >
+    <ul class="dynamic-grid" angular-grid="currentFiles" ag-grid-width="300" ag-gutter-size="40"
+        ag-id="gallery" ag-scroll-container="body" ag-infinite-scroll-distance="700"
+        ag-infinite-scroll="LoadMore()" ag-infinite-scroll-delay="1500">
+        <li data-ng-repeat="pic in imgs" class="grid">
+            <img src="{{pic.dir}}" class="grid-img" />
+        </li>
+    </ul>
+</div>
+<!-- Wrapper Start -->
+<section id="intro">
     <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-6">
-          <h2>NUESTROS SERVICIOS</h2>
-          <p>Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p>Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p>Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <a href="work.html" class="btn btn-view-works">View Works</a>
-        </div>
-      </div>
-    </div>
-  </section>
-        
-    <!-- Service Start -->
-    <section id="service">
-      <div class="container">
         <div class="row">
-          <div class="section-title">
-            <h2>OTROS SERVICIOS</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
-          </div>
+            <div class="col-md-7 col-sm-12">
+                <div class="block">
+                    <div class="section-title">
+                        <h2>QUIENES SOMOS?</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id </p>
+                </div>
+            </div>
+            <!-- .col-md-7 close -->
+            <div class="col-md-5 col-sm-12">
+                <div class="block">
+                    <img src="styles/img/wrapper-img.gif" alt="Img">
+                </div>
+            </div>
+            <!-- .col-md-5 close -->
+        </div>
+    </div>
+</section>
+
+<section id="feature">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-6">
+                <h2>NUESTROS SERVICIOS</h2>
+                <p>Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <p>Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <p>Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <a href="work.html" class="btn btn-view-works">View Works</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Start -->
+<section id="service">
+    <div class="container">
+        <div class="row">
+            <div class="section-title">
+                <h2>OTROS SERVICIOS</h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
+            </div>
         </div>
         <div class="row ">
-          <div class="col-sm-6 col-md-3">
-            <div class="service-item">
-              <i class="icon ion-coffee"></i>
-              <h4>Branding</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            <div class="col-sm-6 col-md-3">
+                <div class="service-item">
+                    <i class="icon ion-coffee"></i>
+                    <h4>Branding</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="service-item">
-              <i class="ion-compass"></i>
-              <h4>Web Design</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            <div class="col-sm-6 col-md-3">
+                <div class="service-item">
+                    <i class="ion-compass"></i>
+                    <h4>Web Design</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="service-item">
-              <i class="ion-image"></i>
-              <h4>App Design</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            <div class="col-sm-6 col-md-3">
+                <div class="service-item">
+                    <i class="ion-image"></i>
+                    <h4>App Design</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="service-item">
-              <i class="ion-bug"></i>
-              <h4>Start Up</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            <div class="col-sm-6 col-md-3">
+                <div class="service-item">
+                    <i class="ion-bug"></i>
+                    <h4>Start Up</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="service-item">
-              <i class="ion-headphone"></i>
-              <h4>Logo Design</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            <div class="col-sm-6 col-md-3">
+                <div class="service-item">
+                    <i class="ion-headphone"></i>
+                    <h4>Logo Design</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="service-item">
-              <i class="ion-leaf"></i>
-              <h4>Development</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            <div class="col-sm-6 col-md-3">
+                <div class="service-item">
+                    <i class="ion-leaf"></i>
+                    <h4>Development</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="service-item">
-              <i class="ion-planet"></i>
-              <h4>Brand Identity</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            <div class="col-sm-6 col-md-3">
+                <div class="service-item">
+                    <i class="ion-planet"></i>
+                    <h4>Brand Identity</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="service-item">
-              <i class="ion-earth"></i>
-              <h4>Brand Identity</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            <div class="col-sm-6 col-md-3">
+                <div class="service-item">
+                    <i class="ion-earth"></i>
+                    <h4>Brand Identity</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
-    <!-- Call to action Start -->
-    <section id="call-to-action">
-      <div class="container">
+    </div>
+</section>
+<!-- Call to action Start -->
+<section id="call-to-action">
+    <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="block">
-              <h2>FOTOGRAFIAS A OTRO NIVEL</h2>
-              <p>Read more about what we do and our philosophy of design. Judge for yourself The work and results we’ve achieved for other clients, and meet our highly experienced Team who just love to design.</p>
-              <a class="btn btn-default btn-call-to-action" href="#" >REGISTRATE</a>
+            <div class="col-md-12">
+                <div class="block">
+                    <h2>FOTOGRAFIAS A OTRO NIVEL</h2>
+                    <p>Read more about what we do and our philosophy of design. Judge for yourself The work and results we’ve achieved for other clients, and meet our highly experienced Team who just love to design.</p>
+                    <a class="btn btn-default btn-call-to-action" href="#">REGISTRATE</a>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>

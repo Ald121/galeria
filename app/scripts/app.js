@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'ngMaterial',
     'route-segment',
-    'view-segment'
+    'view-segment',
+    'angularGrid'
   ])
   .config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
       $routeSegmentProvider.options.autoLoadTemplates = true; 

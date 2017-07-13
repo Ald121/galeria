@@ -30,6 +30,6 @@ angular.module('fotosApp')
 			    	{dir:'styles/images/18.jpg',colspan:4,rowspan:4},
 			    	{dir:'styles/images/19.jpg',colspan:4,rowspan:4},
 			    	{dir:'styles/images/20.jpg',colspan:4,rowspan:4}
-
 			    ];
+
   });
