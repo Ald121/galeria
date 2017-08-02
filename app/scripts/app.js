@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var app = angular
   .module('fotosApp', [
     'ngAnimate',
     'ngCookies',
@@ -19,9 +19,12 @@ angular
     'ngMaterial',
     'route-segment',
     'view-segment',
-    'angularGrid'
-  ])
-  .config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
+    'angularGrid',
+    'ui.bootstrap',
+    'bootstrapLightbox'
+  ]);
+
+app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
       $routeSegmentProvider.options.autoLoadTemplates = true; 
       $routeSegmentProvider    
             .when('/',    'main')
@@ -40,4 +43,8 @@ angular
                 controller: 'FotografiaCtrl',
                 dependencies:['categoria']
             });
-  });
+  })
+
+app.config(function (LightboxProvider) {
+  LightboxProvider.templateUrl = 'views/fotografia/modalShowImg.html';
+});

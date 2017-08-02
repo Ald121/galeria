@@ -7,29 +7,36 @@
  * # InicioctrlCtrl
  * Controller of the fotosApp
  */
-angular.module('fotosApp')
-  .controller('inicioCtrl', function ($scope) {
-        $scope.imgs=[
-			    	{dir:'styles/images/1.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/2.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/3.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/4.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/5.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/6.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/7.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/8.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/9.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/10.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/11.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/12.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/13.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/14.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/15.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/16.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/17.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/18.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/19.jpg',colspan:4,rowspan:4},
-			    	{dir:'styles/images/20.jpg',colspan:4,rowspan:4}
-			    ];
+var app=angular.module('fotosApp');
+  app.controller('inicioCtrl', function ($scope,$mdDialog,Lightbox) {
+    $scope.imgs = [
+		    	{url:'styles/images/21.jpg'},
+		    	{url:'styles/images/22.png'},
+		    	{url:'styles/images/1.jpg'},
+		    	{url:'styles/images/2.jpg'},
+		    	{url:'styles/images/3.jpg'},
+		    	{url:'styles/images/4.jpg'},
+		    	{url:'styles/images/5.jpg'},
+		    	{url:'styles/images/6.jpg'},
+		    	{url:'styles/images/7.jpg'},
+		    	{url:'styles/images/8.jpg'},
+		    	{url:'styles/images/9.jpg'},
+		    	{url:'styles/images/10.jpg'},
+		    	{url:'styles/images/11.jpg'},
+		    	{url:'styles/images/12.jpg'},
+		    	{url:'styles/images/13.jpg'},
+		    	{url:'styles/images/14.jpg'},
+		    	{url:'styles/images/15.jpg'},
+		    	{url:'styles/images/16.jpg'},
+		    	{url:'styles/images/17.jpg'},
+		    	{url:'styles/images/18.jpg'},
+		    	{url:'styles/images/19.jpg'},
+		    	{url:'styles/images/20.jpg'}
+		    ];
+	
+	$scope.openLightboxModal = function (index) {
+    	Lightbox.openModal($scope.imgs,index);
+  	};
 
-  });
+});
+

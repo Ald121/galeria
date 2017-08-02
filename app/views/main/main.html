@@ -1,15 +1,24 @@
 <header>
     <div id="header">
-      <ul class="nav" style="margin-left: 29%;">
-        <li ng-repeat="item in menuSuperior">
-          <a href="#!{{item.link}}"><div><i class="fa {{item.icon}}" aria-hidden="true"></i> {{item.nombre}}</div></a>
-          <ul ng-if="item.child.length>0">
-              <li ng-repeat="subitem in item.child">
-                <a href="#!{{subitem.link}}"><i class="fa {{item.icon}}" aria-hidden="true"></i> {{subitem.nombre}}</a>
-              </li>
-          </ul>
-        </li>
-      </ul>
+        <ul class="nav" style="margin-left: 29%;">
+            <li ng-repeat="item in menuSuperior">
+                <a href="#!{{item.link}}">
+                    <div>
+                    <i class="fa {{item.icon}}" aria-hidden="true"></i> {{item.nombre}}</div>
+                </a>
+                <ul ng-if="item.child.length>0">
+                    <li ng-repeat="subitem in item.child">
+                        <a href="#!{{subitem.link}}"><i class="fa {{item.icon}}" aria-hidden="true"></i> {{subitem.nombre}}</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="" ng-click="openLoginModal($event)">
+                    <div>
+                    <i class="fa fa-user-circle" aria-hidden="true"></i> Ingresar</div>
+                </a>
+            </li>
+        </ul>
     </div>
 </header>
 
