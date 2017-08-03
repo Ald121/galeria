@@ -21,7 +21,8 @@ var app = angular
     'view-segment',
     'angularGrid',
     'ui.bootstrap',
-    'bootstrapLightbox'
+    'bootstrapLightbox',
+    'toastr'
   ]);
 
 app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {

@@ -8,8 +8,8 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('MainCtrl', function ($scope,$location,$mdDialog) {
-
+  .controller('MainCtrl', function ($scope,$location,$mdDialog,userService,toastr) {
+    $scope.saving = false;
      $scope.menuSuperior=[
                       {nombre:'Inicio',link:'/',icon:'fa-home',child:[]},
                       {nombre:'Contactos',link:'/Contactos',icon:'fa-envelope',child:[]},
@@ -40,10 +40,34 @@ angular.module('fotosApp')
       });
     }
 
-    var modalLoginController = function($scope,$mdDialog){
-      console.log('login controller');
+    var modalLoginController = function($scope,$mdDialog,userService){
       $scope.cancel = function(){
         $mdDialog.hide();
+      }
+
+      $scope.ingresar = function(){
+        $scope.saving = true;
+        userService.ingresar($scope.item).then(function(r){
+          if (r.data.respuesta == true) {
+            toastr.success($scope.item.nick, 'Bienvenido !',{
+              closeButton: true,
+              timeOut: 2000,
+            });
+             $scope.saving = false;
+          }else{
+            var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
+              closeButton: true,
+              timeOut: 2000,
+            });
+            $scope.saving = false;
+          }
+        }).catch(function(e){
+          var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+            closeButton: true,
+             timeOut: 2000,
+          });
+          $scope.saving = false;
+        });
       }
     } 
 
