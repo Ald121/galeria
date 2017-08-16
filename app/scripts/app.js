@@ -29,7 +29,8 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
       $routeSegmentProvider.options.autoLoadTemplates = true; 
       $routeSegmentProvider    
             .when('/',    'main')
-            .when('/fotografia/:categoria',    'main.fotografia')        
+            .when('/fotografia/:categoria',    'main.fotografia')
+            .when('/activarcuenta/:code',    'main.activarcuenta')         
             .segment('main', {
                 templateUrl: 'views/main/main.html',
                 controller: 'MainCtrl'
@@ -39,11 +40,17 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                     controller: 'inicioCtrl',
                     default: true
                 })
-            .segment('fotografia', {
-                templateUrl: 'views/fotografia/main.html',
-                controller: 'FotografiaCtrl',
-                dependencies:['categoria']
-            });
+                .segment('fotografia', {
+                    templateUrl: 'views/fotografia/main.html',
+                    controller: 'FotografiaCtrl',
+                    dependencies:['categoria']
+                }) 
+                .segment('activarcuenta', {
+                    templateUrl: 'views/main/inicio.html',
+                    controller: 'accountActivationCtrl',
+                    dependencies:['code']
+                })
+
   })
 
 app.config(function (LightboxProvider) {

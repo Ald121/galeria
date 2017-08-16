@@ -1,0 +1,61 @@
+<style type="text/css">
+  .errorSpan{
+    font-size: 12px;
+  }
+  .requiredMsg{
+     color: #e14c27;
+  }
+</style>
+<md-dialog aria-label="Cargar Imagen " >
+  <form ng-cloak name="form" ng-submit="registrar()">
+    <md-dialog-content >
+      <div id="gridContainer" ng-cloak>
+         <md-content layout-padding>
+         	<div style="text-align: center;">
+         		<img src="icons/user.png" style="width: 20%;">
+         	</div>
+            <md-input-container class="md-icon-float md-block">
+                <md-icon class="md-primary">text_fields</md-icon>
+                <label>Nombres</label>
+                <input name="nombres" ng-model="item.nombres" type="text" required>
+                <span ng-show="form.nombres.$touched && form.nombres.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <md-icon class="md-primary">text_fields</md-icon>
+                <label>Apellidos</label>
+                <input name="apellidos" ng-model="item.apellidos" type="text">
+                <span ng-show="form.apellidos.$touched && form.apellidos.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <md-icon class="md-primary">email</md-icon>
+                <label>Correo / E-mail</label>
+                <input name="email" ng-model="item.email" type="email" required>
+                <span ng-show="form.email.$touched && form.email.$invalid" class="errorSpan requiredMsg">Email Incorrecto</span>
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <md-icon class="md-primary">person_pin</md-icon>
+                <label>Usuario</label>
+                <input name="nick" ng-model="item.nick" type="text" required>
+                <span ng-show="form.nick.$touched && form.nick.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <md-icon class="md-primary">fingerprint</md-icon>
+                <label>Contraseña</label>
+                <input name="pass" ng-model="item.pass" type="password" required>
+                <span ng-show="form.pass.$touched && form.pass.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+            </md-input-container>
+         </md-content>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">
+       Cancelar
+      </md-button>
+      <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving ">
+      <i class="fa fa-spinner" aria-hidden="true" ng-show="saving"></i>
+       Aceptar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

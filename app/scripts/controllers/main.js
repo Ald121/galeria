@@ -10,7 +10,7 @@
 angular.module('fotosApp')
   .controller('MainCtrl', function ($scope,$location,$mdDialog,userService,toastr) {
     $scope.saving = false;
-     $scope.menuSuperior=[
+     $scope.menuSuperior = [
                       {nombre:'Inicio',link:'/',icon:'fa-home',child:[]},
                       {nombre:'Contactos',link:'/Contactos',icon:'fa-envelope',child:[]},
                       {nombre:'Fotografias',link:'/',icon:'fa-camera-retro',child:[
@@ -25,11 +25,11 @@ angular.module('fotosApp')
                       {nombre:'Productos',link:'/',icon:'fa-product-hunt',child:[]},
                       // {nombre:'Ingreso ',link:'/',icon:'fa-user-circle',child:[]},
                     ];
-    $scope.goTo=function(link){
+    $scope.goTo = function(link){
       $location.path(link);
     }
 
-    $scope.openLoginModal=function(ev){
+    $scope.openLoginModal = function(ev){
       $mdDialog.show({
         controller: modalLoginController,
         templateUrl: 'views/fotografia/modalLogin.html',
@@ -69,6 +69,50 @@ angular.module('fotosApp')
           $scope.saving = false;
         });
       }
+
+      $scope.openRegister = function(ev){
+      $mdDialog.show({
+        controller: modalRegisterController,
+        templateUrl: 'views/fotografia/modalRegister.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen
+      });
+    }
+    
+    var modalRegisterController = function($scope,$mdDialog,userService){
+      $scope.cancel = function(){
+        $mdDialog.hide();
+      }
+
+      $scope.registrar = function(){
+        $scope.saving = true;
+        userService.registrar($scope.item).then(function(r){
+          if (r.data.respuesta == true) {
+            toastr.info('Se envió un correo de verificación, para ingresar activa tu cuenta','Correo de verificación',{
+              closeButton: true,
+              timeOut: 3000,
+            });
+             $mdDialog.hide();
+             $scope.saving = false;
+          }else{
+            var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
+              closeButton: true,
+              timeOut: 2000,
+            });
+            $scope.saving = false;
+          }
+        }).catch(function(e){
+          var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+            closeButton: true,
+             timeOut: 2000,
+          });
+          $scope.saving = false;
+        });
+      }
+    } 
+
     } 
 
   });
