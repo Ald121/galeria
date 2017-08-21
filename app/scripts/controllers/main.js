@@ -40,7 +40,7 @@ angular.module('fotosApp')
       });
     }
 
-    var modalLoginController = function($scope,$mdDialog,userService){
+    var modalLoginController = function($scope,$mdDialog,userService,$location){
       $scope.cancel = function(){
         $mdDialog.hide();
       }
@@ -54,6 +54,7 @@ angular.module('fotosApp')
               timeOut: 2000,
             });
              $scope.saving = false;
+             $location.path('/administration');
           }else{
             var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
               closeButton: true,

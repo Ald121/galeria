@@ -22,15 +22,28 @@ var app = angular
     'angularGrid',
     'ui.bootstrap',
     'bootstrapLightbox',
-    'toastr'
+    'toastr',
+    'md.data.table'
   ]);
 
 app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
       $routeSegmentProvider.options.autoLoadTemplates = true; 
       $routeSegmentProvider    
             .when('/',    'main')
+            .when('/administration',    'administration')
+            .when('/administration/images',    'administration.images')
             .when('/fotografia/:categoria',    'main.fotografia')
-            .when('/activarcuenta/:code',    'main.activarcuenta')         
+            .when('/activarcuenta/:code',    'main.activarcuenta')
+            .segment('administration', {
+                templateUrl: 'views/administration/index.html',
+                controller: 'administrationCtrl',
+                default: true
+            }).within()
+                .segment('images', {
+                    templateUrl: 'views/administration/images/index.html',
+                    controller: 'administrationImagesCtrl',
+                    default: true
+                }).up()         
             .segment('main', {
                 templateUrl: 'views/main/main.html',
                 controller: 'MainCtrl'
@@ -50,6 +63,7 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                     controller: 'accountActivationCtrl',
                     dependencies:['code']
                 })
+                .up()
 
   })
 

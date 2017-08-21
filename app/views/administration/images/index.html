@@ -1,0 +1,29 @@
+
+<md-toolbar class="md-table-toolbar md-default">
+  <div class="md-toolbar-tools">
+    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="addImage()">
+	  <i class="fa fa-camera-retro"></i> <i class="fa fa-plus"></i> Añadir Imagen
+	</button>
+  </div>
+</md-toolbar>
+<!-- exact table from live demo -->
+<md-table-container>
+  <table md-table ng-model="selected" md-progress="promise">
+    <thead md-head md-order="query.order" md-on-reorder="getImgs">
+      <tr md-row>
+        <th md-column md-numeric>IMAGEN</th>
+        <th md-column md-numeric md-order-by="calories.value"><span>DIRECCIÓN</span></th>
+        <th md-column md-numeric>ACCIÓN</th>
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row md-select="img" md-select-id="name" md-auto-select ng-repeat="img in imgsList">
+        <td md-cell><a href="" ng-click="showImage($index)"><img ng-src="{{img.url}}" width="50"></a></td>
+        <td md-cell>{{img.url}}</td>
+        <td md-cell><a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+<md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getImgs" md-page-select></md-table-pagination>
