@@ -13,13 +13,15 @@
       <tr md-row>
         <th md-column md-numeric>IMAGEN</th>
         <th md-column md-numeric md-order-by="calories.value"><span>DIRECCIÓN</span></th>
+        <th md-column md-numeric md-order-by="calories.value"><span>FECHA</span></th>
         <th md-column md-numeric>ACCIÓN</th>
       </tr>
     </thead>
     <tbody md-body>
       <tr md-row md-select="img" md-select-id="name" md-auto-select ng-repeat="img in imgsList">
         <td md-cell><a href="" ng-click="showImage($index)"><img ng-src="{{img.url}}" width="50"></a></td>
-        <td md-cell>{{img.url}}</td>
+        <td md-cell>{{img.src}}</td>
+        <td md-cell>{{img.createAt}}</td>
         <td md-cell><a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
       </tr>
     </tbody>

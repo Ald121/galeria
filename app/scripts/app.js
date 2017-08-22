@@ -23,7 +23,8 @@ var app = angular
     'ui.bootstrap',
     'bootstrapLightbox',
     'toastr',
-    'md.data.table'
+    'md.data.table',
+    'angularFileUpload'
   ]);
 
 app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {

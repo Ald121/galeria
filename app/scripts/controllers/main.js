@@ -54,6 +54,7 @@ angular.module('fotosApp')
               timeOut: 2000,
             });
              $scope.saving = false;
+             $mdDialog.hide();
              $location.path('/administration');
           }else{
             var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{

@@ -1,6 +1,5 @@
 angular.module('fotosApp')
   .controller('administrationCtrl', function ($scope,$mdSidenav) {
-    console.log('administration');
     $scope.menuAdministration = [
     							  {nombre:'Galeria',icon:'fa-picture-o',link:'/imageList'
     							  ,child:[
