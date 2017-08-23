@@ -39,5 +39,5 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-danger" type="button" ng-click="close()">Cancelar</button>
-    <button class="btn btn-warning" type="button" ng-click="uploadImage()" ng-disabled="!uploader.getNotUploadedItems().length">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="uploadImage()" ng-disabled="!uploader.getNotUploadedItems().length" ng-show="!uploading">OK</button>
 </div>

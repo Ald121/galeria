@@ -1,6 +1,6 @@
 angular.module('fotosApp')
   .controller('addImageCtrl', function ($scope,generalService,Lightbox,$uibModalInstance,FileUploader,toastr,alertsService) {
-
+    $scope.uploading = false;
     $scope.close = function() {
         $uibModalInstance.close();
     }
@@ -40,6 +40,7 @@ angular.module('fotosApp')
         };
 
         $scope.uploadImage = function(){
+            $scope.uploading = true;
            uploader.uploadAll()
         }
   });

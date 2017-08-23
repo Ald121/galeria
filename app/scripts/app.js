@@ -37,8 +37,7 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
             .when('/activarcuenta/:code',    'main.activarcuenta')
             .segment('administration', {
                 templateUrl: 'views/administration/index.html',
-                controller: 'administrationCtrl',
-                default: true
+                controller: 'administrationCtrl'
             }).within()
                 .segment('images', {
                     templateUrl: 'views/administration/images/index.html',

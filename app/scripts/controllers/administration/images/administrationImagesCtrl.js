@@ -40,7 +40,6 @@ angular.module('fotosApp')
             templateUrl: 'views/administration/images/modalAddImg.html',
             controller: 'addImageCtrl',
         });
-
         modalInstance.result.then(function(result) {
           $scope.getImgs();
         });
@@ -48,6 +47,21 @@ angular.module('fotosApp')
 
       $scope.showImage = function (index) {
         Lightbox.openModal($scope.imgsList,index);
+      };
+
+      $scope.showDelete = function (item) {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/administration/images/modalDeleteImg.html',
+            controller: 'deleteImageCtrl',
+            resolve: {
+                  item: function () {
+                      return item;
+                  }
+              }
+        });
+        modalInstance.result.then(function(result) {
+          $scope.getImgs();
+        });
       };
 
   });

@@ -2,11 +2,16 @@ angular.module('fotosApp').factory('imageServices',['$q', '$timeout', '$http','g
     function ($q, $timeout, $http,generalService) {
     
     return ({
-      imageList: imageList
+      imageList: imageList,
+      deleteImg:deleteImg
     });
 
     function imageList(dataSend) {
        return $http.post(generalService.dir() + 'imagesList', dataSend);
+    }
+
+    function deleteImg(dataSend) {
+       return $http.post(generalService.dir() + 'deleteImg', dataSend);
     }
 
     }])
