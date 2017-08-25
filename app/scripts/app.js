@@ -24,8 +24,24 @@ var app = angular
     'bootstrapLightbox',
     'toastr',
     'md.data.table',
-    'angularFileUpload'
+    'angularFileUpload',
+    'ngStorage'
   ]);
+
+app.run(function($rootScope,$location,userService,toastr,$localStorage) {
+    $rootScope.$on("$locationChangeStart", function(event, next, current) {
+        if ($localStorage.user) {
+            userService.checkSession().then(function(r){
+            }).catch(function(e){
+              var toast = toastr.error('Ups! tu sesión ha caducado', 'Error',{
+                closeButton: true,
+                 timeOut: 2000,
+              });
+              $location.path('/');
+            });
+        }
+    });
+});
 
 app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
       $routeSegmentProvider.options.autoLoadTemplates = true; 

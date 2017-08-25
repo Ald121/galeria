@@ -1,5 +1,5 @@
-angular.module('fotosApp').factory('imageServices',['$q', '$timeout', '$http','generalService',
-    function ($q, $timeout, $http,generalService) {
+angular.module('fotosApp').factory('imageServices',['$q', '$timeout', '$http','generalService','$localStorage',
+    function ($q, $timeout, $http,generalService,$localStorage) {
     
     return ({
       imageList: imageList,
@@ -7,10 +7,22 @@ angular.module('fotosApp').factory('imageServices',['$q', '$timeout', '$http','g
     });
 
     function imageList(dataSend) {
+      if ($localStorage.user) {
+        if (!dataSend) {
+          dataSend = {};
+        }
+        dataSend.token = $localStorage.user.token;
+      }
        return $http.post(generalService.dir() + 'imagesList', dataSend);
     }
 
     function deleteImg(dataSend) {
+      if ($localStorage.user) {
+        if (!dataSend) {
+          dataSend = {};
+        }
+        dataSend.token = $localStorage.user.token;
+      }
        return $http.post(generalService.dir() + 'deleteImg', dataSend);
     }
 

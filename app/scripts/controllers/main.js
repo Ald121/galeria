@@ -8,7 +8,9 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('MainCtrl', function ($scope,$location,$mdDialog,userService,toastr) {
+  .controller('MainCtrl', function ($scope,$rootScope,$localStorage,$location,$window,$mdDialog,userService,toastr) {
+    $rootScope.user = $localStorage.user;
+
     $scope.saving = false;
      $scope.menuSuperior = [
                       {nombre:'Inicio',link:'/',icon:'fa-home',child:[]},
@@ -29,6 +31,23 @@ angular.module('fotosApp')
       $location.path(link);
     }
 
+    $scope.logOut = function(){
+      userService.salir({token:$rootScope.user.token}).then(function(r){
+        if (r.respuesta == true) {
+          $localStorage.$reset();
+          $window.location.reload();
+        }
+      }).catch(function(e){
+        $scope.saving = false;
+        $localStorage.$reset();
+        $window.location.reload();
+        var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+          closeButton: true,
+           timeOut: 2000,
+        });
+      });
+    }
+
     $scope.openLoginModal = function(ev){
       $mdDialog.show({
         controller: modalLoginController,
@@ -40,7 +59,7 @@ angular.module('fotosApp')
       });
     }
 
-    var modalLoginController = function($scope,$mdDialog,userService,$location){
+    var modalLoginController = function($scope,$localStorage,$mdDialog,userService,$location){
       $scope.cancel = function(){
         $mdDialog.hide();
       }
@@ -54,6 +73,7 @@ angular.module('fotosApp')
               timeOut: 2000,
             });
              $scope.saving = false;
+             $localStorage.user = r.data;
              $mdDialog.hide();
              $location.path('/administration');
           }else{
