@@ -28,7 +28,7 @@ var app = angular
     'ngStorage'
   ]);
 
-app.run(function($rootScope,$location,userService,toastr,$localStorage) {
+app.run(function($rootScope,$window,userService,toastr,$localStorage) {
     $rootScope.$on("$locationChangeStart", function(event, next, current) {
         if ($localStorage.user) {
             userService.checkSession().then(function(r){
@@ -37,7 +37,7 @@ app.run(function($rootScope,$location,userService,toastr,$localStorage) {
                 closeButton: true,
                  timeOut: 2000,
               });
-              $location.path('/');
+              $window.location.reload();
             });
         }
     });

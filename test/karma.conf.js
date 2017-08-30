@@ -39,6 +39,7 @@ module.exports = function(config) {
       'bower_components/angular-file-upload/dist/angular-file-upload.min.js',
       'bower_components/sweetalert/dist/sweetalert.min.js',
       'bower_components/ngSweetAlert/SweetAlert.js',
+      'bower_components/ngstorage/ngStorage.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
