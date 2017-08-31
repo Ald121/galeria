@@ -1,0 +1,55 @@
+<div style="width: 100%; text-align: center; border-bottom: 1px solid rgba(189, 189, 189, 0.7);
+    padding-bottom: 3%;">
+    <a href="" ng-click="openLoginModal($event)">
+        <img src="images/mysticB.png" style="height: auto;
+            width: 100%;
+            padding-left: 35%;
+            padding-right: 35%;
+        ">
+    </a>
+</div>
+<header>
+    <div id="header">
+        <ul class="nav" style="margin-left: 15px;">
+            <li ng-repeat="item in menuSuperior">
+                <a href="#!{{item.link}}">
+                    <div>
+                    <i class="fa {{item.icon}}" aria-hidden="true"></i> {{item.nombre}}</div>
+                </a>
+                <ul ng-if="item.child.length>0">
+                    <li ng-repeat="subitem in item.child">
+                        <a href="#!{{subitem.link}}"><i class="fa {{item.icon}}" aria-hidden="true"></i> {{subitem.nombre}}</a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-show="!user">
+                <a href="" ng-click="openLoginModal($event)">
+                    <div>
+                        <i class="fa fa-user-circle" aria-hidden="true"></i> Ingresar / Registrarse
+                    </div>
+                </a>
+            </li>
+            <li ng-show="user">
+                <a href="">
+                    <div>
+                        <i class="fa fa-user-circle" aria-hidden="true"></i> {{user.datos.nombres}}
+                    </div>
+                </a>
+                <ul>
+                    <li ng-click="goTo('/administration')">
+                        <a href="">
+                            <i class="fa fa-desktop" aria-hidden="true"></i> Sistema
+                        </a>
+                    </li>
+                    <li ng-click="logOut()">
+                        <a href="">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i> Salir
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<div app-view-segment="1" layout="column" layout-fill></div>

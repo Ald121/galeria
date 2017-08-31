@@ -81,6 +81,19 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                 })
                 .up()
 
+            .when('/mystic',    'mystic.home')
+            .segment('mystic', {
+                templateUrl: 'views/mystic/public/menu.html',
+                controller: 'mysticHomeCtrl'
+            })
+            .within()
+                .segment('home', {
+                    templateUrl: 'views/mystic/public/inicio.html',
+                    controller: 'mysticInicioCtrl',
+                    default: true
+                })
+                .up()
+
   })
 
 app.config(function (LightboxProvider) {
