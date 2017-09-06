@@ -1,17 +1,114 @@
-<div class="container slider">
-    <img ng-repeat="slide in slides" class="slide slide-animation nonDraggableImage"
-         ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"
-         ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}">
-
-    <a class="arrow prev" href="" ng-click="nextSlide()"></a>
-    <a class="arrow next" href="" ng-click="prevSlide()"></a>
-    <nav class="nav-slider">
-        <div class="wrapper">
-            <ul class="dots">
-                <li class="dot" ng-repeat="slide in slides">
-                    <a href="" ng-class="{'active':isCurrentSlideIndex($index)}"
-                       ng-click="setCurrentSlideIndex($index);">{{slide.description}}</a></li>
-            </ul>
-        </div>
-    </nav>
+<style type="text/css">
+	.grid-prods:hover{
+		/*border: solid 1px black;*/
+		cursor: pointer;
+		border-radius: 5px 5px 5px 5px;
+	    -moz-border-radius: 5px 5px 5px 5px;
+	    -webkit-border-radius: 5px 5px 5px 5px;
+	    -webkit-box-shadow: 0px 0px 5px 0px rgb(28, 139, 202);
+		-moz-box-shadow: 0px 0px 5px 0px rgb(28, 139, 202);
+		box-shadow: 0px 0px 5px 0px rgb(28, 139, 202);
+		transition: all 0.6s ease-out;
+		opacity: 0.8;
+	}
+	.grid-prods:hover>div>a{
+		border-color: rgba(199, 219, 255, 0.86);
+	}
+	
+	.grid-prods>div>a:hover{
+		background: rgba(199, 219, 255, 0.86);
+	}
+	.details-container{
+		padding: 10px;
+	}
+	.img-slider{
+		border-radius: 5px 5px 5px 5px;
+	    -moz-border-radius: 5px 5px 5px 5px;
+	    -webkit-border-radius: 5px 5px 5px 5px;
+	}
+</style>
+<ui-carousel 
+  slides="slides"
+  slides-to-show="3"
+  slides-to-scroll="1"
+  initial-slide="0"
+  autoplay="false"
+  autoplay-speed="5000"
+  dots="true" style="text-align: center;    margin-left: 4%;   width: 90%;">
+  <carousel-item>
+  	<a href="">
+		<img src="{{item.image}}" width="300px" class="img-slider grid-prods">
+	</a>
+  </carousel-item>
+</ui-carousel><br>
+<div class="row">
+	<div class="col-md-11" style="margin-left: 4%">
+		<div class="panel panel-primary">
+		  <div class="panel-body">
+		    <i class="fa fa-star"></i> PRODUCTOS DESTACADOS
+		  </div>
+		  <div class="panel-footer">
+		  	<ui-carousel 
+				  slides="slides"
+				  slides-to-show="4"
+				  slides-to-scroll="1"
+				  initial-slide="0"
+				  autoplay="true"
+				  autoplay-speed="5000"
+				  dots="false" style="text-align: center;    margin-left: 4%;   width: 90%;">
+				  <carousel-item>
+					  	<a href="">
+					  		<img src="{{item.image}}" width="150px" class="img-slider grid-prods">
+					  	</a>
+				  </carousel-item>
+				</ui-carousel>
+		  </div>
+		</div>
+	</div>
 </div>
+<div class="row">
+	<div class="col-md-11" style="margin-left: 4%">
+		<div class="panel panel-primary">
+		  <div class="panel-body">
+		    <i class="fa fa-shopping-bag"></i> PRODUCTOS RECIENTES
+		  </div>
+		  <div class="panel-footer">
+		  	<ul class="dynamic-grid" angular-grid="prods" grid-width="200" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
+			     <li data-ng-repeat="pic in prods" class="grid grid-prods">
+			         <img src="{{pic.image}}" class="grid-img" data-actual-width = "{{pic.actualWidth}}"  data-actual-height="{{pic.actualHeight}}" />
+					 <div class="details-container">
+					 	<p>descripcion</p>
+					 	<a href="" class="btn btn-default pull-right"><i class="fa fa-eye"></i></a>
+					 	<a href="" class="btn btn-default"><i class="fa fa-cart-plus"></i></a>
+					 </div>
+			         
+			     </li>
+			 </ul>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-11" style="margin-left: 4%">
+		<div class="panel panel-primary">
+		  <div class="panel-body">
+		    <i class="fa fa-shopping-bag"></i> PRODUCTOS RELACIONADOS
+		  </div>
+		  <div class="panel-footer">
+		  	<ul class="dynamic-grid" angular-grid="prods" grid-width="200" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
+			     <li data-ng-repeat="pic in prods" class="grid grid-prods">
+			         <img src="{{pic.image}}" class="grid-img" data-actual-width = "{{pic.actualWidth}}"  data-actual-height="{{pic.actualHeight}}" />
+					 <div class="details-container">
+					 	<p>descripcion</p>
+					 	<a href="" class="btn btn-default pull-right"><i class="fa fa-eye"></i></a>
+					 	<a href="" class="btn btn-default"><i class="fa fa-cart-plus"></i></a>
+					 </div>
+			         
+			     </li>
+			 </ul>
+		  </div>
+		</div>
+	</div>
+</div>
+

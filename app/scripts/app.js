@@ -25,7 +25,8 @@ var app = angular
     'toastr',
     'md.data.table',
     'angularFileUpload',
-    'ngStorage'
+    'ngStorage',
+    'ui.carousel'
   ]);
 
 app.run(function($rootScope,$window,userService,toastr,$localStorage) {
