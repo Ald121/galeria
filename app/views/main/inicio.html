@@ -5,7 +5,7 @@
     <ul class="dynamic-grid" angular-grid="imgs" ag-grid-width="200" ag-gutter-size="10" ag-grid-id="gallery" ag-refresh-on-img-load="false" >
          <li data-ng-repeat="pic in imgs" class="grid">
             <a ng-click="openLightboxModal($index)">
-             <img ng-src="{{pic.url}}" class="grid-img" data-actual-width = "100"  data-actual-height="100" />
+             <img ng-src="{{pic.url}}" class="grid-img" data-actual-width = "100"  data-actual-height="100"  style="    width: 200px !important;  height: 100px !important;" />
             </a>
          </li>
     </ul>

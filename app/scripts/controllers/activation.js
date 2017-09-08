@@ -33,7 +33,7 @@ angular.module('fotosApp')
 		    	{url:'styles/images/19.jpg'},
 		    	{url:'styles/images/20.jpg'}
 		    ];
-	
+
 	$scope.openLightboxModal = function (index) {
     	Lightbox.openModal($scope.imgs,index);
   	};

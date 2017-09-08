@@ -3,11 +3,22 @@ var app = angular.module('fotosApp');
     function () {
     
     return ({
-      dir: dir
+      dir: dir,
+      pathImgProds:pathImgProds,
+      pathImgGaleria:pathImgGaleria
     });
 
     function dir () {
-        return 'http://localhost/galeriaWS/public/';
+        return 'http://localhost/galeriaWs/public/';
+    }
+
+
+    function pathImgProds () {
+        return dir() + 'products/';
+    }
+
+    function pathImgGaleria () {
+        return dir() + 'galeria/';
     }
 
     }])

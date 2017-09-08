@@ -797,3 +797,18 @@ footer .footer-manu ul li a {
 footer .footer-manu ul li a:hover {
   color: #000;
 }
+
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 9px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+.action-image-list{
+  position: relative;
+    width: 100%;
+    z-index: 9;
+    top: -42px;
+    left: 5px;
+}

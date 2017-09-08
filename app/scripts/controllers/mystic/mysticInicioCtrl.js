@@ -9,7 +9,7 @@
  */
 angular.module('fotosApp')
   .controller('mysticInicioCtrl', function ($scope) {
-   	     $scope.slides = [
+   	    $scope.slides = [
             {image: 'images/slider/pic1.jpg', description: 'Image 00'},
             {image: 'images/slider/pic2.jpg', description: 'Image 01'},
             {image: 'images/slider/pic3.jpg', description: 'Image 02'},
@@ -26,6 +26,7 @@ angular.module('fotosApp')
             {image: 'images/slider/pic5.jpg', description: 'Image 04'}
         ];
 
+            
     });
 
 
