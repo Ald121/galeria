@@ -3,7 +3,8 @@ angular.module('fotosApp').factory('productsServices',['$q', '$timeout', '$http'
     
     return ({
       productsList: productsList,
-      deleteProd:deleteProd
+      deleteProd:deleteProd,
+      addProd:addProd
     });
 
     function productsList(dataSend) {
@@ -14,6 +15,16 @@ angular.module('fotosApp').factory('productsServices',['$q', '$timeout', '$http'
         dataSend.token = $localStorage.user.token;
       }
        return $http.post(generalService.dir() + 'productsList', dataSend);
+    }
+
+    function addProd(dataSend) {
+      if ($localStorage.user) {
+        if (!dataSend) {
+          dataSend = {};
+        }
+        dataSend.token = $localStorage.user.token;
+      }
+       return $http.post(generalService.dir() + 'addProduct', dataSend);
     }
 
     function deleteProd(dataSend) {

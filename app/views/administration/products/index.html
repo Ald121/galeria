@@ -1,12 +1,15 @@
 
 <md-toolbar class="md-table-toolbar md-default">
   <div class="md-toolbar-tools">
-    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="addImage()">
+    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showAdd(prod)">
 	  <i class="fa fa-shopping-bag"></i> <i class="fa fa-plus"></i> Añadir Producto
 	</button>
   </div>
 </md-toolbar>
 <hr>
+<div style="width: 100%;text-align: center;" ng-show="loading">
+  <img src="icons/loading.svg" width="30">
+</div>
 <div class="row" style="padding-left: 2%;  padding-right: 2%;">
   <div class="col-sm-2 col-md-2" ng-repeat="prod in productsList">
     <div class="thumbnail">
@@ -14,13 +17,11 @@
       <div class="caption">
         <h4><strong>{{prod.nombre}}</strong></h4>
         <hr>
-        <p style="    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;">Pellentesque habitant morbi tristique senectus et netus et </p>
+        <p style="word-wrap: break-word;">{{ prod.description | limitTo: 30 }}{{prod.description.length > 30 ? '...' : ''}}</p>
         <hr>
         <p>
-          <a href="" class="btn btn-danger" ng-click="showDelete(img)"><i class="fa fa-trash"></i></a>
+          <a href="" class="btn btn-primary" ng-click="showAdd(prod)"><i class="fa fa-edit"></i></a>
+          <a href="" class="btn btn-danger" ng-click="showDelete(prod)"><i class="fa fa-trash"></i></a>
         </p>
       </div>
     </div>

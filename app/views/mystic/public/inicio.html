@@ -74,11 +74,22 @@
 		    <i class="fa fa-shopping-bag"></i> PRODUCTOS RECIENTES
 		  </div>
 		  <div class="panel-footer">
-		  	<ul class="dynamic-grid" angular-grid="prods" grid-width="200" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
-			     <li data-ng-repeat="pic in prods" class="grid grid-prods">
-			         <img src="{{pic.image}}" class="grid-img" data-actual-width = "{{pic.actualWidth}}"  data-actual-height="{{pic.actualHeight}}" />
+		  	<ul class="dynamic-grid" angular-grid="productsList" grid-width="200" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
+			     <li data-ng-repeat="prod in productsList" class="grid grid-prods">
+			         <img src="{{prod.picDefault}}" style="width: 100%;
+    min-height: 150px !important;
+    max-height: 150px !important;
+    vertical-align: middle;
+    transition: opacity 0.6s ease-out;
+    background-color: #fff;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    cursor: pointer;" />
 					 <div class="details-container">
-					 	<p>descripcion</p>
+					 <h4><strong>{{prod.nombre}}</strong></h4>
+					 <hr>
+					 	<p style="word-wrap: break-word; height: 70px;">{{ prod.description | limitTo: 30 }}{{prod.description.length > 30 ? '...' : ''}}</p>
 					 	<a href="" class="btn btn-default pull-right"><i class="fa fa-eye"></i></a>
 					 	<a href="" class="btn btn-default"><i class="fa fa-cart-plus"></i></a>
 					 </div>
@@ -99,7 +110,7 @@
 		  <div class="panel-footer">
 		  	<ul class="dynamic-grid" angular-grid="prods" grid-width="200" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
 			     <li data-ng-repeat="pic in prods" class="grid grid-prods">
-			         <img src="{{pic.image}}" class="grid-img" data-actual-width = "{{pic.actualWidth}}"  data-actual-height="{{pic.actualHeight}}" />
+			         <img src="{{prod.image}}" class="grid-img" data-actual-width = "{{prod.actualWidth}}"  data-actual-height="{{prod.actualHeight}}" />
 					 <div class="details-container">
 					 	<p>descripcion</p>
 					 	<a href="" class="btn btn-default pull-right"><i class="fa fa-eye"></i></a>

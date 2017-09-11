@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title"> <i class="fa fa-shopping-bag"></i> Añadir Producto</h4>
+</div>
+<form name="form" ng-submit="save()">
+<div class="modal-body" id="modal-body">
+	<div class="row">
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-font"></i> Nombre</label>
+			<input type="text" name="nombre" class="form-control" placeholder="Nombre" ng-model="item.nombre" required>
+		</div>
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-usd"></i> Precio unitario</label>
+			<input type="text" name="nombre" class="form-control" placeholder="Ej: 9.99" ng-model="item.precio" ui-number-mask="2" required>
+		</div>
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-font"></i> Descripción</label>
+			<textarea name="description" class="form-control" placeholder="Ej: Blusa color blanco ......." rows="5" ng-model="item.description" required></textarea>
+		</div>
+	</div>
+	<input type="file" nv-file-select="" uploader="uploader" multiple  accept="image/*" /><br/>
+	<table class="table">
+	                        <thead>
+	                            <tr>
+	                                <th width="50%">Imagen</th>
+	                                <th ng-show="uploader.isHTML5">Peso</th>
+	                                <th ng-show="uploader.isHTML5">Progreso</th>
+	                                <th>Acción</th>
+	                                <th>Mostrar en miñatura</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr ng-repeat="item in uploader.queue">
+	                                <td>
+	                                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 80 }"></div>
+	                                </td>
+	                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+	                                <td ng-show="uploader.isHTML5">
+	                                    <div class="progress" style="margin-bottom: 0;">
+	                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+	                                    </div>
+	                                </td>
+	                                <td nowrap>
+	                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-show="item.progress==0 && item.isError">
+	                                        <span class="fa fa-refresh"></span>
+	                                    </button>
+	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+	                                        <span class="fa fa-trash"></span>
+	                                    </button>
+	                                </td>
+	                                <td nowrap>
+	                                    <button type="button" class="btn btn-xs" ng-class="{'btn-default':item.default == 0,'btn-primary':item.default == 1}" ng-click="setDefault($index)" uib-tooltip="Mostrar en miñatura">
+	                                        <span class="fa fa-check"></span>
+	                                    </button>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-danger" type="button" ng-click="close()">Cancelar</button>
+	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || !uploader.getNotUploadedItems().length" ng-show="!uploading">OK</button>
+	</div>
+</form>

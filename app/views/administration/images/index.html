@@ -8,14 +8,16 @@
 </md-toolbar>
 <hr>
 <!-- exact table from live demo -->
-<div style="width: 100%;text-align: center;" ng-show="!imgsList"><img src="icons/loading.svg" width="30"></div>
-<ul class="dynamic-grid" angular-grid="imgsList" ag-grid-width="200" ag-gutter-size="10" ag-grid-id="gallery" ag-refresh-on-img-load="false" >
+<div style="width: 100%;text-align: center;" ng-show="loading">
+  <img src="icons/loading.svg" width="30">
+</div>
+<ul class="dynamic-grid" angular-grid="imgsList" ag-grid-width="200" ag-gutter-size="10" angular-grid-id="gallery" ag-refresh-on-img-load="false" ng-show="!loading">
          <li data-ng-repeat="pic in imgsList" class="grid">
             <a ng-click="openLightboxModal($index)">
-             <img ng-src="{{pic.url}}" class="grid-img" data-actual-width = "100"  data-actual-height="100"  style="    width: 200px !important;  height: 100px !important;" />
+             <img ng-src="{{pic.url}}" class="img-grid" />
             </a>
             <div class="action-image-list">
-              <a href="" class="btn btn-danger" ng-click="showDelete(img)"><i class="fa fa-trash"></i></a>
+              <a href="" class="btn btn-danger" ng-click="showDelete(pic)"><i class="fa fa-trash"></i></a>
             </div>
          </li>
     </ul>
