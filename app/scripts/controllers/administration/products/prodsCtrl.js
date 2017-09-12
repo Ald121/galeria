@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('prodsCtrl', function ($scope,productsServices,generalService,toastr,$uibModal) {
+  .controller('prodsCtrl', function (alertsService,$scope,productsServices,generalService,toastr,$uibModal) {
 
    $scope.getProds = function () {
     $scope.loading = true;
@@ -46,8 +46,23 @@ angular.module('fotosApp')
         modalInstance.result.then(function(result) {
           if (result) {
             if (result == 'Y') {
-              $scope.productsList = [];
-              $scope.getProds();
+              productsServices.deleteProd({item:item}).then(function(r) {
+                if (r) {
+                  if (r.data.respuesta == true) {
+                    toastr.success(alertsService.alerts.ok.delete, 'Correcto !',{
+                      closeButton: true,
+                      timeOut: 2000,
+                    });
+                    $scope.productsList = [];
+                    $scope.getProds();
+                  }
+                }
+              }).catch(function(e){
+                toastr.error(alertsService.alerts.error.delete, 'Error !',{
+                    closeButton: true,
+                    timeOut: 2000,
+                });
+              });
             }
           }
         });
