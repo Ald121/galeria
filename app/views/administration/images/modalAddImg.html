@@ -2,6 +2,13 @@
     <h3 class="modal-title" id="modal-title"> <i class="fa fa-picture-o"></i> Subir imagenes</h3>
 </div>
 <div class="modal-body" id="modal-body">
+<ui-select ng-model="selected.category" theme="bootstrap">
+    <ui-select-match placeholder="Selecione la categoria...">{{$select.selected.nombre}}</ui-select-match>
+    <ui-select-choices repeat="item in categorias | filter: $select.search">
+      <span ng-bind-html="item.nombre | highlight: $select.search"></span>
+    </ui-select-choices>
+</ui-select>
+<br>
 <input type="file" nv-file-select="" uploader="uploader" multiple  accept="image/*" /><br/>
 <table class="table">
                         <thead>

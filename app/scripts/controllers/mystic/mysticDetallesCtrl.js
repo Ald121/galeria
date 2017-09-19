@@ -8,7 +8,7 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('mysticDetallesCtrl', function ($location,$scope,productsServices,toastr,generalService,$routeParams) {
+  .controller('mysticDetallesCtrl', function ($scope,productsServices,toastr,generalService,$routeParams) {
      productsServices.prodDetails({id:$routeParams.id}).then(function(r){
           console.log(r);
         }).catch(function(e){

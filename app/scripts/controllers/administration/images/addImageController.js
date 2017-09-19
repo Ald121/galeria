@@ -4,7 +4,14 @@ angular.module('fotosApp')
     $scope.close = function() {
         $uibModalInstance.close();
     }
-
+    $scope.selected = {};
+    $scope.categorias = [
+                        {nombre:'Corporativas',link:'/fotografia/Corporativas',icon:'fa-picture-o',child:[]},
+                        {nombre:'Bodas',link:'/fotografia/Bodas',icon:'fa-picture-o',child:[]},
+                        {nombre:'Retratos',link:'/fotografia/Retratos',icon:'fa-picture-o',child:[]},
+                        {nombre:'Fashion',link:'/fotografia/Fashion',icon:'fa-picture-o',child:[]},
+                        {nombre:'Editorial',link:'/fotografia/Editorial',icon:'fa-picture-o',child:[]}
+                        ];
     var uploader = $scope.uploader = new FileUploader({
             url: generalService.dir() + 'uploadFiles'
         });
@@ -20,6 +27,7 @@ angular.module('fotosApp')
         uploader.onBeforeUploadItem = function(item) {
             formData = [{
                 token: $localStorage.user.token,
+                cat:$scope.selected.category.nombre
             }];
             Array.prototype.push.apply(item.formData, formData);
         };

@@ -16,7 +16,7 @@ angular.module('fotosApp')
                       {nombre:'Inicio',link:'/',icon:'fa-home',child:[]},
                       {nombre:'Contactos',link:'/Contactos',icon:'fa-envelope',child:[]},
                       {nombre:'Fotografias',link:'/',icon:'fa-camera-retro',child:[
-                        {nombre:'Corportivas',link:'/fotografia/Corportivas',icon:'fa-picture-o',child:[]},
+                        {nombre:'Corporativas',link:'/fotografia/Corporativas',icon:'fa-picture-o',child:[]},
                         {nombre:'Bodas',link:'/fotografia/Bodas',icon:'fa-picture-o',child:[]},
                         {nombre:'Retratos',link:'/fotografia/Retratos',icon:'fa-picture-o',child:[]},
                         {nombre:'Fashion',link:'/fotografia/Fashion',icon:'fa-picture-o',child:[]},
