@@ -37,11 +37,11 @@ module.exports = function(config) {
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/angular-material-data-table/dist/md-data-table.js',
       'bower_components/angular-file-upload/dist/angular-file-upload.min.js',
-      'bower_components/sweetalert/dist/sweetalert.min.js',
       'bower_components/ngSweetAlert/SweetAlert.js',
       'bower_components/ngstorage/ngStorage.js',
       'bower_components/angular-ui-carousel/dist/ui-carousel.js',
       'bower_components/angular-input-masks/angular-input-masks-standalone.js',
+      'bower_components/wip-image-zoom/dist/wip-image-zoom.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

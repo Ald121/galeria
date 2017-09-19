@@ -27,7 +27,8 @@ var app = angular
     'angularFileUpload',
     'ngStorage',
     'ui.carousel',
-    'ui.utils.masks'
+    'ui.utils.masks',
+    'wipImageZoom'
   ]);
 
 app.run(function($rootScope,$window,userService,toastr,$localStorage) {
@@ -90,6 +91,7 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                 .up()
 
             .when('/mystic',    'mystic.home')
+            .when('/mystic/detalles/:id',    'mystic.detalles')
             .segment('mystic', {
                 templateUrl: 'views/mystic/public/menu.html',
                 controller: 'mysticHomeCtrl'
@@ -99,6 +101,11 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                     templateUrl: 'views/mystic/public/inicio.html',
                     controller: 'mysticInicioCtrl',
                     default: true
+                })
+                .segment('detalles', {
+                    templateUrl: 'views/mystic/public/detalles.html',
+                    controller: 'mysticDetallesCtrl',
+                    dependencies: ['id']
                 })
                 .up()
 
