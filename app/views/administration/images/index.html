@@ -6,27 +6,19 @@
 	</button>
   </div>
 </md-toolbar>
+<hr>
 <!-- exact table from live demo -->
-<div style="width: 100%;text-align: center;" ng-show="!imgsList"><img src="icons/loading.svg" width="30"></div>
-<md-table-container ng-show="imgsList">
-  <table md-table ng-model="selected" md-progress="promise">
-    <thead md-head md-order="query.order" md-on-reorder="getImgs">
-      <tr md-row>
-        <th md-column md-numeric>IMAGEN</th>
-        <th md-column md-numeric md-order-by="calories.value"><span>DIRECCIÓN</span></th>
-        <th md-column md-numeric md-order-by="calories.value"><span>FECHA</span></th>
-        <th md-column md-numeric>ACCIÓN</th>
-      </tr>
-    </thead>
-    <tbody md-body>
-      <tr md-row md-select="img" md-select-id="name" md-auto-select ng-repeat="img in imgsList">
-        <td md-cell><a href="" ng-click="showImage($index)"><img ng-src="{{img.url}}" width="50"></a></td>
-        <td md-cell>{{img.src}}</td>
-        <td md-cell>{{img.createAt}}</td>
-        <td md-cell><a href="" class="btn btn-danger" ng-click="showDelete(img)"><i class="fa fa-trash"></i></a></td>
-      </tr>
-    </tbody>
-  </table>
-</md-table-container>
-
-<md-table-pagination ng-show="imgsList" md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getImgs" md-page-select></md-table-pagination>
+<div style="width: 100%;text-align: center;" ng-show="loading">
+  <img src="icons/loading.svg" width="30">
+</div>
+<ul class="dynamic-grid" angular-grid="imgsList" ag-grid-width="200" ag-gutter-size="10" angular-grid-id="gallery" ag-refresh-on-img-load="false" ng-show="!loading">
+         <li data-ng-repeat="pic in imgsList" class="grid">
+            <a ng-click="openLightboxModal($index)">
+             <img ng-src="{{pic.url}}" class="img-grid" />
+            </a>
+            <div class="action-image-list">
+              <a href="" class="btn btn-danger" ng-click="showDelete(pic)"><i class="fa fa-trash"></i></a>
+            </div>
+         </li>
+    </ul>
+</div>

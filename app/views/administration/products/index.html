@@ -1,0 +1,47 @@
+
+<md-toolbar class="md-table-toolbar md-default">
+  <div class="md-toolbar-tools">
+    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showAdd(prod)">
+	  <i class="fa fa-shopping-bag"></i> <i class="fa fa-plus"></i> Añadir Producto
+	</button>
+  </div>
+</md-toolbar>
+<hr>
+    <nav ng-show="!productsList || productsList.length == 0" class="navbar navbar-default" style="margin-left: 40px; margin-right: 40px;">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <p class="navbar-text">
+            <i class="fa fa-exclamation-triangle"></i> No hay productos para mostrar
+          </p>
+        </div>
+      </div>
+    </nav>
+<div style="width: 100%;text-align: center;" ng-show="loading">
+  <img src="icons/loading.svg" width="30">
+</div>
+<div class="row" style="padding-left: 2%;  padding-right: 2%;">
+  <div class="col-sm-3 col-md-3" ng-repeat="prod in productsList">
+    <div class="thumbnail">
+      <img ng-src="{{prod.picDefault}}" style="width: 100%;
+    min-height: 200px !important;
+    max-height: 200px !important;" />
+    <span class="label label-info" style="float: right;
+    font-size: 20px;
+    position: absolute;
+    top: 16px;
+    right: 28px;"> $ {{prod.precio}}</span>
+      <div class="caption">
+        <h4>
+        <strong>{{prod.nombre}}</strong>
+        </h4>
+        <hr>
+        <p style="word-wrap: break-word; height: 40px;">{{ prod.description | limitTo: 30 }}{{prod.description.length > 30 ? '...' : ''}}</p>
+        <hr>
+        <p>
+          <a href="" class="btn btn-primary" ng-click="showAdd(prod)"><i class="fa fa-edit"></i></a>
+          <a href="" class="btn btn-danger" ng-click="showDelete(prod)"><i class="fa fa-trash"></i></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

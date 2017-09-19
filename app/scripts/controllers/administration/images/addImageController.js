@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('addImageCtrl', function ($scope,generalService,Lightbox,$uibModalInstance,FileUploader,toastr,alertsService) {
+  .controller('addImageCtrl', function ($localStorage,$scope,generalService,Lightbox,$uibModalInstance,FileUploader,toastr,alertsService) {
     $scope.uploading = false;
     $scope.close = function() {
         $uibModalInstance.close();
@@ -16,6 +16,13 @@ angular.module('fotosApp')
                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
         });
+
+        uploader.onBeforeUploadItem = function(item) {
+            formData = [{
+                token: $localStorage.user.token,
+            }];
+            Array.prototype.push.apply(item.formData, formData);
+        };
 
         uploader.onCompleteAll = function() {
             var allCompleted = true;
@@ -36,7 +43,6 @@ angular.module('fotosApp')
                   timeOut: 2000,
                 });
             }
-            
         };
 
         $scope.uploadImage = function(){

@@ -2,10 +2,10 @@
 <div style="margin: 0 5% 0 5%;  padding: 7px;" >
 <div style="width: 100%;
     text-align: center;" ng-show="!imgs"><img src="icons/loading.svg" width="50"></div>
-    <ul class="dynamic-grid" angular-grid="imgs" ag-grid-width="200" ag-gutter-size="10" ag-grid-id="gallery" ag-refresh-on-img-load="false" >
-         <li data-ng-repeat="pic in imgs" class="grid">
+    <ul class="dynamic-grid" angular-grid="imgs" ag-grid-width="200" ag-gutter-size="20" ag-grid-id="gallery" ag-refresh-on-img-load="false" cssGrid="false">
+         <li data-ng-repeat="pic in imgs" >
             <a ng-click="openLightboxModal($index)">
-             <img ng-src="{{pic.url}}" class="grid-img" data-actual-width = "100"  data-actual-height="100" />
+             <img ng-src="{{pic.url}}" class="img-grid" />
             </a>
          </li>
     </ul>

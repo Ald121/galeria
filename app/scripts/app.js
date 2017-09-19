@@ -26,7 +26,8 @@ var app = angular
     'md.data.table',
     'angularFileUpload',
     'ngStorage',
-    'ui.carousel'
+    'ui.carousel',
+    'ui.utils.masks'
   ]);
 
 app.run(function($rootScope,$window,userService,toastr,$localStorage) {
@@ -38,6 +39,7 @@ app.run(function($rootScope,$window,userService,toastr,$localStorage) {
                 closeButton: true,
                  timeOut: 2000,
               });
+              $localStorage.$reset();
               $window.location.reload();
             });
         }
@@ -50,6 +52,7 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
             .when('/',    'main')
             .when('/administration',    'administration')
             .when('/administration/images',    'administration.images')
+            .when('/administration/products',    'administration.products')
             .when('/fotografia/:categoria',    'main.fotografia')
             .when('/activarcuenta/:code',    'main.activarcuenta')
             .segment('administration', {
@@ -60,6 +63,10 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                     templateUrl: 'views/administration/images/index.html',
                     controller: 'administrationImagesCtrl',
                     default: true
+                })
+                .segment('products', {
+                    templateUrl: 'views/administration/products/index.html',
+                    controller: 'prodsCtrl'
                 }).up()         
             .segment('main', {
                 templateUrl: 'views/main/main.html',

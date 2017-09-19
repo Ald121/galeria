@@ -1,14 +1,8 @@
 angular.module('fotosApp')
-  .controller('administrationImagesCtrl', function ($scope,$mdSidenav,Lightbox,$uibModal,imageServices,generalService) {
-     $scope.selected = [];
-  
-      $scope.query = {
-        order: 'name',
-        limit: 5,
-        page: 1
-      };
+  .controller('administrationImagesCtrl', function ($scope,Lightbox,$uibModal,imageServices,generalService,toastr) {
+    $scope.imgsList = [];
       
-      $scope.getImgs = function () {
+    $scope.getImgs = function () {
          $scope.loading = true;
         imageServices.imageList().then(function(r){
           if (r.data.respuesta == true) {
@@ -41,6 +35,7 @@ angular.module('fotosApp')
             controller: 'addImageCtrl',
         });
         modalInstance.result.then(function(result) {
+          $scope.imgsList = [];
           $scope.getImgs();
         });
       };
@@ -51,8 +46,8 @@ angular.module('fotosApp')
 
       $scope.showDelete = function (item) {
         var modalInstance = $uibModal.open({
-            templateUrl: 'views/administration/images/modalDeleteImg.html',
-            controller: 'deleteImageCtrl',
+            templateUrl: 'views/commonModals/modalDelete.html',
+            controller: 'commonDeleteCtrl',
             resolve: {
                   item: function () {
                       return item;
@@ -60,10 +55,37 @@ angular.module('fotosApp')
               }
         });
         modalInstance.result.then(function(result) {
-          $scope.getImgs();
+          if (result) {
+            if (result == 'Y') {
+              imageServices.deleteImg({id:item.idpictures,img:item.src}).then(function(r){
+                if (r.data.respuesta == true) {
+                   var indexObj = $scope.imgsList.indexOf(item);
+                   $scope.imgsList = [];
+                   $scope.getImgs();
+                }else{
+                  var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                  closeButton: true,
+                   timeOut: 2000,
+                });
+                $scope.loading = false;
+                }
+              }).catch(function(e){
+                console.log(e);
+                var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                  closeButton: true,
+                   timeOut: 2000,
+                });
+                $scope.loading = false;
+              });
+            }
+          }
         });
       };
 
+    $scope.openLightboxModal = function (index) {
+      Lightbox.openModal($scope.imgsList,index);
+    };
+    
   });
 
   

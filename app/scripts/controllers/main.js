@@ -24,8 +24,7 @@ angular.module('fotosApp')
                       ]},
                       {nombre:'Workshop',link:'/',icon:'fa-home',child:[]},
                       {nombre:'Videos',link:'/',icon:'fa-video-camera',child:[]},
-                      {nombre:'Productos',link:'/',icon:'fa-product-hunt',child:[]},
-                      {nombre:'Mystic',link:'/mystic',icon:'fa-shopping-cart',child:[]}
+                      {nombre:'Productos',link:'/',icon:'fa-product-hunt',child:[]}
                       // {nombre:'Ingreso ',link:'/',icon:'fa-user-circle',child:[]},
                     ];
     $scope.goTo = function(link){

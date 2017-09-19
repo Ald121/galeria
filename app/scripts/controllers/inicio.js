@@ -15,6 +15,7 @@ var app=angular.module('fotosApp');
 	        angular.forEach($scope.imgs,function(value,key){
 	          $scope.imgs[key].url = generalService.dir() + $scope.imgs[key].src
 	        });
+          
         }).catch(function(e){
           var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
             closeButton: true,
