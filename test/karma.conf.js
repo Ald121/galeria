@@ -42,6 +42,7 @@ module.exports = function(config) {
       'bower_components/angular-ui-carousel/dist/ui-carousel.js',
       'bower_components/angular-input-masks/angular-input-masks-standalone.js',
       'bower_components/wip-image-zoom/dist/wip-image-zoom.js',
+      'bower_components/angular-ui-select/dist/select.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

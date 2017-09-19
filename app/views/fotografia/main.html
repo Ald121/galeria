@@ -12,7 +12,7 @@
         </div>
     </section>
 <!-- Portfolio Start -->
-    <section id="portfolio-work">
+    <!-- <section id="portfolio-work">
         <div class="container">
             <div class="row">
               <div class="col-md-12">
@@ -108,10 +108,10 @@
               </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Clients Logo Section Start -->
-    <section id="clients-logo-section">
+   <!--  <section id="clients-logo-section">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -158,8 +158,20 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
+<!-- Slider Start -->
+<div style="margin: 0 5% 0 5%;  padding: 7px;" >
+<div style="width: 100%;
+    text-align: center;" ng-show="!imgs"><img src="icons/loading.svg" width="50"></div>
+    <ul class="dynamic-grid" angular-grid="imgs" ag-grid-width="200" ag-gutter-size="20" ag-grid-id="gallery" ag-refresh-on-img-load="false" cssGrid="false">
+         <li data-ng-repeat="pic in imgs" >
+            <a ng-click="openLightboxModal($index)">
+             <img ng-src="{{pic.url}}" class="img-grid" />
+            </a>
+         </li>
+    </ul>
+</div>
   
 <!-- Call to action Start -->
     <section id="call-to-action">

@@ -3,7 +3,8 @@ angular.module('fotosApp').factory('imageServices',['$q', '$timeout', '$http','g
     
     return ({
       imageList: imageList,
-      deleteImg:deleteImg
+      deleteImg:deleteImg,
+      imagesListByCat:imagesListByCat
     });
 
     function imageList(dataSend) {
@@ -14,6 +15,16 @@ angular.module('fotosApp').factory('imageServices',['$q', '$timeout', '$http','g
         dataSend.token = $localStorage.user.token;
       }
        return $http.post(generalService.dir() + 'imagesList', dataSend);
+    }
+
+    function imagesListByCat(dataSend) {
+      if ($localStorage.user) {
+        if (!dataSend) {
+          dataSend = {};
+        }
+        dataSend.token = $localStorage.user.token;
+      }
+       return $http.post(generalService.dir() + 'imagesListByCat', dataSend);
     }
 
     function deleteImg(dataSend) {

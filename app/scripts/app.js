@@ -28,7 +28,9 @@ var app = angular
     'ngStorage',
     'ui.carousel',
     'ui.utils.masks',
-    'wipImageZoom'
+    'wipImageZoom',
+    'ui.select', 
+    'ngSanitize'
   ]);
 
 app.run(function($rootScope,$window,userService,toastr,$localStorage) {
