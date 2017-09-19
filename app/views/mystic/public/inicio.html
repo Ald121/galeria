@@ -95,10 +95,9 @@
 					 <h5><i class="fa fa-cart-arrow-down"></i> <strong>{{prod.nombre}}</strong></h5>
 					 <hr>
 					 	<p style="word-wrap: break-word; height: 70px;">{{ prod.description | limitTo: 30 }}{{prod.description.length > 30 ? '...' : ''}}</p>
-					 	<a href="" class="btn btn-default pull-right"><i class="fa fa-eye"></i></a>
+					 	<a href="#!/mystic/detalles/{{prod.idproductos}}" class="btn btn-default pull-right"><i class="fa fa-eye"></i></a>
 					 	<a href="" class="btn btn-default"><i class="fa fa-cart-plus"></i></a>
 					 </div>
-			         
 			     </li>
 			 </ul>
 		  </div>
@@ -121,7 +120,6 @@
 					 	<a href="" class="btn btn-default pull-right"><i class="fa fa-eye"></i></a>
 					 	<a href="" class="btn btn-default"><i class="fa fa-cart-plus"></i></a>
 					 </div>
-			         
 			     </li>
 			 </ul>
 		  </div>
