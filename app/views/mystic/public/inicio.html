@@ -1,47 +1,22 @@
-<style type="text/css">
-	.grid-prods:hover{
-		/*border: solid 1px black;*/
-		cursor: pointer;
-		border-radius: 5px 5px 5px 5px;
-	    -moz-border-radius: 5px 5px 5px 5px;
-	    -webkit-border-radius: 5px 5px 5px 5px;
-	    -webkit-box-shadow: 0px 0px 5px 0px rgb(28, 139, 202);
-		-moz-box-shadow: 0px 0px 5px 0px rgb(28, 139, 202);
-		box-shadow: 0px 0px 5px 0px rgb(28, 139, 202);
-		transition: all 0.6s ease-out;
-		opacity: 0.8;
-	}
-	.grid-prods:hover>div>a{
-		border-color: rgba(199, 219, 255, 0.86);
-	}
-	
-	.grid-prods>div>a:hover{
-		background: rgba(199, 219, 255, 0.86);
-	}
-	.details-container{
-		padding: 10px;
-	}
-	.img-slider{
-		border-radius: 5px 5px 5px 5px;
-	    -moz-border-radius: 5px 5px 5px 5px;
-	    -webkit-border-radius: 5px 5px 5px 5px;
-	}
-</style>
 <br>
-<ui-carousel 
-  slides="slides"
-  slides-to-show="3"
-  slides-to-scroll="1"
-  initial-slide="0"
-  autoplay="false"
-  autoplay-speed="5000"
-  dots="true" style="text-align: center;    margin-left: 4%;   width: 90%;">
-  <carousel-item>
-  	<a href="">
-		<img src="{{item.image}}" width="300px" class="img-slider grid-prods">
-	</a>
-  </carousel-item>
-</ui-carousel><br>
+<div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="loadingSlider">
+		  		<i class="fa fa-spinner fa-spin fa-2x fa-fw" ></i>
+		  	</div>
+	<ui-carousel 
+	  slides="productsListSlider"
+	  slides-to-show="3"
+	  slides-to-scroll="1"
+	  initial-slide="0"
+	  autoplay="false"
+	  autoplay-speed="5000"
+	  dots="true" style="text-align: center;    margin-left: 4%;   width: 90%;">
+	  <carousel-item>
+	  	<a href="">
+			<img src="{{item.picDefault}}" width="300px" class="img-slider grid-prods">
+		</a>
+	  </carousel-item>
+	</ui-carousel>
+<br>
 <div class="row" style="background: white;">
 	<div class="col-md-11" style="margin-left: 4%">
 		<div class="panel panel-primary">
@@ -49,8 +24,11 @@
 		    <i class="fa fa-star"></i> PRODUCTOS DESTACADOS
 		  </div>
 		  <div class="panel-footer">
+		  	<div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="loadingDestacados">
+		  		<i class="fa fa-spinner fa-spin fa-2x fa-fw" ></i>
+		  	</div>
 		  	<ui-carousel 
-				  slides="slides"
+				  slides="productsDestacados"
 				  slides-to-show="4"
 				  slides-to-scroll="1"
 				  initial-slide="0"
@@ -59,7 +37,7 @@
 				  dots="false" style="text-align: center;    margin-left: 4%;   width: 90%;">
 				  <carousel-item>
 					  	<a href="">
-					  		<img src="{{item.image}}" width="150px" class="img-slider grid-prods">
+					  		<img src="{{item.picDefault}}" width="150px" class="img-slider grid-prods">
 					  	</a>
 				  </carousel-item>
 				</ui-carousel>
@@ -74,11 +52,14 @@
 		    <i class="fa fa-shopping-bag"></i> PRODUCTOS RECIENTES
 		  </div>
 		  <div class="panel-footer">
+		  	<div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="loadingRecent">
+		  		<i class="fa fa-spinner fa-spin fa-2x fa-fw" ></i>
+		  	</div>
 		  	<ul class="dynamic-grid" angular-grid="productsList" grid-width="200" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
-			     <li data-ng-repeat="prod in productsList" class="grid grid-prods">
+			     <li data-ng-repeat="prod in productsList" class="grid grid-prods" ng-click="viewDetails($event,prod)">
 			         <img src="{{prod.picDefault}}" style="width: 100%;
     min-height: 200px !important;
-    max-height: 200px !important;
+    max-height: 230px !important;
     vertical-align: middle;
     transition: opacity 0.6s ease-out;
     background-color: #fff;
@@ -126,4 +107,3 @@
 		</div>
 	</div>
 </div>
-

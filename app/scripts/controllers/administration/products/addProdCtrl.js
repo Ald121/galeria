@@ -2,11 +2,13 @@ angular.module('fotosApp')
   .controller('addProdCtrl', function (alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,productsServices) {
 
     if (item) {
-
-    }else{
       $scope.item = item;
+    }else{
+      $scope.item = {};
+      $scope.item.inSlider = 0;
+      $scope.item.destacar = 0;
     }
-
+    $scope.loading = false;
     $scope.uploader = new FileUploader({
         url: generalService.dir() + 'addImgProduct'
     });
@@ -50,7 +52,9 @@ angular.module('fotosApp')
             });
             var result = {respuesta:'Y',data:$scope.item};
             $uibModalInstance.close(result);
+            $scope.loading = false;
         }else{
+             $scope.loading = false;
             toastr.error(alertsService.alerts.error.upload, 'Error !',{
               closeButton: true,
               timeOut: 2000,
@@ -59,11 +63,13 @@ angular.module('fotosApp')
     };
 
     $scope.save = function() {
+      $scope.loading = true;
         $scope.item.token = $localStorage.user.token;
         productsServices.addProd($scope.item).then(function(r){
           $scope.item = r.data.row;
           $scope.uploader.uploadAll();
         }).catch(function(e){
+          $scope.loading = false;
           toastr.error(alertsService.alerts.error.save, 'Error !',{
               closeButton: true,
               timeOut: 2000,

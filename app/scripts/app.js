@@ -33,10 +33,15 @@ var app = angular
     'ngSanitize'
   ]);
 
-app.run(function($rootScope,$window,userService,toastr,$localStorage) {
+app.run(function($rootScope,$window,userService,toastr,$localStorage,$location) {
     $rootScope.$on("$locationChangeStart", function(event, next, current) {
         if ($localStorage.user) {
+            $rootScope.user = $localStorage.user;
             userService.checkSession().then(function(r){
+                if (r.data.respuesta != true) {
+                  $localStorage.$reset();
+                  $window.location.reload();
+                }
             }).catch(function(e){
               var toast = toastr.error('Ups! tu sesión ha caducado', 'Error',{
                 closeButton: true,
@@ -56,6 +61,7 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
             .when('/administration',    'administration')
             .when('/administration/images',    'administration.images')
             .when('/administration/products',    'administration.products')
+            .when('/administration/slider',    'administration.slider')
             .when('/fotografia/:categoria',    'main.fotografia')
             .when('/activarcuenta/:code',    'main.activarcuenta')
             .segment('administration', {
@@ -70,6 +76,10 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                 .segment('products', {
                     templateUrl: 'views/administration/products/index.html',
                     controller: 'prodsCtrl'
+                })
+                .segment('slider', {
+                    templateUrl: 'views/administration/slider/index.html',
+                    controller: 'sliderCtrl'
                 }).up()         
             .segment('main', {
                 templateUrl: 'views/main/main.html',

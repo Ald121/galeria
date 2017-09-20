@@ -1,4 +1,5 @@
-<md-dialog aria-label="Cargar Imagen " >
+
+<md-dialog aria-label="Cargar Imagen ">
   <form ng-cloak name="form" ng-submit="ingresar()">
     <md-dialog-content >
       <div id="gridContainer" ng-cloak>
@@ -34,9 +35,9 @@
        Cancelar
       </md-button>
       <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving ">
-      <i class="fa fa-spinner" aria-hidden="true" ng-show="saving"></i>
+      <i class="fa fa-spinner fa-spin fa-fw" ng-show="saving"></i>
        Aceptar
       </md-button>
     </md-dialog-actions>
-  </form>
+ </form>
 </md-dialog>

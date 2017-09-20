@@ -2,7 +2,7 @@
 <md-toolbar class="md-table-toolbar md-default">
   <div class="md-toolbar-tools">
     <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showAdd(prod)">
-	  <i class="fa fa-shopping-bag"></i> <i class="fa fa-plus"></i> Añadir Producto
+	  <i class="fa fa-picture-o"></i> <i class="fa fa-plus"></i> Añadir Imagenes
 	</button>
   </div>
 </md-toolbar>
@@ -11,11 +11,27 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <p class="navbar-text">
-            <i class="fa fa-exclamation-triangle"></i> No hay productos para mostrar
+            <i class="fa fa-picture-o"></i> No hay imagenes para mostrar
           </p>
         </div>
       </div>
     </nav>
+<br>
+<ui-carousel 
+  slides="slides"
+  slides-to-show="3"
+  slides-to-scroll="1"
+  initial-slide="0"
+  autoplay="false"
+  autoplay-speed="5000"
+  dots="true" style="text-align: center;    margin-left: 4%;   width: 90%;">
+  <carousel-item>
+  	<a href="">
+		<img src="{{item.url}}" width="300px" class="img-slider grid-prods">
+	</a>
+  </carousel-item>
+</ui-carousel>
+<br>
 <div style="width: 100%;text-align: center;" ng-show="loading">
   <img src="icons/loading.svg" width="30">
 </div>

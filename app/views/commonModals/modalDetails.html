@@ -1,0 +1,50 @@
+<style type="text/css">
+  md-dialog.fullscreen-dialog {
+    max-width: 98%;
+    max-height: 75%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+</style>
+<md-dialog aria-label="Cargar Imagen " class="fullscreen-dialog">
+  <form ng-cloak name="form" ng-submit="ingresar()">
+    <md-dialog-content >
+      <div id="gridContainer" ng-cloak>
+         <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab>
+        <md-tab-label><i class="fa fa-picture-o"></i> Multimedia</md-tab-label>
+        <md-tab-body>
+          <div class="row" style="    height: 396px;">
+            <div class="form-control col-md-6">
+              <img src="{{prodSelected.picDefault}}" 
+                    wip-image-zoom="options" 
+                    selected-model="selected"
+                    selected-index="selectedIndex" width="200">
+            </div>
+          </div>
+        </md-tab-body>
+      </md-tab>
+      <md-tab>
+        <md-tab-label><i class="fa fa-list"></i> Descripción</md-tab-label>
+        <md-tab-body>
+          
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" >
+      <md-button ng-click="cancel()">
+       Cancelar
+      </md-button>
+      <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving ">
+      <i class="fa fa-spinner fa-spin fa-fw" ng-show="saving"></i>
+       Añadir
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

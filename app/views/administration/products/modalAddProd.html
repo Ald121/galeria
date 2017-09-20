@@ -16,6 +16,17 @@
 			<label><i class="fa fa-font"></i> Descripción</label>
 			<textarea name="description" class="form-control" placeholder="Ej: Blusa color blanco ......." rows="5" ng-model="item.description" required></textarea>
 		</div>
+		<div class="form-group col-md-6">
+			<label><i class="fa fa-picture-o"></i> ¿ Mostrar producto en slider ?</label>
+			<md-switch ng-model="item.inSlider" aria-label="Switch 1">
+			</md-switch>
+		</div>
+		<div class="form-group col-md-6">
+			<label><i class="fa fa-star"></i> ¿ Destacar producto ?</label>
+			<md-switch ng-model="item.destacar" aria-label="Switch 1">
+			</md-switch>
+		</div>
+		 
 	</div>
 	<input type="file" nv-file-select="" uploader="uploader" multiple  accept="image/*" /><br/>
 	<table class="table">
@@ -58,6 +69,6 @@
 	</div>
 	<div class="modal-footer">
 	    <button class="btn btn-danger" type="button" ng-click="close()">Cancelar</button>
-	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || !uploader.getNotUploadedItems().length" ng-show="!uploading">OK</button>
+	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || !uploader.getNotUploadedItems().length || loading " ng-show="!uploading"><i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i> OK</button>
 	</div>
 </form>
