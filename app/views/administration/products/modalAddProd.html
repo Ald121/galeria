@@ -16,6 +16,19 @@
 			<label><i class="fa fa-font"></i> Descripción</label>
 			<textarea name="description" class="form-control" placeholder="Ej: Blusa color blanco ......." rows="5" ng-model="item.description" required></textarea>
 		</div>
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-usd"></i> Stock</label>
+			<input type="number" name="stock" class="form-control" placeholder="Ej: 5" ng-model="item.stock" required>
+		</div>
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-usd"></i> Color</label>
+			<ui-select ng-model="item.colores" multiple close-on-select="false">
+		        <ui-select-match placeholder="Selecionar un color(es)..">{{$item.nombre}}</ui-select-match>
+		        <ui-select-choices repeat="value.idcolores as value in colorList | filter: $select.search">
+		            <div ng-bind-html="value.nombre | highlight: $select.search"></div>
+		        </ui-select-choices>
+		    </ui-select>
+		</div>
 		<div class="form-group col-md-6">
 			<label><i class="fa fa-picture-o"></i> ¿ Mostrar producto en slider ?</label>
 			<md-switch ng-model="item.inSlider" aria-label="Switch 1">

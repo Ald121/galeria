@@ -125,7 +125,7 @@ angular.module('fotosApp')
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose:true,
-          fullscreen: $scope.customFullscreen,
+          fullscreen: true,
           locals:{
             prod:item
           }
@@ -133,16 +133,46 @@ angular.module('fotosApp')
       }
 
       var modalDetailsController = function(prod,$scope,$localStorage,$mdDialog,userService,$location){
-        $scope.cancel = function(){
-          $mdDialog.hide();
-        }
+        $scope.saving = false;
         $scope.prodSelected = prod;
+        $scope.images = [];
         angular.forEach($scope.prodSelected.images,function(image,keyImg){
           $scope.prodSelected.images[keyImg].image = generalService.pathImgProds() + $scope.prodSelected.images[keyImg].url;
+          var img = {
+            thumb:$scope.prodSelected.images[keyImg].image,
+            large:$scope.prodSelected.images[keyImg].image,
+            medium:$scope.prodSelected.images[keyImg].image
+          }
+          $scope.images.push(img);
           if ($scope.prodSelected.images[keyImg].default == 1) {
                 $scope.prodSelected.picDefault = $scope.prodSelected.images[keyImg].image;
           }
         });
+        console.log($scope.images);
+        $scope.zoomOptions1 = {
+            defaultImage        : 0,
+            style               : 'box',
+            boxPos              : 'right-top',
+            boxW                : 400,
+            boxH                : 400,
+            method              : 'lens',
+            cursor              : 'crosshair',
+            lens                : true,
+            zoomLevel           : 3,
+            immersiveMode       : '769',
+            immersiveModeOptions: {
+            },
+            prevThumbButton     : '&#9665;',
+            nextThumbButton     : '&#9655;',
+            thumbsPos           : 'top',
+            thumbCol            : 4,
+            thumbColPadding     : 4,
+            images              : $scope.images
+        };
+
+        $scope.cancel = function(){
+          $mdDialog.hide();
+        }
       }
             
     });

@@ -1,47 +1,89 @@
-
-<md-toolbar class="md-table-toolbar md-default">
-  <div class="md-toolbar-tools">
-    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showAdd(prod)">
-	  <i class="fa fa-shopping-bag"></i> <i class="fa fa-plus"></i> Añadir Producto
-	</button>
-  </div>
-</md-toolbar>
-<hr>
-    <nav ng-show="(!productsList || productsList.length == 0) && loading == false" class="navbar navbar-default" style="margin-left: 40px; margin-right: 40px;">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <p class="navbar-text">
-            <i class="fa fa-exclamation-triangle"></i> No hay productos para mostrar
-          </p>
-        </div>
-      </div>
-    </nav>
-<div style="width: 100%;text-align: center;" ng-show="loading">
-  <img src="icons/loading.svg" width="30">
-</div>
-<div class="row" style="padding-left: 2%;  padding-right: 2%;">
-  <div class="col-sm-3 col-md-3" ng-repeat="prod in productsList">
-    <div class="thumbnail">
-      <img ng-src="{{prod.picDefault}}" style="width: 100%;
-    min-height: 200px !important;
-    max-height: 230px !important;" />
-    <span class="label label-info" style="float: right;
-    font-size: 20px;
-    position: absolute;
-    top: 16px;
-    right: 28px;"> $ {{prod.precio}}</span>
-      <div class="caption">
-        <h4>
-        <strong>{{prod.nombre}}</strong>
-        </h4>
-        <hr>
-        <p style="word-wrap: break-word; height: 40px;">{{ prod.description | limitTo: 30 }}{{prod.description.length > 30 ? '...' : ''}}</p>
-        <hr>
-        <p>
-          <a href="" class="btn btn-primary" ng-click="showAdd(prod)"><i class="fa fa-edit"></i></a>
-          <a href="" class="btn btn-danger" ng-click="showDelete(prod)"><i class="fa fa-trash"></i></a>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+<md-tabs md-dynamic-height md-border-bottom>
+    <md-tab>
+        <md-tab-label><i class="fa fa-shopping-bag"></i> <strong>Productos</strong></md-tab-label>
+        <md-tab-body>
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools">
+                    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showAdd(prod)">
+                        <i class="fa fa-shopping-bag"></i> <i class="fa fa-plus"></i> Añadir Producto
+                    </button>
+                </div>
+            </md-toolbar>
+            <hr>
+            <nav ng-show="(!productsList || productsList.length == 0) && loading == false" class="navbar navbar-default" style="margin-left: 40px; margin-right: 40px;">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <p class="navbar-text">
+                            <i class="fa fa-exclamation-triangle"></i> No hay productos para mostrar
+                        </p>
+                    </div>
+                </div>
+            </nav>
+            <div style="width: 100%;text-align: center;" ng-show="loading">
+                <img src="icons/loading.svg" width="30">
+            </div>
+            <div class="row" style="padding-left: 2%;  padding-right: 2%;">
+                <div class="col-sm-3 col-md-3" ng-repeat="prod in productsList">
+                    <div class="thumbnail">
+                        <img ng-src="{{prod.picDefault}}" style="width: 100%;
+            min-height: 200px !important;
+            max-height: 230px !important;" />
+                        <span class="label label-info" style="float: right;
+            font-size: 20px;
+            position: absolute;
+            top: 16px;
+            right: 28px;"> $ {{prod.precio}}</span>
+                        <div class="caption">
+                            <h4>
+                <strong>{{prod.nombre}}</strong>
+                </h4>
+                            <hr>
+                            <p style="word-wrap: break-word; height: 40px;">{{ prod.description | limitTo: 30 }}{{prod.description.length > 30 ? '...' : ''}}</p>
+                            <hr>
+                            <p>
+                                <a href="" class="btn btn-primary" ng-click="showAdd(prod)"><i class="fa fa-edit"></i></a>
+                                <a href="" class="btn btn-danger" ng-click="showDelete(prod)"><i class="fa fa-trash"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-tab-body>
+    </md-tab>
+    <md-tab>
+        <md-tab-label><i class="fa fa-tint"></i> Colores</md-tab-label>
+        <md-tab-body>
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools">
+                    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showAddColor(prod)">
+                        <i class="fa fa-tint"></i> <i class="fa fa-plus"></i> Añadir Color
+                    </button>
+                </div>
+            </md-toolbar>
+            <hr>
+            <md-table-container layout-padding>
+                <table md-table md-progress="promise">
+                    <thead md-head md-order="query.order" md-on-reorder="data_inv_producto_get">
+                        <tr md-row>
+                            <th md-column md-numeric>#</th>
+                            <th md-column md-numeric>NOMBRE</th>
+                            <th md-column md-numeric>VALOR</th>
+                            <th md-column md-numeric>ACCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row md-select="color" md-select-id="name" md-auto-select ng-repeat="color in colorList">
+                            <td md-cell>{{$index}}</td>
+                            <td md-cell>{{color.nombre}}</td>
+                            <td md-cell>{{color.value}}</td>
+                            <td md-cell><a href="" class="btn btn-primary" ng-click="showAddColor(color)"><i class="fa fa-edit"></i></a>
+                                <a href="" class="btn btn-danger" ng-click="showDeleteColor(color)"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+            <!--  <md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.pagina_actual" md-total="{{total}}" md-on-paginate="data_inv_producto_get" md-page-select>
+    </md-table-pagination> -->
+        </md-tab-body>
+    </md-tab>
+</md-tabs>
