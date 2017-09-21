@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('addProdCtrl', function (alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,productsServices) {
+  .controller('addProdCtrl', function (colorService,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,productsServices) {
 
     if (item) {
       $scope.item = item;
@@ -20,6 +20,15 @@ angular.module('fotosApp')
                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
         });
+
+    $scope.getColors = function () {
+        colorService.colorList().then(function(r){
+          $scope.colorList = r.data.list;
+        }).catch(function(e){
+
+        });
+    };
+    $scope.getColors();
 
     $scope.uploader.onBeforeUploadItem = function(item) {
         formData = [{

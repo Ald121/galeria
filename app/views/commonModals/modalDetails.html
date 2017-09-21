@@ -1,50 +1,84 @@
 <style type="text/css">
-  md-dialog.fullscreen-dialog {
-    max-width: 98%;
-    max-height: 75%;
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-}
+    md-dialog.fullscreen-dialog {
+        max-width: 99%;
+        max-height: 99%;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
 </style>
 <md-dialog aria-label="Cargar Imagen " class="fullscreen-dialog">
-  <form ng-cloak name="form" ng-submit="ingresar()">
-    <md-dialog-content >
-      <div id="gridContainer" ng-cloak>
-         <md-content>
-    <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab>
-        <md-tab-label><i class="fa fa-picture-o"></i> Multimedia</md-tab-label>
-        <md-tab-body>
-          <div class="row" style="    height: 396px;">
-            <div class="form-control col-md-6">
-              <img src="{{prodSelected.picDefault}}" 
-                    wip-image-zoom="options" 
-                    selected-model="selected"
-                    selected-index="selectedIndex" width="200">
-            </div>
-          </div>
-        </md-tab-body>
-      </md-tab>
-      <md-tab>
-        <md-tab-label><i class="fa fa-list"></i> Descripción</md-tab-label>
-        <md-tab-body>
-          
-        </md-tab-body>
-      </md-tab>
-    </md-tabs>
-  </md-content>
-      </div>
-    </md-dialog-content>
+    <form ng-cloak name="form" ng-submit="ingresar()">
+        <md-dialog-content>
+            <div id="gridContainer" ng-cloak>
+                <md-content>
+                    <md-tabs md-dynamic-height md-border-bottom>
+                        <md-tab>
+                            <md-tab-label><i class="fa fa-shopping-bag"></i> <strong>{{prodSelected.nombre}}</strong></md-tab-label>
+                            <md-tab-body>
 
-    <md-dialog-actions layout="row" >
-      <md-button ng-click="cancel()">
-       Cancelar
-      </md-button>
-      <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving ">
-      <i class="fa fa-spinner fa-spin fa-fw" ng-show="saving"></i>
-       Añadir
-      </md-button>
-    </md-dialog-actions>
-  </form>
+                              <div class="form-group col-md-6" style="padding-top: 10px;">
+                                  <div class="panel panel-default">
+                                    <div class="panel-body">
+                                      <i class="fa fa-picture-o"></i> Multimedia
+                                    </div>
+                                    <div class="panel-footer" style="display: -webkit-box;">
+                                      <div class="container">
+                                              <div class="demo-preview">
+                                                  <img src="images/zoom/1-medium.jpg" wip-image-zoom="zoomOptions1" selected-model="selected" selected-index="selectedIndex">
+                                              </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+        
+                                <div class="form-group col-md-6" style="padding-top: 10px;">
+                                  <div class="panel panel-default">
+                                    <div class="panel-body">
+                                      <i class="fa fa-info"></i> Detalles del producto
+                                    </div>
+                                    <div class="panel-footer">
+                                      <ul class="list-group">
+                                        <li class="list-group-item" style="word-wrap: break-word;">
+                                          <i class="fa fa-info"></i> {{prodSelected.description}}
+                                        </li>
+                                        <li class="list-group-item" >
+                                          <i class="fa fa-angle-double-right"></i> <strong>Stock disponible</strong>
+                                          <span class="badge" style="background-color: #5bc0de;">{{prodSelected.stock}}</span>
+                                        </li>
+                                        <li class="list-group-item" >
+                                          <i class="fa fa-angle-double-right"></i> <strong>Categoria</strong>
+                                          <span class="badge">{{prodSelected.categoria}}</span>
+                                        </li>
+                                        <li class="list-group-item" >
+                                          <i class="fa fa-angle-double-right"></i> <strong>Colores</strong>
+                                          <span class="badge" style="background-color: black;" ng-repeat="color in [1,2,3]">color</span>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                            </md-tab-body>
+                        </md-tab>
+                        <!-- <md-tab>
+                            <md-tab-label><i class="fa fa-list"></i> Descripción</md-tab-label>
+                            <md-tab-body>
+
+                            </md-tab-body>
+                        </md-tab> -->
+                    </md-tabs>
+                </md-content>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">
+                Cancelar
+            </md-button>
+            <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving ">
+                <i class="fa fa-cart-plus"></i>
+                <i class="fa fa-spinner fa-spin fa-fw" ng-show="saving"></i> Añadir
+            </md-button>
+        </md-dialog-actions>
+    </form>
 </md-dialog>

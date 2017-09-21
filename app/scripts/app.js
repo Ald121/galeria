@@ -30,7 +30,8 @@ var app = angular
     'ui.utils.masks',
     'wipImageZoom',
     'ui.select', 
-    'ngSanitize'
+    'ngSanitize',
+    'colorpicker.module'
   ]);
 
 app.run(function($rootScope,$window,userService,toastr,$localStorage,$location) {

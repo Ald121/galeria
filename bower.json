@@ -23,7 +23,8 @@
     "angular-ui-carousel": "^0.1.10",
     "angular-input-masks": "^2.6.0",
     "wip-image-zoom": "^1.0.4",
-    "angular-ui-select": "^0.19.8"
+    "angular-ui-select": "^0.19.8",
+    "angular-bootstrap-colorpicker": "^3.0.31"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
