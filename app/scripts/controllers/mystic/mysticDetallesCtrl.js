@@ -17,8 +17,7 @@ angular.module('fotosApp')
              timeOut: 2000,
           });
           $scope.saving = false;
-        });
-            
+        });   
     });
 
 
