@@ -72,12 +72,11 @@
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
-            <md-button ng-click="cancel()">
-                Cancelar
+            <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving " ng-click="addToCar(prodSelected)">
+                <i class="fa fa-cart-plus"></i> Añadir
             </md-button>
-            <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving ">
-                <i class="fa fa-cart-plus"></i>
-                <i class="fa fa-spinner fa-spin fa-fw" ng-show="saving"></i> Añadir
+            <md-button ng-click="cancel()">
+                Aceptar
             </md-button>
         </md-dialog-actions>
     </form>

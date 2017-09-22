@@ -8,7 +8,26 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('mysticHomeCtrl', function ($scope,$mdDialog,toastr) {
+  .controller('mysticHomeCtrl', function ($scope,$mdDialog,toastr,carService,$localStorage) {
+      var modalCarListController = function($scope,$mdDialog,userService,$location){
+        $scope.carList = $localStorage.car;
+
+        $scope.cancel = function(){
+          $mdDialog.hide();
+        }
+      }
+
+    $scope.openCar = function(ev){
+        $mdDialog.show({
+          controller: modalCarListController,
+          templateUrl: 'views/commonModals/modalCarList.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: true
+        });
+    }
+
     $scope.menuSuperior = [
                       {nombre:'Inicio',link:'/mytic',icon:'fa-home',child:[]},
                       {nombre:'Camisas',link:'/camisas',icon:'fa-shopping-bag',child:[]},
