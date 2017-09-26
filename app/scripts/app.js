@@ -31,7 +31,8 @@ var app = angular
     'wipImageZoom',
     'ui.select', 
     'ngSanitize',
-    'colorpicker.module'
+    'colorpicker.module',
+    'underscore'
   ]);
 
 app.run(function($rootScope,$window,userService,toastr,$localStorage,$location) {

@@ -15,6 +15,10 @@ angular.module('fotosApp')
         $scope.cancel = function(){
           $mdDialog.hide();
         }
+
+        $scope.updateCantidad = function(index,item){
+          carService.updateCantidadCar(index,item);
+        }
       }
 
     $scope.openCar = function(ev){

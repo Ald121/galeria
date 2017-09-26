@@ -118,7 +118,6 @@ angular.module('fotosApp')
       $scope.getSlider();
 
       $scope.viewDetails = function(ev,item){
-        console.log(item);
         // $location.path('/mystic/detalles/' + item.idproductos);
         $mdDialog.show({
           controller: modalDetailsController,
@@ -134,7 +133,6 @@ angular.module('fotosApp')
       }
 
       var modalDetailsController = function(prod,$scope,$localStorage,$mdDialog,userService,$location){
-             console.log(prod);
         $scope.saving = false;
         $scope.prodSelected = prod;
         $scope.images = [];

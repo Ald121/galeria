@@ -10,22 +10,59 @@
 <md-dialog aria-label="Cargar Imagen " class="fullscreen-dialog">
     <form ng-cloak name="form" ng-submit="ingresar()">
         <md-dialog-content>
-            <div id="gridContainer" ng-cloak>
                 <md-content>
                     <md-tabs md-dynamic-height md-border-bottom>
                         <md-tab>
-                            <md-tab-label><i class="fa fa-shopping-bag"></i> <strong>{{prodSelected.nombre}}</strong></md-tab-label>
+                            <md-tab-label><i class="fa fa-shopping-bag"></i> Mi Carrito<strong>{{prodSelected.nombre}}</strong></md-tab-label>
                             <md-tab-body>       
-                                <div class="form-group col-md-6">
+                                <!-- <div class="form-group col-md-6">
                                   <p ng-repeat="prod in carList.items">
                                     {{prod.nombre}}
                                   </p>
-                                </div>
+                                </div> -->
+                                <!-- <md-content>
+                                    <md-list>
+                                      <md-list-item class="md-3-line" ng-repeat="prod in carList.items">
+                                        <img ng-src="{{prod.picDefault}}" class="md-avatar" alt="{{item.who}}">
+                                        <div class="md-list-item-text">
+                                          <h3>{{prod.nombre}}</h3>
+                                          <h4>{{prod.description}}</h4>
+                                          <p>{{prod.notes}}</p>
+                                        </div>
+                                        <md-button class="md-secondary"><i class="fa fa-trash"></i></md-button>
+                                        <md-divider ng-if="!$last"></md-divider>
+                                      </md-list-item>
+                                    </md-list>
+                                </md-content> -->
+                                <md-table-container>
+                                  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+                                    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                                      <tr md-row>
+                                        <th md-column><span>Imagen</span></th>
+                                        <th md-column md-numeric>Nombre</th>
+                                        <th md-column md-numeric ><span>Precio U.</span></th>
+                                        <th md-column md-numeric>Cantidad</th>
+                                        <th md-column md-numeric>Total</th>
+                                        <th md-column md-numeric>Acción</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody md-body>
+                                      <tr md-row md-select="prod" md-select-id="name" md-auto-select ng-repeat="prod in carList.items">
+                                        <td md-cell>
+                                        <img ng-src="{{prod.picDefault}}" width="50" alt="{{item.who}}"></td>
+                                        <td md-cell>{{prod.nombre}}</td>
+                                        <td md-cell>{{prod.precio}}</td>
+                                        <td md-cell><input type="number" value="{{prod.cantidadInCar}}" ng-model="prod.cantidadInCar" ng-change="updateCantidad($index,prod)"></td>
+                                        <td md-cell>{{prod.totalCu}}</td>
+                                        <td md-cell><md-button class="md-secondary"><i class="fa fa-trash"></i></md-button></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </md-table-container>
                             </md-tab-body>
                         </md-tab>
                     </md-tabs>
                 </md-content>
-            </div>
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
