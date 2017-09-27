@@ -21,14 +21,17 @@ angular.module('fotosApp')
                   ];
         $rootScope.setActiveLogo = function(item){
           angular.forEach($rootScope.logos,function(value){
-            if (value.image == item.image) {
+            if (value.link == $location.path()) {
               value.active = true;
             }else{
               value.active = false;
             }
           });
-          $location.path(item.link);
+          if (item) {
+            $location.path(item.link);
+          }
         }
+        $rootScope.setActiveLogo();
 
         $scope.getProds = function () {
             $scope.loadingRecent = true;

@@ -31,16 +31,19 @@ angular.module('fotosApp')
                       {image:'images/cofradiaB.png',link:'/',active:false},
                       {image:'images/mysticB.png',link:'/mystic',active:false}
                   ];
-    $rootScope.setActiveLogo = function(item){
-      angular.forEach($rootScope.logos,function(value){
-        if (value.image == item.image) {
-          value.active = true;
-        }else{
-          value.active = false;
+   $rootScope.setActiveLogo = function(item){
+          angular.forEach($rootScope.logos,function(value){
+            if (value.link == $location.path()) {
+              value.active = true;
+            }else{
+              value.active = false;
+            }
+          });
+          if (item) {
+            $location.path(item.link);
+          }
         }
-      });
-      $location.path(item.link);
-    }
+    $rootScope.setActiveLogo();
 
     $scope.goTo = function(link){
       $location.path(link);
