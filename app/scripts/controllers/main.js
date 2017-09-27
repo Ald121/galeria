@@ -27,6 +27,21 @@ angular.module('fotosApp')
                       {nombre:'Productos',link:'/',icon:'fa-product-hunt',child:[]}
                       // {nombre:'Ingreso ',link:'/',icon:'fa-user-circle',child:[]},
                     ];
+    $rootScope.logos = [
+                      {image:'images/cofradiaB.png',link:'/',active:false},
+                      {image:'images/mysticB.png',link:'/mystic',active:false}
+                  ];
+    $rootScope.setActiveLogo = function(item){
+      angular.forEach($rootScope.logos,function(value){
+        if (value.image == item.image) {
+          value.active = true;
+        }else{
+          value.active = false;
+        }
+      });
+      $location.path(item.link);
+    }
+
     $scope.goTo = function(link){
       $location.path(link);
     }

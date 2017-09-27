@@ -52,9 +52,17 @@
                                         <img ng-src="{{prod.picDefault}}" width="50" alt="{{item.who}}"></td>
                                         <td md-cell>{{prod.nombre}}</td>
                                         <td md-cell>{{prod.precio}}</td>
-                                        <td md-cell><input type="number" value="{{prod.cantidadInCar}}" ng-model="prod.cantidadInCar" ng-change="updateCantidad($index,prod)"></td>
+                                        <td md-cell width="150">
+                                              <md-input-container flex="70">
+                                                <input type="number" value="{{prod.cantidadInCar}}" ng-model="prod.cantidadInCar" ng-change="updateCantidad($index,prod)" min="1">
+                                              </md-input-container>
+                                        </td>
                                         <td md-cell>{{prod.totalCu}}</td>
-                                        <td md-cell><md-button class="md-secondary"><i class="fa fa-trash"></i></md-button></td>
+                                        <td md-cell>
+                                            <md-button class="md-secondary" ng-click="removeItemCar($index)">
+                                                <i class="fa fa-trash"></i>
+                                            </md-button>
+                                        </td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -66,11 +74,11 @@
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
-            <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving ">
-                <i class="fa fa-paper-plane"></i> Enviar Pedido
-            </md-button>
             <md-button ng-click="cancel()">
-                Aceptar
+                Cerrar
+            </md-button>
+            <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving || carList.items.length == 0">
+                <i class="fa fa-paper-plane"></i> Enviar Pedido
             </md-button>
         </md-dialog-actions>
     </form>

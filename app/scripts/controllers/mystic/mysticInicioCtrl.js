@@ -8,12 +8,27 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('mysticInicioCtrl', function (carService,$mdDialog,$location,sliderService,$scope,productsServices,toastr,generalService) {
+  .controller('mysticInicioCtrl', function ($rootScope,carService,$mdDialog,$location,sliderService,$scope,productsServices,toastr,generalService) {
    	    $scope.productsListSlider = [];
         $scope.productsDestacados = [];
         $scope.loadingDestacados = false;
         $scope.loadingSlider = false;
         $scope.loadingRecent = false;
+
+        $rootScope.logos = [
+                      {image:'images/cofradiaB.png',link:'/',active:false},
+                      {image:'images/mysticB.png',link:'/mystic',active:false}
+                  ];
+        $rootScope.setActiveLogo = function(item){
+          angular.forEach($rootScope.logos,function(value){
+            if (value.image == item.image) {
+              value.active = true;
+            }else{
+              value.active = false;
+            }
+          });
+          $location.path(item.link);
+        }
 
         $scope.getProds = function () {
             $scope.loadingRecent = true;
@@ -118,68 +133,15 @@ angular.module('fotosApp')
       $scope.getSlider();
 
       $scope.viewDetails = function(ev,item){
-        // $location.path('/mystic/detalles/' + item.idproductos);
-        $mdDialog.show({
-          controller: modalDetailsController,
-          templateUrl: 'views/commonModals/modalDetails.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true,
-          fullscreen: true,
-          locals:{
-            prod:item
-          }
-        });
-      }
-
-      var modalDetailsController = function(prod,$scope,$localStorage,$mdDialog,userService,$location){
-        $scope.saving = false;
-        $scope.prodSelected = prod;
-        $scope.images = [];
-        angular.forEach($scope.prodSelected.images,function(image,keyImg){
-          $scope.prodSelected.images[keyImg].image = generalService.pathImgProds() + $scope.prodSelected.images[keyImg].url;
-          var img = {
-            thumb:$scope.prodSelected.images[keyImg].image,
-            large:$scope.prodSelected.images[keyImg].image,
-            medium:$scope.prodSelected.images[keyImg].image
-          }
-          $scope.images.push(img);
-          if ($scope.prodSelected.images[keyImg].default == 1) {
-                $scope.prodSelected.picDefault = $scope.prodSelected.images[keyImg].image;
-          }
-        });
-
-        $scope.zoomOptions1 = {
-            defaultImage        : 0,
-            style               : 'box',
-            boxPos              : 'right-top',
-            boxW                : 400,
-            boxH                : 400,
-            method              : 'lens',
-            cursor              : 'crosshair',
-            lens                : true,
-            zoomLevel           : 3,
-            immersiveMode       : '769',
-            immersiveModeOptions: {
-            },
-            prevThumbButton     : '&#9665;',
-            nextThumbButton     : '&#9655;',
-            thumbsPos           : 'top',
-            thumbCol            : 4,
-            thumbColPadding     : 4,
-            images              : $scope.images
-        };
-
-        $scope.cancel = function(){
-          $mdDialog.hide();
-        }
-        $scope.addToCar = function(item){
-          carService.addToCar(item);
+        if (ev.target.nodeName === 'SPAN'  || ev.target.nodeName === 'H5' || ev.target.nodeName === 'IMG' || ev.target.nodeName === 'P' || ev.target.nodeName === 'DIV') {
+          carService.viewDetails(ev,item,$mdDialog);
         }
       }
       
-      $scope.addToCar = function(item){
-        carService.addToCar(item);
+      $scope.addToCar = function(evn,item){
+        if (evn.target.nodeName === 'A' || evn.target.nodeName === 'I') {
+          carService.addToCar(item);
+        }
       }
 
     });

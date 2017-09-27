@@ -1,12 +1,25 @@
-<div style="width: 100%; text-align: center; border-bottom: 1px solid rgba(189, 189, 189, 0.7);
-    padding-bottom: 3%;">
-    <a href="" ng-click="openLoginModal($event)">
-        <img src="images/mysticB.png" style="height: auto;
-            width: 100%;
-            padding-left: 35%;
-            padding-right: 35%;
-        ">
+<div style="width: 100%; border-bottom: 1px solid rgba(189, 189, 189, 0.7);
+    padding-bottom: 1%; padding-left: 10px;">
+    <a href="" ng-repeat ="logo in logos" ng-click="setActiveLogo(logo)">
+        <img src="{{logo.image}}" style="height: auto;
+            width: 10%;
+    margin-top: 7px;
+        " ng-class="{'logo-active':logo.active == true}">
     </a>
+</div>
+<div style="margin-left: 90%; padding-top: 5px;">
+    <a href="https://www.facebook.com/CofradiaCo/" target="_blank">
+        <i class="fa fa-facebook-official fa-lg red-social-icon"></i>
+    </a>
+    <a href="" target="_blank">
+        <i class="fa fa-twitter fa-lg red-social-icon"></i>
+    </a>
+    <a href="https://www.youtube.com/user/realmcrap" target="_blank">
+        <i class="fa fa-youtube-play fa-lg red-social-icon"></i>
+    </a> 
+    <a href="https://www.instagram.com/tonyyamberla/" target="_blank">
+        <i class="fa fa-instagram fa-lg red-social-icon"></i>
+    </a>   
 </div>
 <header style="border-bottom: 1px solid rgba(189, 189, 189, 0.7);">
     <div id="header">

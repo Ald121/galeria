@@ -19,6 +19,10 @@ angular.module('fotosApp')
         $scope.updateCantidad = function(index,item){
           carService.updateCantidadCar(index,item);
         }
+
+        $scope.removeItemCar = function(index){
+          carService.removeItemCar(index);
+        }
       }
 
     $scope.openCar = function(ev){
