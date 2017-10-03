@@ -6,7 +6,9 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
       addToCar: addToCar,
       updateCantidadCar:updateCantidadCar,
       removeItemCar:removeItemCar,
-      viewDetails:viewDetails
+      viewDetails:viewDetails,
+      addPedido:addPedido,
+      resetCar:resetCar
     });
 
     function addToCar(itemToAdd) {
@@ -15,14 +17,16 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
       	$localStorage.car.items = [];
       	$localStorage.car.total = 0.00;
       }
-
+      var added = false;
       var proInCar = _.where($localStorage.car.items,{idproductos:itemToAdd.idproductos});
       if (proInCar.length == 0) {
         itemToAdd.cantidadInCar = 1;
         itemToAdd.totalCu = itemToAdd.cantidadInCar * itemToAdd.precio;
-        $localStorage.car.items.push(itemToAdd);
+        if (itemToAdd.stock > 0) {
+          added = true;
+          $localStorage.car.items.push(itemToAdd);
+        }
       }else{
-        var added = false;
         angular.forEach($localStorage.car.items,function(value,key){
           if (value.idproductos == itemToAdd.idproductos) {
             if ($localStorage.car.items[key].cantidadInCar < itemToAdd.stock) {
@@ -30,14 +34,13 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
                 itemToAdd.cantidadInCar = parseInt(value.cantidadInCar) + 1;
                 itemToAdd.totalCu = parseInt(value.cantidadInCar) * value.precio;
                 $localStorage.car.items[key] = itemToAdd;
-            }
+            }else{}
             return true;
           }
         });
       }
-      calTotalInCar($localStorage.car.items);
-      $rootScope.carList = $localStorage.car;
 
+      console.log(added);
       if (added) {
         var toast = toastr.success('Producto Añadido correctamente', null,{
           closeButton: true,
@@ -49,7 +52,14 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
            timeOut: 2000,
         });
       }
-      
+      calTotalInCar($localStorage.car.items);
+      $rootScope.carList = $localStorage.car;
+    }
+
+    function resetCar(){
+        $localStorage.car = {}
+        $localStorage.car.items = [];
+        $localStorage.car.total = 0.00;
     }
 
     function updateCantidadCar(index,item){
@@ -76,6 +86,16 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
         sum = sum + value.totalCu;
       });
       $localStorage.car.total = sum.toFixed(2);
+    }
+
+    function addPedido(){
+      if ($localStorage.user) {
+        if (!dataSend) {
+          dataSend = {};
+        }
+        dataSend.token = $localStorage.user.token;
+      }
+      return $http.post(generalService.dir() + 'addPedido', $localStorage.car);
     }
 
     function viewDetails(ev,item,mdDialog){

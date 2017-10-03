@@ -25,7 +25,7 @@ angular.module('fotosApp').factory('productsServices',['$q', '$timeout', '$http'
         }
         dataSend.token = $localStorage.user.token;
       }
-       return $http.post(generalService.dir() + 'addProduct', dataSend);
+      return $http.post(generalService.dir() + 'addProduct', dataSend);
     }
 
     function deleteProd(dataSend) {

@@ -8,9 +8,11 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('mysticHomeCtrl', function ($scope,$mdDialog,toastr,carService,$localStorage) {
-      var modalCarListController = function($scope,$mdDialog,userService,$location){
+  .controller('mysticHomeCtrl', function ($window,$scope,$mdDialog,toastr,carService,$localStorage) {
+      var modalCarListController = function($rootScope,$scope,$mdDialog,userService,pedidosServices){
         $scope.carList = $localStorage.car;
+        $scope.loading = false;
+        $scope.showRegister = ($rootScope.user) ? false : true;
 
         $scope.cancel = function(){
           $mdDialog.hide();
@@ -23,6 +25,33 @@ angular.module('fotosApp')
         $scope.removeItemCar = function(index){
           carService.removeItemCar(index);
         }
+
+        $scope.sendCar = function(){
+          $scope.loading = true;
+           pedidosServices.addPedido($localStorage.car).then(function(r){
+            if (r.data.respuesta == true) {
+              var toast = toastr.success('Pedido Enviado correctamente', 'Correcto',{
+                        closeButton: true,
+                         timeOut: 2000,
+                      });
+              carService.resetCar();
+              $mdDialog.hide('Y');
+              $scope.loading = false;
+            }else{
+              var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                        closeButton: true,
+                         timeOut: 2000,
+                      });
+                      $scope.loading = false;
+            }
+           }).catch(function(e){
+              var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                closeButton: true,
+                 timeOut: 2000,
+              });
+              $scope.loading = false;
+           });
+        }
       }
 
     $scope.openCar = function(ev){
@@ -33,6 +62,10 @@ angular.module('fotosApp')
           targetEvent: ev,
           clickOutsideToClose:true,
           fullscreen: true
+        }).then(function(r) {
+          if (r == 'Y') {
+            $window.location.reload();
+          }
         });
     }
 

@@ -14,11 +14,11 @@ angular.module('fotosApp')
         $scope.loadingDestacados = false;
         $scope.loadingSlider = false;
         $scope.loadingRecent = false;
-
         $rootScope.logos = [
                       {image:'images/cofradiaB.png',link:'/',active:false},
                       {image:'images/mysticB.png',link:'/mystic',active:false}
                   ];
+
         $rootScope.setActiveLogo = function(item){
           angular.forEach($rootScope.logos,function(value){
             if (value.link == $location.path()) {

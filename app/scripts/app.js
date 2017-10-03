@@ -64,6 +64,7 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
             .when('/administration/images',    'administration.images')
             .when('/administration/products',    'administration.products')
             .when('/administration/slider',    'administration.slider')
+            .when('/administration/pedidos',    'administration.pedidos')
             .when('/fotografia/:categoria',    'main.fotografia')
             .when('/activarcuenta/:code',    'main.activarcuenta')
             .segment('administration', {
@@ -82,6 +83,10 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                 .segment('slider', {
                     templateUrl: 'views/administration/slider/index.html',
                     controller: 'sliderCtrl'
+                })
+                .segment('pedidos', {
+                    templateUrl: 'views/administration/pedidos/index.html',
+                    controller: 'pedidosCtrl'
                 }).up()         
             .segment('main', {
                 templateUrl: 'views/main/main.html',

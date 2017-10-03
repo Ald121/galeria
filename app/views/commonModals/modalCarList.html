@@ -8,7 +8,7 @@
     }
 </style>
 <md-dialog aria-label="Cargar Imagen " class="fullscreen-dialog">
-    <form ng-cloak name="form" ng-submit="ingresar()">
+    <form ng-cloak name="form" ng-submit="sendCar()">
         <md-dialog-content>
                 <md-content>
                     <md-tabs md-dynamic-height md-border-bottom>
@@ -54,7 +54,7 @@
                                         <td md-cell>{{prod.precio}}</td>
                                         <td md-cell width="150">
                                               <md-input-container flex="70">
-                                                <input type="number" value="{{prod.cantidadInCar}}" ng-model="prod.cantidadInCar" ng-change="updateCantidad($index,prod)" min="1">
+                                                <input type="number" value="{{prod.cantidadInCar}}" ng-model="prod.cantidadInCar" ng-change="updateCantidad($index,prod)" min="1" aria-label="">
                                               </md-input-container>
                                         </td>
                                         <td md-cell>{{prod.totalCu}}</td>
@@ -72,13 +72,16 @@
                     </md-tabs>
                 </md-content>
         </md-dialog-content>
-
         <md-dialog-actions layout="row">
             <md-button ng-click="cancel()">
                 Cerrar
             </md-button>
-            <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving || carList.items.length == 0">
-                <i class="fa fa-paper-plane"></i> Enviar Pedido
+            <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving || carList.items.length == 0 || !carList" ng-show="!showRegister">
+                <i class="fa fa-paper-plane"></i>
+                <i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i>Enviar Pedido
+            </md-button>
+            <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving || carList.items.length == 0 || !carList" ng-show="showRegister">
+                <i class="fa fa-user"></i> REGISTRATE para enviar pedido
             </md-button>
         </md-dialog-actions>
     </form>
