@@ -111,48 +111,8 @@ angular.module('fotosApp')
       }
 
       $scope.openRegister = function(ev){
-      $mdDialog.show({
-        controller: modalRegisterController,
-        templateUrl: 'views/fotografia/modalRegister.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        fullscreen: $scope.customFullscreen
-      });
-    }
-    
-    var modalRegisterController = function($scope,$mdDialog,userService){
-      $scope.cancel = function(){
-        $mdDialog.hide();
+        userService.openModalRegister(ev);
       }
-
-      $scope.registrar = function(){
-        $scope.saving = true;
-        userService.registrar($scope.item).then(function(r){
-          if (r.data.respuesta == true) {
-            toastr.info('Se envió un correo de verificación, para ingresar activa tu cuenta','Correo de verificación',{
-              closeButton: true,
-              timeOut: 3000,
-            });
-             $mdDialog.hide();
-             $scope.saving = false;
-          }else{
-            var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
-              closeButton: true,
-              timeOut: 2000,
-            });
-            $scope.saving = false;
-          }
-        }).catch(function(e){
-          var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
-            closeButton: true,
-             timeOut: 2000,
-          });
-          $scope.saving = false;
-        });
-      }
-    } 
-
     } 
 
   });

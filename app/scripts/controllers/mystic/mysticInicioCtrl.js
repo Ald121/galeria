@@ -18,7 +18,6 @@ angular.module('fotosApp')
                       {image:'images/cofradiaB.png',link:'/',active:false},
                       {image:'images/mysticB.png',link:'/mystic',active:false}
                   ];
-
         $rootScope.setActiveLogo = function(item){
           angular.forEach($rootScope.logos,function(value){
             if (value.link == $location.path()) {

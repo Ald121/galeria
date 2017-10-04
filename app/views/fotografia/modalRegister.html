@@ -11,39 +11,81 @@
     <md-dialog-content >
       <div id="gridContainer" ng-cloak>
          <md-content layout-padding>
-         	<div style="text-align: center;">
-         		<img src="icons/user.png" style="width: 20%;">
-         	</div>
-            <md-input-container class="md-icon-float md-block">
+          <div style="text-align: center;">
+            <img src="icons/user.png" style="width: 20%;">
+          </div>
+            <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="50">
                 <md-icon class="md-primary">text_fields</md-icon>
                 <label>Nombres</label>
                 <input name="nombres" ng-model="item.nombres" type="text" required>
                 <span ng-show="form.nombres.$touched && form.nombres.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
-            </md-input-container>
-            <md-input-container class="md-icon-float md-block">
-                <md-icon class="md-primary">text_fields</md-icon>
-                <label>Apellidos</label>
-                <input name="apellidos" ng-model="item.apellidos" type="text">
-                <span ng-show="form.apellidos.$touched && form.apellidos.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
-            </md-input-container>
-            <md-input-container class="md-icon-float md-block">
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                  <md-icon class="md-primary">text_fields</md-icon>
+                  <label>Apellidos</label>
+                  <input name="apellidos" ng-model="item.apellidos" type="text">
+                  <span ng-show="form.apellidos.$touched && form.apellidos.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="50">
+                <md-icon class="md-primary">adress</md-icon>
+                <label>Provincia</label>
+                 <ui-select ng-model="selected.provincia" theme="bootstrap" ng-change="getCiudades($select.selected.nombre)" ng-disabled="loadingProv">
+                    <ui-select-match placeholder="Selecione la Provincia...">{{$select.selected.nombre}}</ui-select-match>
+                    <ui-select-choices repeat="item in provinciasList | filter: $select.search">
+                      <span ng-bind-html="item.nombre | highlight: $select.search"></span>
+                    </ui-select-choices>
+                </ui-select>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                <md-icon class="md-primary">adress</md-icon>
+                <label>Ciudad</label>
+                 <ui-select ng-model="selected.ciudad" theme="bootstrap" ng-change="setCiudad($select.selected.nombre)">
+                    <ui-select-match placeholder="Selecione la Ciudad..." >{{$select.selected.nombre}}</ui-select-match>
+                    <ui-select-choices repeat="item in ciudadesList | filter: $select.search">
+                      <span ng-bind-html="item.nombre | highlight: $select.search"></span>
+                    </ui-select-choices>
+                </ui-select>
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="50">
                 <md-icon class="md-primary">email</md-icon>
                 <label>Correo / E-mail</label>
                 <input name="email" ng-model="item.email" type="email" required>
                 <span ng-show="form.email.$touched && form.email.$invalid" class="errorSpan requiredMsg">Email Incorrecto</span>
-            </md-input-container>
-            <md-input-container class="md-icon-float md-block">
-                <md-icon class="md-primary">person_pin</md-icon>
-                <label>Usuario</label>
-                <input name="nick" ng-model="item.nick" type="text" required>
-                <span ng-show="form.nick.$touched && form.nick.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
-            </md-input-container>
-            <md-input-container class="md-icon-float md-block">
-                <md-icon class="md-primary">fingerprint</md-icon>
-                <label>Contraseña</label>
-                <input name="pass" ng-model="item.pass" type="password" required>
-                <span ng-show="form.pass.$touched && form.pass.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
-            </md-input-container>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                  <md-icon class="md-primary">phone</md-icon>
+                  <label>Telefono / Celular</label>
+                  <input name="telefono" ng-model="item.telefono" type="number" required>
+                  <span ng-show="form.telefono.$touched && form.telefono.$invalid" class="errorSpan requiredMsg">Telefono Incorrecto</span>
+              </md-input-container>
+            </div>
+            <div layout-gt-lg="row">
+              <md-input-container class="md-icon-float md-block" >
+                  <md-icon class="md-primary">home</md-icon>
+                  <label>Dirección</label>
+                  <input name="direccion" ng-model="item.direccion" type="text" required>
+                  <span ng-show="form.direccion.$touched && form.direccion.$invalid" class="errorSpan requiredMsg">Dirección Incorrecta</span>
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="50">
+                  <md-icon class="md-primary">person_pin</md-icon>
+                  <label>Usuario</label>
+                  <input name="nick" ng-model="item.nick" type="text" required>
+                  <span ng-show="form.nick.$touched && form.nick.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                  <md-icon class="md-primary">fingerprint</md-icon>
+                  <label>Contraseña</label>
+                  <input name="pass" ng-model="item.pass" type="password" required>
+                  <span ng-show="form.pass.$touched && form.pass.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+              </md-input-container>
+            </div>
          </md-content>
       </div>
     </md-dialog-content>

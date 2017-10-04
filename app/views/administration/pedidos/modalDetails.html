@@ -1,0 +1,52 @@
+<style type="text/css">
+    md-dialog.fullscreen-dialog {
+        max-width: 80%;
+        max-height: 80%;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+</style>
+<md-dialog aria-label="Cargar Imagen " class="fullscreen-dialog">
+    <form ng-cloak name="form" ng-submit="sendCar()">
+        <md-dialog-content>
+                <md-content>
+                    <md-tabs md-dynamic-height md-border-bottom>
+                        <md-tab>
+                            <md-tab-label><i class="fa fa-shopping-bag"></i> <strong>{{pedido.codigo}}</strong></md-tab-label>
+                            <md-tab-body>       
+                                <md-table-container>
+                                  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+                                    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                                      <tr md-row>
+                                        <th md-column><span>Imagen</span></th>
+                                        <th md-column md-numeric>Nombre</th>
+                                        <th md-column md-numeric>Precio U.</th>
+                                        <th md-column md-numeric>Cantidad</th>
+                                        <th md-column md-numeric>Total</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody md-body>
+                                      <tr md-row md-select="prod" md-select-id="name" md-auto-select ng-repeat="prod in pedido.detalles">
+                                        <td md-cell>
+                                        <img ng-src="{{prod.image}}" width="50" alt="{{prod.nombre}}"></td>
+                                        <td md-cell>{{prod.nombre}}</td>
+                                        <td md-cell>{{prod.precio}}</td>
+                                        <td md-cell>{{prod.cantidad}}</td>
+                                        <td md-cell>{{prod.total_prod}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </md-table-container>
+                            </md-tab-body>
+                        </md-tab>
+                    </md-tabs>
+                </md-content>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">
+                Cerrar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

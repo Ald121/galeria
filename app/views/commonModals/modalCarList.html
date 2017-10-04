@@ -54,7 +54,7 @@
                                         <td md-cell>{{prod.precio}}</td>
                                         <td md-cell width="150">
                                               <md-input-container flex="70">
-                                                <input type="number" value="{{prod.cantidadInCar}}" ng-model="prod.cantidadInCar" ng-change="updateCantidad($index,prod)" min="1" aria-label="">
+                                                <input type="number" value="{{prod.cantidadInCar}}" ng-model="prod.cantidadInCar" ng-change="updateCantidad($index,prod)" min="1" aria-label="aa">
                                               </md-input-container>
                                         </td>
                                         <td md-cell>{{prod.totalCu}}</td>
@@ -80,7 +80,7 @@
                 <i class="fa fa-paper-plane"></i>
                 <i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i>Enviar Pedido
             </md-button>
-            <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving || carList.items.length == 0 || !carList" ng-show="showRegister">
+            <md-button type="button" ng-click="openRegister($event)" class="md-primary" ng-disabled="form.$invalid || saving || carList.items.length == 0 || !carList" ng-show="showRegister">
                 <i class="fa fa-user"></i> REGISTRATE para enviar pedido
             </md-button>
         </md-dialog-actions>

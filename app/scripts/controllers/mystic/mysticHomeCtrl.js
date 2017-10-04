@@ -52,6 +52,12 @@ angular.module('fotosApp')
               $scope.loading = false;
            });
         }
+
+        $scope.openRegister = function(ev){
+          userService.openModalRegister(ev);
+        }
+          
+
       }
 
     $scope.openCar = function(ev){
@@ -118,7 +124,7 @@ angular.module('fotosApp')
         });
       }
 
-      $scope.openRegister = function(ev){
+    $scope.openRegister = function(ev){
       $mdDialog.show({
         controller: modalRegisterController,
         templateUrl: 'views/fotografia/modalRegister.html',

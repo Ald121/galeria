@@ -1,13 +1,15 @@
 var app = angular.module('fotosApp');
-  app.factory('userService',['$q', '$timeout', '$http','generalService','$localStorage',
-    function ($q, $timeout, $http,generalService,$localStorage) {
+  app.factory('userService',['$q', '$timeout', '$http','generalService',
+    '$localStorage','$mdDialog',
+    function ($q, $timeout, $http,generalService,$localStorage,$mdDialog) {
     
     return ({
       ingresar: ingresar,
       registrar:registrar,
       activar:activar,
       salir:salir,
-      checkSession:checkSession
+      checkSession:checkSession,
+      openModalRegister:openModalRegister
     });
     function ingresar(dataSend) {
        if ($localStorage.user) {
@@ -58,5 +60,101 @@ var app = angular.module('fotosApp');
       }
       return $http.post(generalService.dir() + 'checkSession', dataSend);
     }
+
+    function openModalRegister(ev){
+      $mdDialog.show({
+        controller: modalRegisterController,
+        templateUrl: 'views/fotografia/modalRegister.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: true
+      });
+    }
+
+    function modalRegisterController($scope,$mdDialog,userService,locationService,toastr){
+        $scope.cancel = function(){
+          $mdDialog.hide();
+        }
+        $scope.item = {};
+        
+        $scope.lodingProv = true;
+        locationService.provinciasList()
+        .then(function(r){
+            if (r.data.respuesta == true) {
+              $scope.lodingProv = false;
+              $scope.provinciasList = r.data.provincias;
+            }else{
+              $scope.lodingProv = false;
+              var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
+                closeButton: true,
+                timeOut: 2000,
+              });
+              $scope.saving = false;
+            }
+          }).catch(function(e){
+            $scope.lodingProv = false;
+            var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+              closeButton: true,
+               timeOut: 2000,
+            });
+            $scope.saving = false;
+          });
+
+        $scope.getCiudades = function(prov){
+          $scope.loadingCiudades = true;
+          locationService.ciudadesList({provincia:prov})
+          .then(function(r){
+              if (r.data.respuesta == true) {
+                $scope.ciudadesList = r.data.ciudades;
+                $scope.loadingCiudades = false;
+              }else{
+                $scope.loadingCiudades = false;
+                var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
+                  closeButton: true,
+                  timeOut: 2000,
+                });
+                $scope.saving = false;
+              }
+            }).catch(function(e){
+              $scope.loadingCiudades = false;
+              var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                closeButton: true,
+                 timeOut: 2000,
+              });
+              $scope.saving = false;
+            });
+        } 
+        $scope.setCiudad = function(item){
+          console.log(item);
+          $scope.item.ciudad = item;
+        }
+
+        $scope.registrar = function(){
+          $scope.saving = true;
+          userService.registrar($scope.item).then(function(r){
+            if (r.data.respuesta == true) {
+              toastr.info('Se envió un correo de verificación, para ingresar activa tu cuenta','Correo de verificación',{
+                closeButton: true,
+                timeOut: 3000,
+              });
+               $mdDialog.hide();
+               $scope.saving = false;
+            }else{
+              var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
+                closeButton: true,
+                timeOut: 2000,
+              });
+              $scope.saving = false;
+            }
+          }).catch(function(e){
+            var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+              closeButton: true,
+               timeOut: 2000,
+            });
+            $scope.saving = false;
+          });
+        }
+      }
 
     }])
