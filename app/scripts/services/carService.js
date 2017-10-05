@@ -115,7 +115,6 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
         if (ev.target.nodeName === 'A' || ev.target.nodeName === 'I') {
           addToCar(item);
         }
-      
     }
 
      function modalDetailsController(carService,prod,$scope,$localStorage,$mdDialog,userService,$location){
@@ -159,6 +158,7 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
         $scope.cancel = function(){
           $mdDialog.hide();
         }
+
         $scope.addToCar = function(item){
           carService.addToCar(item);
         }

@@ -29,6 +29,15 @@
 		        </ui-select-choices>
 		    </ui-select>
 		</div>
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-usd"></i> Talla</label>
+			<ui-select ng-model="item.tallas" multiple close-on-select="false">
+		        <ui-select-match placeholder="Selecionar una talla(s)..">{{$item.nombre}}</ui-select-match>
+		        <ui-select-choices repeat="value.idtallas as value in tallasList | filter: $select.search">
+		            <div ng-bind-html="value.nombre | highlight: $select.search"></div>
+		        </ui-select-choices>
+		    </ui-select>
+		</div>
 		<div class="form-group col-md-6">
 			<label><i class="fa fa-picture-o"></i> ¿ Mostrar producto en slider ?</label>
 			<md-switch ng-model="item.inSlider" aria-label="Switch 1">

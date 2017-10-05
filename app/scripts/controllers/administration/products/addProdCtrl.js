@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('addProdCtrl', function (colorService,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,productsServices) {
+  .controller('addProdCtrl', function (tallasService,colorService,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,productsServices) {
 
     if (item) {
       $scope.item = item;
@@ -28,7 +28,16 @@ angular.module('fotosApp')
 
         });
     };
-    $scope.getColors();
+    $scope.getColors(); 
+
+    $scope.getTallas = function () {
+        tallasService.tallasList().then(function(r){
+          $scope.tallasList = r.data.list;
+        }).catch(function(e){
+
+        });
+    };
+    $scope.getTallas();
 
     $scope.uploader.onBeforeUploadItem = function(item) {
         formData = [{
