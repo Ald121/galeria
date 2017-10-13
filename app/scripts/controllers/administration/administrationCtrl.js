@@ -3,7 +3,7 @@ angular.module('fotosApp')
     $scope.menuAdministration = [
     							  {nombre:'Galeria',icon:'fa-picture-o',link:'/administration/images',child:[]},
                     {nombre:'Productos',icon:'fa-shopping-bag',link:'/administration/products',child:[]},
-    							  {nombre:'Pedidos',icon:'fa-archive',link:'/administration/pedidos',child:[]}
+                    {nombre:'Pedidos',icon:'fa-archive',link:'/administration/pedidos',child:[]}
                     // {nombre:'Slider',icon:'fa-file-image-o',link:'/administration/slider',child:[]}
     							];
     $scope.loading = false;

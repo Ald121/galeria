@@ -15,25 +15,20 @@
                         <md-tab>
                             <md-tab-label><i class="fa fa-shopping-bag"></i> Mi Carrito<strong>{{prodSelected.nombre}}</strong></md-tab-label>
                             <md-tab-body>       
-                                <!-- <div class="form-group col-md-6">
-                                  <p ng-repeat="prod in carList.items">
-                                    {{prod.nombre}}
-                                  </p>
-                                </div> -->
-                                <!-- <md-content>
+                                <md-subheader class="md-primary"><i class="fa fa-info"></i> Para que tu pedido sea aceptado debe realizar el deposito de :  <span class="label label-info" style="font-size: 14px;"> <strong>$ {{carList.total}}</strong></span> a uno los siguientes bancos :
+                                </md-subheader>
+                                <md-content>
                                     <md-list>
-                                      <md-list-item class="md-3-line" ng-repeat="prod in carList.items">
-                                        <img ng-src="{{prod.picDefault}}" class="md-avatar" alt="{{item.who}}">
-                                        <div class="md-list-item-text">
-                                          <h3>{{prod.nombre}}</h3>
-                                          <h4>{{prod.description}}</h4>
-                                          <p>{{prod.notes}}</p>
+                                      <md-list-item class="md-3-line" >
+                                        <div class="md-list-item-text" ng-repeat="banco in bancosList">
+                                          <h3><strong>{{banco.nombre}}</strong></h3>
+                                          <h4>{{banco.nro_cuenta}}</h4>
+                                          <p>{{banco.tipo_cuenta}}</p>
                                         </div>
-                                        <md-button class="md-secondary"><i class="fa fa-trash"></i></md-button>
-                                        <md-divider ng-if="!$last"></md-divider>
                                       </md-list-item>
                                     </md-list>
-                                </md-content> -->
+                                </md-content>
+                                <hr>
                                 <md-table-container>
                                   <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
                                     <thead md-head md-order="query.order" md-on-reorder="getDesserts">

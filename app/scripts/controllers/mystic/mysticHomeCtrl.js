@@ -9,10 +9,31 @@
  */
 angular.module('fotosApp')
   .controller('mysticHomeCtrl', function ($window,$scope,$mdDialog,toastr,carService,$localStorage) {
-      var modalCarListController = function($rootScope,$scope,$mdDialog,userService,pedidosServices){
+      var modalCarListController = function(bancosServices,$rootScope,$scope,$mdDialog,userService,pedidosServices){
         $scope.carList = $localStorage.car;
         $scope.loading = false;
         $scope.showRegister = ($rootScope.user) ? false : true;
+
+        //Lista de bancos 
+        bancosServices.bancosList().then(function(r){
+          console.log(r);
+          if (r.data.respuesta == true) {
+            $scope.bancosList = r.data.list;
+          }else{
+            var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                        closeButton: true,
+                         timeOut: 2000,
+                      });
+            $scope.loading = false;
+          }
+        })
+        .catch(function(e){
+          var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                        closeButton: true,
+                         timeOut: 2000,
+                      });
+          $scope.loading = false;
+        });
 
         $scope.cancel = function(){
           $mdDialog.hide();

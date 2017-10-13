@@ -59,4 +59,60 @@
             
         </md-tab-body>
     </md-tab>
+    <md-tab md-on-select="getBancos()">
+        <md-tab-label>
+            <i class="fa fa-archive"></i> 
+            <strong>Bancos</strong>
+        </md-tab-label>
+        <md-tab-body>
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools">
+                    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="addBanco(prod)">
+                        <i class="fa fa-shopping-bag"></i> <i class="fa fa-plus"></i> Añadir Banco
+                    </button>
+                </div>
+            </md-toolbar>
+            <hr>
+            <nav ng-show="(!bancosList || bancosList.length == 0) && loading == false" class="navbar navbar-default" style="margin-left: 40px; margin-right: 40px;">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <p class="navbar-text">
+                            <i class="fa fa-exclamation-triangle"></i> 
+                            No hay bancos para mostrar
+                        </p>
+                    </div>
+                </div>
+            </nav>
+            <div style="width: 100%;text-align: center;" ng-show="loading">
+                <img src="icons/loading.svg" width="30">
+            </div>
+             <md-table-container layout-padding ng-show="bancosList || bancosList.length > 0">
+                <table md-table md-progress="promise">
+                    <thead md-head md-order="query.order" md-on-reorder="getBancos">
+                        <tr md-row>
+                            <th md-column >NOMBRE</th>
+                            <th md-column >CUENTA</th>
+                            <th md-column >TIPO DE CUENTA</th>
+                            <th md-column >ACCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row md-select="color" md-select-id="name" md-auto-select ng-repeat="banco in bancosList">
+                            <td md-cell>{{banco.nombre}}</td>
+                            <td md-cell>{{banco.nro_cuenta}}</td>
+                            <td md-cell>{{banco.tipo_cuenta}}</td>
+                            <td md-cell>
+                                <a href="" class="btn btn-primary" ng-click="addBanco(banco)" uib-tooltip="Editar">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="" class="btn btn-danger" ng-click="showDelete(banco)" uib-tooltip="Eliminar">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+        </md-tab-body>
+    </md-tab>
 </md-tabs>

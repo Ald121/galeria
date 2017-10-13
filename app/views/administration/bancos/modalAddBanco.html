@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title"> <i class="fa fa-shopping-bag"></i> Añadir Banco</h4>
+</div>
+<form name="form" ng-submit="save()">
+<div class="modal-body" id="modal-body">
+	<div class="row">
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-font"></i> Nombre</label>
+			<input type="text" name="nombre" class="form-control" placeholder="Ej:BANCO PICHINCHA" ng-model="item.nombre" required>
+		</div>
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-font"></i> Numero de cuenta</label>
+			<input type="text" name="nro_cuenta" class="form-control" placeholder="EJ: 9999999-989-99" ng-model="item.nro_cuenta">
+		</div>
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-usd"></i> Tipo de cuenta</label>
+			<ui-select ng-model="item.tipo_cuenta">
+		        <ui-select-match placeholder="Selecionar el tipo de cuenta(es)..">{{$select.selected.nombre}}</ui-select-match>
+		        <ui-select-choices repeat="value.nombre as value in tipoList | filter: $select.search">
+		            <div ng-bind-html="value.nombre | highlight: $select.search"></div>
+		        </ui-select-choices>
+		    </ui-select>
+		</div>		 
+	</div>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-danger" type="button" ng-click="close()">Cancelar</button>
+	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || loading " ng-show="!uploading"><i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i> OK</button>
+	</div>
+</form>

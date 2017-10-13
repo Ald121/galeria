@@ -40,7 +40,6 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
         });
       }
 
-      console.log(added);
       if (added) {
         var toast = toastr.success('Producto Añadido correctamente', null,{
           closeButton: true,
@@ -121,6 +120,7 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
         $scope.saving = false;
         $scope.prodSelected = prod;
         $scope.images = [];
+
         angular.forEach($scope.prodSelected.images,function(image,keyImg){
           $scope.prodSelected.images[keyImg].image = generalService.pathImgProds() + $scope.prodSelected.images[keyImg].url;
           var img = {
