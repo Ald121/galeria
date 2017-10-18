@@ -35,8 +35,8 @@ var app = angular
     'underscore'
   ]);
 
-app.run(function($rootScope,$window,userService,toastr,$localStorage,$location) {
-    $rootScope.$on("$locationChangeStart", function(event, next, current) {
+app.run(function($rootScope,$window,userService,toastr,$localStorage,$location,$routeSegment) {
+    $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
         if ($localStorage.user) {
             $rootScope.user = $localStorage.user;
             userService.checkSession().then(function(r){
@@ -53,7 +53,10 @@ app.run(function($rootScope,$window,userService,toastr,$localStorage,$location) 
               $window.location.reload();
             });
         }
+
+        console.log(next);
     });
+    
 });
 
 app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
@@ -69,12 +72,19 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
             .when('/activarcuenta/:code',    'main.activarcuenta')
             .segment('administration', {
                 templateUrl: 'views/administration/index.html',
-                controller: 'administrationCtrl'
+                controller: 'administrationCtrl',
+                locals: {
+                      resolver: 'resolver'
+                    }
             }).within()
                 .segment('images', {
                     templateUrl: 'views/administration/images/index.html',
                     controller: 'administrationImagesCtrl',
-                    default: true
+                    default: true,
+                    locals: {
+                      resolver: 'resolver'
+                    }
+
                 })
                 .segment('products', {
                     templateUrl: 'views/administration/products/index.html',

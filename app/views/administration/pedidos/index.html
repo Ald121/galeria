@@ -45,12 +45,12 @@
                                 </span>
                             </td>
                             <td md-cell>
+                                <a href="" class="btn btn-success" ng-click="showChangeStatus(pedido)" uib-tooltip="Aceptar Pedido" ng-show="pedido.estado != 'Enviado'">
+                                    <i class="fa fa-check"></i>
+                                </a>
                                 <a href="" class="btn btn-default" ng-click="viewDetails($event,pedido)" uib-tooltip="Ver Detalles">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <!-- <a href="" class="btn btn-danger" ng-click="showDeleteColor(pedido)" uib-tooltip="Eliminar">
-                                    <i class="fa fa-trash"></i>
-                                </a> -->
                             </td>
                         </tr>
                     </tbody>
@@ -61,7 +61,7 @@
     </md-tab>
     <md-tab md-on-select="getBancos()">
         <md-tab-label>
-            <i class="fa fa-archive"></i> 
+            <i class="fa fa-credit-card-alt"></i> 
             <strong>Bancos</strong>
         </md-tab-label>
         <md-tab-body>

@@ -5,7 +5,8 @@ angular.module('fotosApp').factory('pedidosServices',['$q', '$timeout', '$http',
       pedidosList: pedidosList,
       deletePedido:deletePedido,
       addPedido:addPedido,
-      PedidoDetails:PedidoDetails
+      PedidoDetails:PedidoDetails,
+      procesPedido:procesPedido
     });
 
     function pedidosList(dataSend) {
@@ -47,6 +48,16 @@ angular.module('fotosApp').factory('pedidosServices',['$q', '$timeout', '$http',
         dataSend.token = $localStorage.user.token;
       }
        return $http.post(generalService.dir() + 'PedidoDetails', dataSend);
+    }
+
+    function procesPedido(dataSend) {
+      if ($localStorage.user) {
+        if (!dataSend) {
+          dataSend = {};
+        }
+        dataSend.token = $localStorage.user.token;
+      }
+       return $http.post(generalService.dir() + 'procesPedido', dataSend);
     }
 
     }])

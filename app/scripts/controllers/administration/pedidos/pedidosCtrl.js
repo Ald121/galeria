@@ -125,5 +125,40 @@ angular.module('fotosApp')
         });
       };
 
+    $scope.showChangeStatus = function(item){
+      var modalInstance = $uibModal.open({
+            templateUrl: 'views/commonModals/modalOkPedido.html',
+            controller: 'commonDeleteCtrl',
+            resolve: {
+                  item: function () {
+                      return item;
+                  }
+              }
+        });
+        modalInstance.result.then(function(result) {
+          if (result) {
+            if (result == 'Y') {
+              pedidosServices.procesPedido({id:item.idpedidos}).then(function(r) {
+                if (r) {
+                  if (r.data.respuesta == true) {
+                    toastr.success(alertsService.alerts.ok.processPedido, 'Correcto !',{
+                      closeButton: true,
+                      timeOut: 2000,
+                    });
+                    $scope.pedidosList = [];
+                    $scope.getPedidos();
+                  }
+                }
+              }).catch(function(e){
+                toastr.error(alertsService.alerts.error.processPedido, 'Error !',{
+                    closeButton: true,
+                    timeOut: 2000,
+                });
+              });
+            }
+          }
+        });
+    }
+
 	// FIN BANCOS
   });

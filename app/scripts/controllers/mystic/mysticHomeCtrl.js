@@ -8,15 +8,19 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('mysticHomeCtrl', function ($window,$scope,$mdDialog,toastr,carService,$localStorage) {
-      var modalCarListController = function(bancosServices,$rootScope,$scope,$mdDialog,userService,pedidosServices){
+  .controller('mysticHomeCtrl', function ($rootScope,userService,$window,$scope,$mdDialog,toastr,carService,$localStorage) {
+      $scope.carList = $localStorage.car;
+      var modalCarListController = function(locationService,bancosServices,$rootScope,$scope,$mdDialog,userService,pedidosServices){
         $scope.carList = $localStorage.car;
         $scope.loading = false;
+        $scope.loading = false;
+        $scope.selected = {};
         $scope.showRegister = ($rootScope.user) ? false : true;
-
+        if ($rootScope.user) {
+          $scope.user = $rootScope.user.datos;
+        }
         //Lista de bancos 
         bancosServices.bancosList().then(function(r){
-          console.log(r);
           if (r.data.respuesta == true) {
             $scope.bancosList = r.data.list;
           }else{
@@ -33,6 +37,69 @@ angular.module('fotosApp')
                          timeOut: 2000,
                       });
           $scope.loading = false;
+        });
+
+        $scope.getCiudades = function(prov){
+          $scope.loadingCiudades = true;
+          locationService.ciudadesList({provincia:prov})
+          .then(function(r){
+              if (r.data.respuesta == true) {
+                $scope.ciudadesList = r.data.ciudades;
+                angular.forEach($scope.ciudadesList,function(value){
+                  if ($scope.user) {
+                    if (value.nombre == $scope.user.ciudad) {
+                      $scope.selected.ciudad = value;
+                    }
+                  }
+                });
+                $scope.loadingCiudades = false;
+              }else{
+                $scope.loadingCiudades = false;
+                var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
+                  closeButton: true,
+                  timeOut: 2000,
+                });
+                $scope.saving = false;
+              }
+            }).catch(function(e){
+              $scope.loadingCiudades = false;
+              var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                closeButton: true,
+                 timeOut: 2000,
+              });
+              $scope.saving = false;
+            });
+        }
+
+        locationService.provinciasList()
+        .then(function(r){
+          if (r.data.respuesta == true) {
+            $scope.lodingProv = false;
+            $scope.provinciasList = r.data.provincias;
+            angular.forEach($scope.provinciasList,function(value){
+              if ($scope.user) {
+                console.log(value);
+                if (value.nombre == $scope.user.provincia) {
+                  $scope.selected.provincia = value;
+                  $scope.getCiudades($scope.selected.provincia);
+                }
+              }
+            });
+          }else{
+            $scope.lodingProv = false;
+            var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
+              closeButton: true,
+              timeOut: 2000,
+            });
+            $scope.saving = false;
+          }
+        }).catch(function(e){
+          $scope.lodingProv = false;
+          var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+            closeButton: true,
+             timeOut: 2000,
+          });
+          $scope.saving = false;
         });
 
         $scope.cancel = function(){
@@ -80,6 +147,24 @@ angular.module('fotosApp')
           
 
       }
+
+    $scope.logOut = function(){
+      $scope.loading = true;
+      userService.salir({token:$rootScope.user.token}).then(function(r){
+        if (r.respuesta == true) {
+          $localStorage.$reset();
+          $window.location.reload();
+        }
+      }).catch(function(e){
+        $scope.loading = false;
+        $localStorage.$reset();
+        $window.location.reload();
+        var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+          closeButton: true,
+           timeOut: 2000,
+        });
+      });
+    }
 
     $scope.openCar = function(ev){
         $mdDialog.show({
