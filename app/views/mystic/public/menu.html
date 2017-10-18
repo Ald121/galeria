@@ -1,3 +1,7 @@
+
+<a class="btn-car" href="" ng-click="openCar($event)">
+    <i class="fa fa-shopping-cart"></i> Carrito ({{carList.items.length}})
+</a>
 <div style="width: 100%; border-bottom: 1px solid rgba(189, 189, 189, 0.7);
     padding-bottom: 1%; padding-left: 10px;">
     <a href="" ng-repeat ="logo in logos" ng-click="setActiveLogo(logo)">
@@ -42,14 +46,14 @@
                     </div>
                 </a>
             </li>
-
+<!-- 
             <li >
                 <a href="" ng-click="openCar($event)" style="color: #ffc77a;">
                     <div>
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito
                     </div>
                 </a>
-            </li>
+            </li> -->
 
             <li ng-show="user">
                 <a href="">
@@ -65,7 +69,8 @@
                     </li>
                     <li ng-click="logOut()">
                         <a href="">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i> Salir
+                            <i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i>
+                            <i class="fa fa-sign-out" aria-hidden="true" ng-show="!loading"></i> Salir
                         </a>
                     </li>
                 </ul>

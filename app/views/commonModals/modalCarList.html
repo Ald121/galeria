@@ -10,62 +10,158 @@
 <md-dialog aria-label="Cargar Imagen " class="fullscreen-dialog">
     <form ng-cloak name="form" ng-submit="sendCar()">
         <md-dialog-content>
-                <md-content>
-                    <md-tabs md-dynamic-height md-border-bottom>
-                        <md-tab>
-                            <md-tab-label><i class="fa fa-shopping-bag"></i> Mi Carrito<strong>{{prodSelected.nombre}}</strong></md-tab-label>
-                            <md-tab-body>       
-                                <md-subheader class="md-primary"><i class="fa fa-info"></i> Para que tu pedido sea aceptado debe realizar el deposito de :  <span class="label label-info" style="font-size: 14px;"> <strong>$ {{carList.total}}</strong></span> a uno los siguientes bancos :
+            <md-content layout-padding>
+                <md-tabs md-dynamic-height md-border-bottom>
+                    <md-tab>
+                        <md-tab-label>
+                            <i class="fa fa-shopping-bag"></i> Mi Carrito
+                            <strong>{{prodSelected.nombre}}</strong>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-card md-theme-watch ng-show="carList.items.length > 0">
+                                <md-subheader class="md-primary"><i class="fa fa-info"></i> Para que tu pedido sea aceptado debe realizar el deposito de : <span class="label label-info" style="font-size: 14px;"> <strong>$ {{carList.total}}</strong></span> a uno los siguientes bancos :
                                 </md-subheader>
-                                <md-content>
+                                <div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="!bancosList">
+                                    <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+                                </div>
+                                <md-content ng-show="bancosList">
                                     <md-list>
-                                      <md-list-item class="md-3-line" >
-                                        <div class="md-list-item-text" ng-repeat="banco in bancosList">
-                                          <h3><strong>{{banco.nombre}}</strong></h3>
-                                          <h4>{{banco.nro_cuenta}}</h4>
-                                          <p>{{banco.tipo_cuenta}}</p>
-                                        </div>
-                                      </md-list-item>
+                                        <md-list-item class="md-3-line">
+                                            <div class="md-list-item-text" ng-repeat="banco in bancosList">
+                                                <h3><strong>{{banco.nombre}}</strong></h3>
+                                                <h4>{{banco.nro_cuenta}}</h4>
+                                                <p>{{banco.tipo_cuenta}}</p>
+                                            </div>
+                                        </md-list-item>
                                     </md-list>
                                 </md-content>
-                                <hr>
-                                <md-table-container>
-                                  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+                            </md-card>
+                            <hr>
+                            <md-table-container>
+                                <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
                                     <thead md-head md-order="query.order" md-on-reorder="getDesserts">
-                                      <tr md-row>
-                                        <th md-column><span>Imagen</span></th>
-                                        <th md-column md-numeric>Nombre</th>
-                                        <th md-column md-numeric ><span>Precio U.</span></th>
-                                        <th md-column md-numeric>Cantidad</th>
-                                        <th md-column md-numeric>Total</th>
-                                        <th md-column md-numeric>Acción</th>
-                                      </tr>
+                                        <tr md-row>
+                                            <th md-column><span>Imagen</span></th>
+                                            <th md-column md-numeric>Nombre</th>
+                                            <th md-column md-numeric><span>Precio U.</span></th>
+                                            <th md-column md-numeric>Cantidad</th>
+                                            <th md-column md-numeric>Total</th>
+                                            <th md-column md-numeric>Acción</th>
+                                        </tr>
                                     </thead>
                                     <tbody md-body>
-                                      <tr md-row md-select="prod" md-select-id="name" md-auto-select ng-repeat="prod in carList.items">
-                                        <td md-cell>
-                                        <img ng-src="{{prod.picDefault}}" width="50" alt="{{item.who}}"></td>
-                                        <td md-cell>{{prod.nombre}}</td>
-                                        <td md-cell>{{prod.precio}}</td>
-                                        <td md-cell width="150">
-                                              <md-input-container flex="70">
-                                                <input type="number" value="{{prod.cantidadInCar}}" ng-model="prod.cantidadInCar" ng-change="updateCantidad($index,prod)" min="1" aria-label="aa">
-                                              </md-input-container>
-                                        </td>
-                                        <td md-cell>{{prod.totalCu}}</td>
-                                        <td md-cell>
-                                            <md-button class="md-secondary" ng-click="removeItemCar($index)">
-                                                <i class="fa fa-trash"></i>
-                                            </md-button>
-                                        </td>
-                                      </tr>
+                                        <tr md-row md-select="prod" md-select-id="name" md-auto-select ng-repeat="prod in carList.items">
+                                            <td md-cell>
+                                                <img ng-src="{{prod.picDefault}}" width="50" alt="{{item.who}}"></td>
+                                            <td md-cell>{{prod.nombre}}</td>
+                                            <td md-cell>{{prod.precio}}</td>
+                                            <td md-cell width="150">
+                                                <md-input-container flex="70">
+                                                    <input type="number" value="{{prod.cantidadInCar}}" ng-model="prod.cantidadInCar" ng-change="updateCantidad($index,prod)" min="1" aria-label="aa">
+                                                </md-input-container>
+                                            </td>
+                                            <td md-cell>{{prod.totalCu}}</td>
+                                            <td md-cell>
+                                                <md-button class="md-secondary" ng-click="removeItemCar($index)">
+                                                    <i class="fa fa-trash"></i>
+                                                </md-button>
+                                            </td>
+                                        </tr>
                                     </tbody>
-                                  </table>
-                                </md-table-container>
-                            </md-tab-body>
-                        </md-tab>
-                    </md-tabs>
-                </md-content>
+                                </table>
+                            </md-table-container>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab ng-show="user">
+                        <md-tab-label>
+                            <i class="fa fa-info"></i> Datos de envio
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-card md-theme-watch>
+                                <md-content layout-padding>
+                                    <div id="gridContainer" ng-cloak>
+         <md-content layout-padding>
+          <div style="text-align: center;">
+            <img src="icons/bag.png" style="width: 10%;">
+          </div>
+            <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="50">
+                <md-icon class="md-primary">text_fields</md-icon>
+                <label>Nombres</label>
+                <input name="nombres" ng-model="user.nombres" type="text" readonly>
+                <span ng-show="form.nombres.$touched && form.nombres.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                  <md-icon class="md-primary">text_fields</md-icon>
+                  <label>Apellidos</label>
+                  <input name="apellidos" ng-model="user.apellidos" type="text" readonly>
+                  <span ng-show="form.apellidos.$touched && form.apellidos.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+              </md-input-container>
+            </div>
+            <!-- <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="50">
+                <md-icon class="md-primary">adress</md-icon>
+                <label>Provincia</label>
+                 <ui-select ng-model="selected.provincia" theme="bootstrap" ng-change="getCiudades($select.selected.nombre)" ng-disabled="loadingProv" readonly>
+                    <ui-select-match placeholder="Selecione la Provincia...">{{$select.selected.nombre}}</ui-select-match>
+                    <ui-select-choices repeat="item in provinciasList | filter: $select.search">
+                      <span ng-bind-html="item.nombre | highlight: $select.search"></span>
+                    </ui-select-choices>
+                </ui-select>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                <md-icon class="md-primary">adress</md-icon>
+                <label>Ciudad</label>
+                 <ui-select ng-model="selected.ciudad" theme="bootstrap" ng-change="setCiudad($select.selected.nombre)" >
+                    <ui-select-match placeholder="Selecione la Ciudad..." >{{$select.selected.nombre}}</ui-select-match>
+                    <ui-select-choices repeat="item in ciudadesList | filter: $select.search">
+                      <span ng-bind-html="user.nombre | highlight: $select.search"></span>
+                    </ui-select-choices>
+                </ui-select>
+              </md-input-container>
+            </div> -->
+            <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="50">
+                <md-icon class="md-primary">location</md-icon>
+                <label>Provincia</label>
+                <input name="provincia" ng-model="user.provincia" type="text" readonly>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                  <md-icon class="md-primary">location</md-icon>
+                  <label>Ciudad</label>
+                  <input name="ciudad" ng-model="user.ciudad" type="text" readonly>
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="50">
+                <md-icon class="md-primary">email</md-icon>
+                <label>Correo / E-mail</label>
+                <input name="email" ng-model="user.email" type="email" readonly>
+                <span ng-show="form.email.$touched && form.email.$invalid" class="errorSpan requiredMsg">Email Incorrecto</span>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                  <md-icon class="md-primary">phone</md-icon>
+                  <label>Telefono / Celular</label>
+                  <input name="telefono" ng-model="user.telefono" type="number" readonly>
+                  <span ng-show="form.telefono.$touched && form.telefono.$invalid" class="errorSpan requiredMsg">Telefono Incorrecto</span>
+              </md-input-container>
+            </div>
+            <div layout-gt-lg="row">
+              <md-input-container class="md-icon-float md-block" >
+                  <md-icon class="md-primary">home</md-icon>
+                  <label>Dirección</label>
+                  <input name="direccion" ng-model="user.direccion" type="text" readonly>
+                  <span ng-show="form.direccion.$touched && form.direccion.$invalid" class="errorSpan requiredMsg">Dirección Incorrecta</span>
+              </md-input-container>
+            </div>
+         </md-content>
+      </div>
+                                </md-content>
+                            </md-card>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <md-button ng-click="cancel()">
