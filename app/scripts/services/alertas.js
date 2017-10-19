@@ -5,6 +5,7 @@ var app = angular.module('fotosApp');
      var alerts = {
         error :{
             upload:'Ups !! algunos archivos no fueron subidos, Intentalo nuevamente',
+            session:'Ups !! Tu sesión ha terminado, Ingresa nuevamente',
             save:'Ups !! No se pudo guardar el registro, Intentalo nuevamente',
             update:'Ups !! No se pudo actualizar el registro, Intentalo nuevamente',
             delete:'Ups !! No se pudo eliminar el registro, Intentalo nuevamente',

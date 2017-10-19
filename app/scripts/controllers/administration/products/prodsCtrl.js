@@ -1,6 +1,13 @@
 angular.module('fotosApp')
-  .controller('prodsCtrl', function (tallasService,colorService,alertsService,$scope,productsServices,generalService,toastr,$uibModal) {
-
+  .controller('prodsCtrl', function ($rootScope,tallasService,colorService,alertsService,$scope,productsServices,generalService,toastr,$uibModal) {
+    $scope.rolForRoute = 'ADMIN';
+    if ($rootScope.user.datos.userType != $scope.rolForRoute) {
+      var toast = toastr.error('Acesso denegado', 'Error',{
+          closeButton: true,
+           timeOut: 2000,
+        });
+      $location.path('/');
+    }
    $scope.getProds = function () {
     $scope.loading = true;
     productsServices.productsList().then(function(r){

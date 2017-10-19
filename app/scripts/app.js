@@ -53,8 +53,6 @@ app.run(function($rootScope,$window,userService,toastr,$localStorage,$location,$
               $window.location.reload();
             });
         }
-
-        console.log(next);
     });
     
 });
@@ -63,28 +61,38 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
       $routeSegmentProvider.options.autoLoadTemplates = true; 
       $routeSegmentProvider    
             .when('/',    'main')
+            // Administracion
             .when('/administration',    'administration')
             .when('/administration/images',    'administration.images')
             .when('/administration/products',    'administration.products')
             .when('/administration/slider',    'administration.slider')
             .when('/administration/pedidos',    'administration.pedidos')
+            // Cliente
+            .when('/client',    'client')
+            .when('/client/pedidos',    'client.pedidos')
+            // Cofradia
             .when('/fotografia/:categoria',    'main.fotografia')
+            // Activar cuenta
             .when('/activarcuenta/:code',    'main.activarcuenta')
+
+            .segment('client', {
+                templateUrl: 'views/administration/index.html',
+                controller: 'clientAdministrationCtrl'
+            }).within()
+                .segment('pedidos', {
+                    templateUrl: 'views/administration/client/pedidos/index.html',
+                    controller: 'clientPedidosCtrl',
+                    default: true
+                }).up()
+
             .segment('administration', {
                 templateUrl: 'views/administration/index.html',
-                controller: 'administrationCtrl',
-                locals: {
-                      resolver: 'resolver'
-                    }
+                controller: 'administrationCtrl'
             }).within()
                 .segment('images', {
                     templateUrl: 'views/administration/images/index.html',
                     controller: 'administrationImagesCtrl',
-                    default: true,
-                    locals: {
-                      resolver: 'resolver'
-                    }
-
+                    default: true
                 })
                 .segment('products', {
                     templateUrl: 'views/administration/products/index.html',

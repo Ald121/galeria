@@ -1,6 +1,14 @@
 angular.module('fotosApp')
-  .controller('addImageCtrl', function ($localStorage,$scope,generalService,Lightbox,$uibModalInstance,FileUploader,toastr,alertsService) {
+  .controller('addImageCtrl', function ($rootScope,$localStorage,$scope,generalService,Lightbox,$uibModalInstance,FileUploader,toastr,alertsService) {
     $scope.uploading = false;
+    $scope.rolForRoute = 'ADMIN';
+    if ($rootScope.user.datos.userType != $scope.rolForRoute) {
+      var toast = toastr.error('Acesso denegado', 'Error',{
+          closeButton: true,
+           timeOut: 2000,
+        });
+      $location.path('/');
+    }
     $scope.close = function() {
         $uibModalInstance.close();
     }

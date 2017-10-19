@@ -46,7 +46,16 @@ angular.module('fotosApp')
     $rootScope.setActiveLogo();
 
     $scope.goTo = function(link){
-      $location.path(link);
+      if (link == '/administration') {
+        if ($rootScope.user.datos.userType == 'ADMIN') {
+            $location.path('/administration');
+         }
+         if ($rootScope.user.datos.userType == 'CLIENTE') {
+            $location.path('/client');
+         }
+       }else{
+            $location.path(link);
+       }
     }
 
     $scope.logOut = function(){
@@ -93,7 +102,13 @@ angular.module('fotosApp')
              $scope.saving = false;
              $localStorage.user = r.data;
              $mdDialog.hide();
-             $location.path('/administration');
+             if (r.data.datos.userType == 'ADMIN') {
+                $location.path('/administration');
+             }
+             if (r.data.datos.userType == 'CLIENTE') {
+                $location.path('/client');
+             }
+             
           }else{
             var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
               closeButton: true,

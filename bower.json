@@ -18,7 +18,6 @@
     "angular-toastr": "^2.1.1",
     "angular-material-data-table": "^0.10.10",
     "angular-file-upload": "^2.5.0",
-    "ngSweetAlert": "angular-sweetalert#^1.1.2",
     "ngstorage": "^0.3.11",
     "angular-ui-carousel": "^0.1.10",
     "angular-input-masks": "^2.6.0",

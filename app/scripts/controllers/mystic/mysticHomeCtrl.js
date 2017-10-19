@@ -8,8 +8,20 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('mysticHomeCtrl', function ($rootScope,userService,$window,$scope,$mdDialog,toastr,carService,$localStorage) {
+  .controller('mysticHomeCtrl', function ($location,$rootScope,userService,$window,$scope,$mdDialog,toastr,carService,$localStorage) {
       $scope.carList = $localStorage.car;
+      swal({
+                 title: "Ok",
+                 text: "Pedido Enviado Correctamente !!",
+                 type: "info",
+                 showCancelButton: false,
+                 confirmButtonText: "Aceptar",
+                 closeOnConfirm: false}, 
+              function(){ 
+                 carService.resetCar();
+                 $scope.loading = false;
+              });
+      
       var modalCarListController = function(locationService,bancosServices,$rootScope,$scope,$mdDialog,userService,pedidosServices){
         $scope.carList = $localStorage.car;
         $scope.loading = false;
@@ -118,13 +130,27 @@ angular.module('fotosApp')
           $scope.loading = true;
            pedidosServices.addPedido($localStorage.car).then(function(r){
             if (r.data.respuesta == true) {
-              var toast = toastr.success('Pedido Enviado correctamente', 'Correcto',{
-                        closeButton: true,
-                         timeOut: 2000,
-                      });
-              carService.resetCar();
-              $mdDialog.hide('Y');
-              $scope.loading = false;
+              // var toast = toastr.success('Pedido Enviado correctamente', 'Correcto',{
+              //           closeButton: true,
+              //            timeOut: 2000,
+              //         });
+              // toastr.info('No olvides subir tu comprobante de pago, para que tu pedido sea atendido', 'Correcto',{
+              //           closeButton: true,
+              //            timeOut: 5000,
+              //         });
+              
+              swal({
+                 title: "Ok",
+                 text: "Pedido Enviado Correctamente !!",
+                 type: "info",
+                 showCancelButton: false,
+                 confirmButtonText: "Aceptar",
+                 closeOnConfirm: false}, 
+              function(){ 
+                 carService.resetCar();
+                 $scope.loading = false;
+              });
+              
             }else{
               var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
                         closeButton: true,
@@ -164,6 +190,19 @@ angular.module('fotosApp')
            timeOut: 2000,
         });
       });
+    }
+
+    $scope.goTo = function(link){
+      if (link == '/administration') {
+        if ($rootScope.user.datos.userType == 'ADMIN') {
+            $location.path('/administration');
+         }
+         if ($rootScope.user.datos.userType == 'CLIENTE') {
+            $location.path('/client');
+         }
+       }else{
+            $location.path(link);
+       }
     }
 
     $scope.openCar = function(ev){
