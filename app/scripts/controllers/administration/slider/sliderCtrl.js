@@ -1,7 +1,14 @@
 angular.module('fotosApp')
-  .controller('sliderCtrl', function ($scope,Lightbox,$uibModal,imageServices,generalService,toastr) {
+  .controller('sliderCtrl', function ($rootScope,$scope,Lightbox,$uibModal,imageServices,generalService,toastr) {
     $scope.slides = [];
-      
+    $scope.rolForRoute = 'ADMIN';
+    if ($rootScope.user.datos.userType != $scope.rolForRoute) {
+      var toast = toastr.error('Acesso denegado', 'Error',{
+          closeButton: true,
+           timeOut: 2000,
+        });
+      $location.path('/');
+    }
     $scope.getImgs = function () {
          $scope.loading = true;
         imageServices.imageList().then(function(r){

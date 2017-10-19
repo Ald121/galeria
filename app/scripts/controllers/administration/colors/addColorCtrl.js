@@ -1,6 +1,15 @@
 angular.module('fotosApp')
-  .controller('addColorCtrl', function (alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,colorService) {
+  .controller('addColorCtrl', function ($rootScope,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,colorService) {
 
+    $scope.rolForRoute = 'ADMIN';
+    if ($rootScope.user.datos.userType != $scope.rolForRoute) {
+      var toast = toastr.error('Acesso denegado', 'Error',{
+          closeButton: true,
+           timeOut: 2000,
+        });
+      $location.path('/');
+    }
+    
     if (item) {
       $scope.item = item;
     }else{

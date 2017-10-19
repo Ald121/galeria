@@ -1,6 +1,13 @@
 angular.module('fotosApp')
-  .controller('addTallaCtrl', function (alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,tallasService) {
-
+  .controller('addTallaCtrl', function ($rootScope,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,tallasService) {
+    $scope.rolForRoute = 'ADMIN';
+    if ($rootScope.user.datos.userType != $scope.rolForRoute) {
+      var toast = toastr.error('Acesso denegado', 'Error',{
+          closeButton: true,
+           timeOut: 2000,
+        });
+      $location.path('/');
+    }
     if (item) {
       $scope.item = item;
     }else{

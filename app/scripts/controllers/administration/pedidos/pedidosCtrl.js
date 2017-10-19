@@ -1,5 +1,13 @@
 angular.module('fotosApp')
-  .controller('pedidosCtrl', function (alertsService,$uibModal,bancosServices,$mdDialog,toastr,$location,$localStorage,$scope,$mdSidenav,pedidosServices,$rootScope) {
+  .controller('pedidosCtrl', function ($rootScope,alertsService,$uibModal,bancosServices,$mdDialog,toastr,$location,$localStorage,$scope,$mdSidenav,pedidosServices,$rootScope) {
+    $scope.rolForRoute = 'ADMIN';
+    if ($rootScope.user.datos.userType != $scope.rolForRoute) {
+      var toast = toastr.error('Acesso denegado', 'Error',{
+          closeButton: true,
+           timeOut: 2000,
+        });
+      $location.path('/');
+    }
     $scope.getPedidos = function () {
     $scope.loading = true;
 	    pedidosServices.pedidosList().then(function(r){

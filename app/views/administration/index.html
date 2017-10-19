@@ -15,7 +15,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" ng-repeat="menu in menuAdministration" >
-        <li style="top: 5px;">
+        <li style="top: 5px;" ng-show="menu.rol == user.datos.userType">
           <a href="#!{{menu.link}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa {{menu.icon}}"></i> {{menu.nombre}}</a>
         </li>
       </ul>
@@ -23,7 +23,7 @@
         <li class="dropdown" style="top: 5px;">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o"></i> Usuario <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="!#/configuration"><i class="fa fa-cog"></i> Configuración</a></li>
+            <!-- <li><a href="!#/configuration"><i class="fa fa-cog"></i> Configuración</a></li> -->
             <li role="separator" class="divider"></li>
             <li ng-click="logOut()"><a href="">
               <i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i>
