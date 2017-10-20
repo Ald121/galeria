@@ -18,7 +18,7 @@
                             <strong>{{prodSelected.nombre}}</strong>
                         </md-tab-label>
                         <md-tab-body>
-                            <md-card md-theme-watch ng-show="carList.items.length > 0">
+                            <md-card md-theme-watch ng-show="carList.items.length > 0 && carList">
                                 <md-subheader class="md-primary"><i class="fa fa-info"></i> Para que tu pedido sea aceptado debe realizar el deposito de : <span class="label label-info" style="font-size: 14px;"> <strong>$ {{carList.total}}</strong></span> a uno los siguientes bancos :
                                 </md-subheader>
                                 <div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="!bancosList">

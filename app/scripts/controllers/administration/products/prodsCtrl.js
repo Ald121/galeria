@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('prodsCtrl', function ($rootScope,tallasService,colorService,alertsService,$scope,productsServices,generalService,toastr,$uibModal) {
+  .controller('prodsCtrl', function (categoriaService,$rootScope,tallasService,colorService,alertsService,$scope,productsServices,generalService,toastr,$uibModal) {
     $scope.rolForRoute = 'ADMIN';
     if ($rootScope.user.datos.userType != $scope.rolForRoute) {
       var toast = toastr.error('Acesso denegado', 'Error',{
@@ -94,15 +94,48 @@ angular.module('fotosApp')
           }
         });
       };
-      // Colores
-      $scope.getColors = function () {
-        colorService.colorList().then(function(r){
-          $scope.colorList = r.data.list;
-        }).catch(function(e){
 
+      $scope.showAddImages = function (item) {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/administration/products/modalAddImageProd.html',
+            controller: 'addImageProdCtrl',
+            resolve: {
+                  item: function () {
+                      return item;
+                  }
+              }
+        });
+        modalInstance.result.then(function(r) {
+          if (r) {
+            if (r.respuesta == 'Y') {
+              $scope.productsList = [];
+              $scope.getProds();
+            }
+          }
         });
       };
-      $scope.getColors();
+      // Colores
+      $scope.getColors = function () {
+        $scope.loading = true;
+        colorService.colorList().then(function(r){
+          $scope.colorList = r.data.list;
+          $scope.loading = false;
+        }).catch(function(e){
+          $scope.loading = false;
+        });
+      };
+      // $scope.getColors();
+
+      $scope.getCategorias = function () {
+        $scope.loading = true;
+        categoriaService.categoriasList().then(function(r){
+          $scope.categoriasList = r.data.list;
+          $scope.loading = false;
+        }).catch(function(e){
+          $scope.loading = false;
+        });
+      };
+      // $scope.getCategorias();
 
       $scope.showDeleteColor = function (item) {
         var modalInstance = $uibModal.open({
@@ -158,6 +191,60 @@ angular.module('fotosApp')
         });
       };
 
+       $scope.showAddCategoria = function (item) {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/administration/categorias/modalAddCategoria.html',
+            controller: 'addCategoriaCtrl',
+            resolve: {
+                  item: function () {
+                      return item;
+                  }
+              }
+        });
+        modalInstance.result.then(function(r) {
+          if (r) {
+            if (r.respuesta == 'Y') {
+              $scope.getCategorias();
+            }
+          }
+        });
+      };
+
+      $scope.showDeleteCategoria = function (item) {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/commonModals/modalDelete.html',
+            controller: 'commonDeleteCtrl',
+            resolve: {
+                  item: function () {
+                      return item;
+                  }
+              }
+        });
+        modalInstance.result.then(function(result) {
+          if (result) {
+            if (result == 'Y') {
+              categoriaService.deleteCategoria({id:item.idcategorias}).then(function(r) {
+                if (r) {
+                  if (r.data.respuesta == true) {
+                    toastr.success(alertsService.alerts.ok.delete, 'Correcto !',{
+                      closeButton: true,
+                      timeOut: 2000,
+                    });
+                    $scope.categoriasList = [];
+                    $scope.getCategorias();
+                  }
+                }
+              }).catch(function(e){
+                toastr.error(alertsService.alerts.error.delete, 'Error !',{
+                    closeButton: true,
+                    timeOut: 2000,
+                });
+              });
+            }
+          }
+        });
+      };
+
       $scope.showDeleteTalla = function (item) {
         var modalInstance = $uibModal.open({
             templateUrl: 'views/commonModals/modalDelete.html',
@@ -195,13 +282,15 @@ angular.module('fotosApp')
 
       // Tallas
       $scope.getTallas = function () {
+        $scope.loading = true;
         tallasService.tallasList().then(function(r){
           $scope.tallasList = r.data.list;
+          $scope.loading = false;
         }).catch(function(e){
-
+          $scope.loading = false;
         });
       };
-      $scope.getTallas();
+      // $scope.getTallas();
 
       $scope.showAddTalla = function (item) {
         var modalInstance = $uibModal.open({

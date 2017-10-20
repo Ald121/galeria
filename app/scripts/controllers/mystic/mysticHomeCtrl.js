@@ -9,19 +9,12 @@
  */
 angular.module('fotosApp')
   .controller('mysticHomeCtrl', function ($location,$rootScope,userService,$window,$scope,$mdDialog,toastr,carService,$localStorage) {
-      $scope.carList = $localStorage.car;
-      swal({
-                 title: "Ok",
-                 text: "Pedido Enviado Correctamente !!",
-                 type: "info",
-                 showCancelButton: false,
-                 confirmButtonText: "Aceptar",
-                 closeOnConfirm: false}, 
-              function(){ 
-                 carService.resetCar();
-                 $scope.loading = false;
-              });
-      
+      $scope.$watch(function () { return $localStorage.car; },function(newVal,oldVal){
+           if($localStorage.car){
+            $rootScope.carList = $localStorage.car;
+          }
+          console.log($rootScope.carList);
+        },true);
       var modalCarListController = function(locationService,bancosServices,$rootScope,$scope,$mdDialog,userService,pedidosServices){
         $scope.carList = $localStorage.car;
         $scope.loading = false;
@@ -32,24 +25,27 @@ angular.module('fotosApp')
           $scope.user = $rootScope.user.datos;
         }
         //Lista de bancos 
-        bancosServices.bancosList().then(function(r){
-          if (r.data.respuesta == true) {
-            $scope.bancosList = r.data.list;
-          }else{
+        if ($scope.carList) {
+          bancosServices.bancosList().then(function(r){
+            if (r.data.respuesta == true) {
+              $scope.bancosList = r.data.list;
+            }else{
+              var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                          closeButton: true,
+                           timeOut: 2000,
+                        });
+              $scope.loading = false;
+            }
+          })
+          .catch(function(e){
             var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
-                        closeButton: true,
-                         timeOut: 2000,
-                      });
+                          closeButton: true,
+                           timeOut: 2000,
+                        });
             $scope.loading = false;
-          }
-        })
-        .catch(function(e){
-          var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
-                        closeButton: true,
-                         timeOut: 2000,
-                      });
-          $scope.loading = false;
-        });
+          });
+        }
+        
 
         $scope.getCiudades = function(prov){
           $scope.loadingCiudades = true;
@@ -90,7 +86,6 @@ angular.module('fotosApp')
             $scope.provinciasList = r.data.provincias;
             angular.forEach($scope.provinciasList,function(value){
               if ($scope.user) {
-                console.log(value);
                 if (value.nombre == $scope.user.provincia) {
                   $scope.selected.provincia = value;
                   $scope.getCiudades($scope.selected.provincia);
@@ -130,25 +125,18 @@ angular.module('fotosApp')
           $scope.loading = true;
            pedidosServices.addPedido($localStorage.car).then(function(r){
             if (r.data.respuesta == true) {
-              // var toast = toastr.success('Pedido Enviado correctamente', 'Correcto',{
-              //           closeButton: true,
-              //            timeOut: 2000,
-              //         });
-              // toastr.info('No olvides subir tu comprobante de pago, para que tu pedido sea atendido', 'Correcto',{
-              //           closeButton: true,
-              //            timeOut: 5000,
-              //         });
-              
               swal({
-                 title: "Ok",
-                 text: "Pedido Enviado Correctamente !!",
+                 title: "Pedido Enviado Correctamente !!",
+                 text: "No olvides subir tu comprobante de pago para que tu pedido sea atendido",
                  type: "info",
                  showCancelButton: false,
                  confirmButtonText: "Aceptar",
-                 closeOnConfirm: false}, 
+                 closeOnConfirm: false
+               }, 
               function(){ 
                  carService.resetCar();
                  $scope.loading = false;
+                 $window.location.reload();
               });
               
             }else{
@@ -170,8 +158,6 @@ angular.module('fotosApp')
         $scope.openRegister = function(ev){
           userService.openModalRegister(ev);
         }
-          
-
       }
 
     $scope.logOut = function(){

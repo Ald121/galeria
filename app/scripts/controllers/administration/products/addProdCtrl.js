@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('addProdCtrl', function ($rootScope,tallasService,colorService,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,productsServices) {
+  .controller('addProdCtrl', function (categoriaService,$rootScope,tallasService,colorService,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,productsServices) {
     $scope.rolForRoute = 'ADMIN';
     if ($rootScope.user.datos.userType != $scope.rolForRoute) {
       var toast = toastr.error('Acesso denegado', 'Error',{
@@ -10,8 +10,25 @@ angular.module('fotosApp')
     }
 
     if (item) {
+      $scope.itemBackUp = angular.copy(item);
       $scope.item = item;
+      var colorArray = [];
+      angular.forEach($scope.item.colores,function(value){
+        colorArray.push(value.idcolores);
+      });
+      var tallasArray = [];
+      angular.forEach($scope.item.tallas,function(value){
+        tallasArray.push(value.idtallas);
+      });
+      $scope.item.colores = colorArray;
+      $scope.item.tallas = tallasArray;
+      $scope.item.destacar = ($scope.item.destacar == 1)?true:false;
+      $scope.item.inSlider = ($scope.item.inSlider == 1)?true:false;
+      $scope.typeSave = 'EDIT';
+      $scope.tittle = 'Editar Producto';
     }else{
+      $scope.typeSave = 'ADD';
+      $scope.tittle = 'Añadir Producto';
       $scope.item = {};
       $scope.item.inSlider = 0;
       $scope.item.destacar = 0;
@@ -32,6 +49,9 @@ angular.module('fotosApp')
     $scope.getColors = function () {
         colorService.colorList().then(function(r){
           $scope.colorList = r.data.list;
+          if (item) {
+            console.log(item);
+          }
         }).catch(function(e){
 
         });
@@ -46,6 +66,17 @@ angular.module('fotosApp')
         });
     };
     $scope.getTallas();
+
+    $scope.getCategorias = function () {
+        $scope.loading = true;
+        categoriaService.categoriasList().then(function(r){
+          $scope.categoriasList = r.data.list;
+          $scope.loading = false;
+        }).catch(function(e){
+          $scope.loading = false;
+        });
+      };
+      $scope.getCategorias();
 
     $scope.uploader.onBeforeUploadItem = function(item) {
         formData = [{
@@ -89,7 +120,8 @@ angular.module('fotosApp')
     };
 
     $scope.save = function() {
-      $scope.loading = true;
+      if ($scope.typeSave == 'ADD') {
+        $scope.loading = true;
         $scope.item.token = $localStorage.user.token;
         productsServices.addProd($scope.item).then(function(r){
           $scope.item = r.data.row;
@@ -101,6 +133,30 @@ angular.module('fotosApp')
               timeOut: 2000,
           });
         });
+      }else{
+        $scope.loading = true;
+        $scope.item.token = $localStorage.user.token;
+        productsServices.updateProd($scope.item).then(function(r){
+          if (r.data.respuesta) {
+            $scope.item = r.data.row;
+            var result = {respuesta:'Y',data:$scope.item};
+            $uibModalInstance.close(result);
+            $scope.loading = false;
+          }else{
+            $scope.loading = false;
+            toastr.error(alertsService.alerts.error.save, 'Error !',{
+                closeButton: true,
+                timeOut: 2000,
+            });
+          }
+        }).catch(function(e){
+          $scope.loading = false;
+          toastr.error(alertsService.alerts.error.save, 'Error !',{
+              closeButton: true,
+              timeOut: 2000,
+          });
+        });
+      }
     }
 
     $scope.close = function() {

@@ -1,5 +1,5 @@
 <md-tabs md-dynamic-height md-border-bottom>
-    <md-tab>
+    <md-tab md-on-select="getProds()">
         <md-tab-label><i class="fa fa-shopping-bag"></i> <strong>Productos</strong></md-tab-label>
         <md-tab-body>
             <md-toolbar class="md-table-toolbar md-default">
@@ -41,8 +41,9 @@
                             <p style="word-wrap: break-word; height: 40px;">{{ prod.description | limitTo: 30 }}{{prod.description.length > 30 ? '...' : ''}}</p>
                             <hr>
                             <p>
-                                <a href="" class="btn btn-primary" ng-click="showAdd(prod)"><i class="fa fa-edit"></i></a>
-                                <a href="" class="btn btn-danger" ng-click="showDelete(prod)"><i class="fa fa-trash"></i></a>
+                                <a href="" class="btn btn-primary" ng-click="showAdd(prod)" uib-tooltip="Editar"><i class="fa fa-edit"></i></a>
+                                <a href="" class="btn btn-primary" ng-click="showAddImages(prod)" uib-tooltip="Añadir Imagenes"><i class="fa fa-picture-o"></i></a>
+                                <a href="" class="btn btn-danger" ng-click="showDelete(prod)" uib-tooltip="Eliminar"><i class="fa fa-trash"></i></a>
                             </p>
                         </div>
                     </div>
@@ -50,7 +51,7 @@
             </div>
         </md-tab-body>
     </md-tab>
-    <md-tab>
+    <md-tab md-on-select="getColors()">
         <md-tab-label><i class="fa fa-tint"></i> Colores</md-tab-label>
         <md-tab-body>
             <md-toolbar class="md-table-toolbar md-default">
@@ -61,7 +62,19 @@
                 </div>
             </md-toolbar>
             <hr>
-            <md-table-container layout-padding>
+            <nav ng-show="(!colorList || colorList.length == 0) && loading == false" class="navbar navbar-default" style="margin-left: 40px; margin-right: 40px;">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <p class="navbar-text">
+                            <i class="fa fa-exclamation-triangle"></i> No hay colores para mostrar
+                        </p>
+                    </div>
+                </div>
+            </nav>
+            <div style="width: 100%;text-align: center;" ng-show="loading">
+                <img src="icons/loading.svg" width="30">
+            </div>
+            <md-table-container layout-padding ng-show="colorList.length > 0 && loading == false">
                 <table md-table md-progress="promise">
                     <thead md-head md-order="query.order" md-on-reorder="data_inv_producto_get">
                         <tr md-row>
@@ -84,7 +97,7 @@
             </md-table-container>
         </md-tab-body>
     </md-tab>
-    <md-tab>
+    <md-tab md-on-select="getTallas()">
         <md-tab-label><i class="fa fa-arrows-h"></i> Tallas</md-tab-label>
         <md-tab-body>
             <md-toolbar class="md-table-toolbar md-default">
@@ -95,7 +108,19 @@
                 </div>
             </md-toolbar>
             <hr>
-            <md-table-container layout-padding>
+            <nav ng-show="(!tallasList || tallasList.length == 0) && loading == false" class="navbar navbar-default" style="margin-left: 40px; margin-right: 40px;">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <p class="navbar-text">
+                            <i class="fa fa-exclamation-triangle"></i> No hay tallas para mostrar
+                        </p>
+                    </div>
+                </div>
+            </nav>
+            <div style="width: 100%;text-align: center;" ng-show="loading">
+                <img src="icons/loading.svg" width="30">
+            </div>
+            <md-table-container layout-padding ng-show="tallasList.length > 0 && loading == false">
                 <table md-table md-progress="promise">
                     <thead md-head md-order="query.order" md-on-reorder="data_inv_producto_get">
                         <tr md-row>
@@ -115,6 +140,58 @@
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <a href="" class="btn btn-danger" ng-click="showDeleteTalla(talla)">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+        </md-tab-body>
+    </md-tab>
+    <md-tab md-on-select="getCategorias()">
+        <md-tab-label><i class="fa fa-list"></i> Categorias</md-tab-label>
+        <md-tab-body>
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools">
+                    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showAddCategoria(categoria)">
+                        <i class="fa fa-arrows-h"></i> <i class="fa fa-plus"></i> Añadir categoria
+                    </button>
+                </div>
+            </md-toolbar>
+            <hr>
+           <nav ng-show="(!categoriasList || categoriasList.length == 0) && loading == false" class="navbar navbar-default" style="margin-left: 40px; margin-right: 40px;">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <p class="navbar-text">
+                            <i class="fa fa-exclamation-triangle"></i> No hay categorias para mostrar
+                        </p>
+                    </div>
+                </div>
+            </nav>
+            <div style="width: 100%;text-align: center;" ng-show="loading">
+                <img src="icons/loading.svg" width="30">
+            </div>
+            <md-table-container layout-padding ng-show="categoriasList.length > 0 && loading == false">
+                <table md-table md-progress="promise">
+                    <thead md-head md-order="query.order" md-on-reorder="data_inv_producto_get">
+                        <tr md-row>
+                            <th md-column md-numeric>#</th>
+                            <th md-column md-numeric>NOMBRE</th>
+                            <th md-column md-numeric>DESCRIPCIÓN</th>
+                            <th md-column md-numeric>ACCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row md-select="categoria" md-select-id="name" md-auto-select ng-repeat="categoria in categoriasList">
+                            <td md-cell>{{$index}}</td>
+                            <td md-cell>{{categoria.nombre}}</td>
+                            <td md-cell>{{categoria.descripcion}}</td>
+                            <td md-cell>
+                                <a href="" class="btn btn-primary" ng-click="showAddCategoria(categoria)">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="" class="btn btn-danger" ng-click="showDeleteCategoria(categoria)">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>

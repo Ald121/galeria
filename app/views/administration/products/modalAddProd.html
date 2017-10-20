@@ -1,26 +1,22 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-title"> <i class="fa fa-shopping-bag"></i> Añadir Producto</h4>
+    <h4 class="modal-title" id="modal-title"> <i class="fa fa-shopping-bag"></i> {{tittle}}</h4>
 </div>
 <form name="form" ng-submit="save()">
 <div class="modal-body" id="modal-body">
 	<div class="row">
-		<div class="form-group col-md-12">
+		<div class="form-group col-md-6">
 			<label><i class="fa fa-font"></i> Nombre</label>
 			<input type="text" name="nombre" class="form-control" placeholder="Nombre" ng-model="item.nombre" required>
 		</div>
-		<div class="form-group col-md-12">
+		<div class="form-group col-md-3">
 			<label><i class="fa fa-usd"></i> Precio unitario</label>
 			<input type="text" name="nombre" class="form-control" placeholder="Ej: 9.99" ng-model="item.precio" ui-number-mask="2" required>
 		</div>
-		<div class="form-group col-md-12">
-			<label><i class="fa fa-font"></i> Descripción</label>
-			<textarea name="description" class="form-control" placeholder="Ej: Blusa color blanco ......." rows="5" ng-model="item.description" required></textarea>
-		</div>
-		<div class="form-group col-md-12">
+		<div class="form-group col-md-3">
 			<label><i class="fa fa-usd"></i> Stock</label>
 			<input type="number" name="stock" class="form-control" placeholder="Ej: 5" ng-model="item.stock" required>
 		</div>
-		<div class="form-group col-md-12">
+		<div class="form-group col-md-6">
 			<label><i class="fa fa-usd"></i> Color</label>
 			<ui-select ng-model="item.colores" multiple close-on-select="false">
 		        <ui-select-match placeholder="Selecionar un color(es)..">{{$item.nombre}}</ui-select-match>
@@ -29,11 +25,20 @@
 		        </ui-select-choices>
 		    </ui-select>
 		</div>
-		<div class="form-group col-md-12">
+		<div class="form-group col-md-6">
 			<label><i class="fa fa-usd"></i> Talla</label>
 			<ui-select ng-model="item.tallas" multiple close-on-select="false">
 		        <ui-select-match placeholder="Selecionar una talla(s)..">{{$item.nombre}}</ui-select-match>
 		        <ui-select-choices repeat="value.idtallas as value in tallasList | filter: $select.search">
+		            <div ng-bind-html="value.nombre | highlight: $select.search"></div>
+		        </ui-select-choices>
+		    </ui-select>
+		</div>
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-usd"></i> Categoria</label>
+			<ui-select ng-model="item.categoria" >
+		        <ui-select-match placeholder="Selecione la categoria..">{{$select.selected.nombre}}</ui-select-match>
+		        <ui-select-choices repeat="value.key as value in categoriasList | filter: $select.search">
 		            <div ng-bind-html="value.nombre | highlight: $select.search"></div>
 		        </ui-select-choices>
 		    </ui-select>
@@ -48,10 +53,13 @@
 			<md-switch ng-model="item.destacar" aria-label="Switch 1">
 			</md-switch>
 		</div>
-		 
+		<div class="form-group col-md-12">
+			<label><i class="fa fa-font"></i> Descripción</label>
+			<textarea name="description" class="form-control" placeholder="Ej: Blusa color blanco ......." rows="5" ng-model="item.description" required></textarea>
+		</div>
 	</div>
-	<input type="file" nv-file-select="" uploader="uploader" multiple  accept="image/*" /><br/>
-	<table class="table">
+	<input type="file" nv-file-select="" uploader="uploader" multiple  ng-show="typeSave == 'ADD'" accept="image/*" /><br/>
+	<table class="table" ng-show="typeSave == 'ADD'">
 	                        <thead>
 	                            <tr>
 	                                <th width="30%">Imagen</th>
@@ -91,6 +99,8 @@
 	</div>
 	<div class="modal-footer">
 	    <button class="btn btn-danger" type="button" ng-click="close()">Cancelar</button>
-	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || !uploader.getNotUploadedItems().length || loading " ng-show="!uploading"><i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i> OK</button>
+	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || !uploader.getNotUploadedItems().length || loading " ng-show="!uploading && typeSave == 'ADD'"><i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i> OK</button>
+
+	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || loading " ng-show="!uploading && typeSave == 'EDIT'"><i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i> OK</button>
 	</div>
 </form>

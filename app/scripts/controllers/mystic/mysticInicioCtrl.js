@@ -8,8 +8,8 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('mysticInicioCtrl', function ($rootScope,carService,$mdDialog,$location,sliderService,$scope,productsServices,toastr,generalService) {
-   	    $scope.productsListSlider = [];
+  .controller('mysticInicioCtrl', function ($localStorage,$rootScope,carService,$mdDialog,$location,sliderService,$scope,productsServices,toastr,generalService) {
+        $scope.productsListSlider = [];
         $scope.productsDestacados = [];
         $scope.loadingDestacados = false;
         $scope.loadingSlider = false;
@@ -69,7 +69,7 @@ angular.module('fotosApp')
       $scope.getProductosDestacados = function () {
             $scope.loadingDestacados = true;
             $scope.loading = true;
-            sliderService.sliderList().then(function(r){
+            sliderService.sliderProdDestacados().then(function(r){
                   if (r.data.respuesta == true) {
                      $scope.loading = false;
                      $scope.productsDestacados = r.data.list;
@@ -103,7 +103,7 @@ angular.module('fotosApp')
       $scope.getSlider = function () {
             $scope.loadingSlider = true;
             $scope.loading = true;
-            sliderService.sliderProdDestacados().then(function(r){
+            sliderService.sliderList().then(function(r){
                   if (r.data.respuesta == true) {
                      $scope.loading = false;
                      $scope.productsListSlider = r.data.list;
