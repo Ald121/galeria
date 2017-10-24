@@ -1,7 +1,7 @@
 var app = angular.module('fotosApp');
   app.factory('userService',['$q', '$timeout', '$http','generalService',
     '$localStorage','$mdDialog',
-    function ($q, $timeout, $http,generalService,$localStorage,$mdDialog) {
+    function ($q, $timeout, $http,generalService,$localStorage,$mdDialog,alertsService) {
     
     return ({
       ingresar: ingresar,
@@ -9,8 +9,23 @@ var app = angular.module('fotosApp');
       activar:activar,
       salir:salir,
       checkSession:checkSession,
-      openModalRegister:openModalRegister
+      openModalRegister:openModalRegister,
+      catchError:catchError
     });
+
+    function catchError(e) {
+       if (e) {
+          if (e.error == "Sin-Token-de-Seguridad" || e.error == "Token-Expirado") {
+            $localStorage.$reset();
+            $window.location.reload();
+            var toast = toastr.error(alertsService.alerts.error.session, 'Error',{
+              closeButton: true,
+               timeOut: 2000,
+            });
+          };
+       }
+    }
+
     function ingresar(dataSend) {
        if ($localStorage.user) {
         if (!dataSend) {

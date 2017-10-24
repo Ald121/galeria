@@ -95,7 +95,9 @@
        Cancelar
       </md-button>
       <md-button type="submit" class="md-primary" ng-disabled="form.$invalid || saving ">
-      <i class="fa fa-spinner" aria-hidden="true" ng-show="saving"></i>
+        <span ng-show="saving">
+          <i class="fa fa-spinner" aria-hidden="true" ></i>
+        </span>
        Aceptar
       </md-button>
     </md-dialog-actions>

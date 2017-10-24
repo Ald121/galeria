@@ -16,6 +16,11 @@
 	</div>
 	<div class="modal-footer">
 	    <button class="btn btn-danger" type="button" ng-click="close()">Cancelar</button>
-	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || loading " ng-show="!uploading"><i class="fa fa-spinner fa-spin fa-fw" ng-show="loading"></i> OK</button>
+	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || loading " ng-show="!uploading">
+			<span ng-show="loading">
+				<i class="fa fa-spinner fa-spin fa-fw"></i>
+			</span>
+	    	 OK
+	    </button>
 	</div>
 </form>

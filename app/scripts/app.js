@@ -128,6 +128,7 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                 .up()
 
             .when('/mystic',    'mystic.home')
+            .when('/mystic/:categoria',    'mystic.byCat')
             .when('/mystic/detalles/:id',    'mystic.detalles')
             .segment('mystic', {
                 templateUrl: 'views/mystic/public/menu.html',
@@ -139,10 +140,10 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                     controller: 'mysticInicioCtrl',
                     default: true
                 })
-                .segment('detalles', {
-                    templateUrl: 'views/mystic/public/detalles.html',
-                    controller: 'mysticDetallesCtrl',
-                    dependencies: ['id']
+                .segment('byCat', {
+                    templateUrl: 'views/mystic/public/inicio.html',
+                    controller: 'mysticByCatCtrl',
+                    dependencies: ['categoria']
                 })
                 .up()
 

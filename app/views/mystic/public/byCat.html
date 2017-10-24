@@ -2,9 +2,6 @@
 <div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="loadingSlider">
 	<i class="fa fa-spinner fa-spin fa-2x fa-fw" ></i>
 </div>
-<div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="productsListSlider.length == 0 && !loadingSlider">
-		<i class="fa fa-frown-o fa-2x"></i> Nada para mostrar ... Agrega algunos productos...
-</div>
 	<ui-carousel 
 	  slides="productsListSlider"
 	  slides-to-show="3"
@@ -12,7 +9,7 @@
 	  initial-slide="0"
 	  autoplay="false"
 	  autoplay-speed="5000"
-	  dots="true" style="text-align: center; margin-left: 4%; width: 90%;">
+	  dots="true" style="text-align: center;    margin-left: 4%;   width: 90%;">
 	  <carousel-item>
 			<img src="{{item.picDefault}}" width="300px" class="img-slider grid-prods">
 			<div style="position: relative; top: -50px;">
@@ -34,9 +31,6 @@
 		  <div class="panel-footer">
 		  	<div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="loadingDestacados">
 		  		<i class="fa fa-spinner fa-spin fa-2x fa-fw" ></i>
-		  	</div>
-		  	<div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="productsDestacados.length == 0 && !loadingDestacados">
-		  		<i class="fa fa-frown-o fa-2x"></i> Nada para mostrar ... Agrega algunos productos...
 		  	</div>
 		  	<ui-carousel 
 				  slides="productsDestacados"
@@ -74,9 +68,6 @@
 		  	<div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="loadingRecent">
 		  		<i class="fa fa-spinner fa-spin fa-2x fa-fw" ></i>
 		  	</div>
-		  	<div class="col-md-12" style="text-align: center; color: #5bc0de;" ng-show="productsList.length == 0 && !loadingRecent">
-					<i class="fa fa-frown-o fa-2x"></i> Nada para mostrar ... Agrega algunos productos...
-			</div>
 		  	<ul class="dynamic-grid" angular-grid="productsList" grid-width="200" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
 			     <li data-ng-repeat="prod in productsList" class="grid grid-prods" ng-click="viewDetails($event,prod)">
 			         <img src="{{prod.picDefault}}" style="width: 100%;

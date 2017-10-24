@@ -30,6 +30,7 @@ angular.module('fotosApp')
           $scope.loading = false;
         }
       }).catch(function(e){
+        userService.catchError(e);
         $scope.saving = false;
         $localStorage.$reset();
         $location.path('/');

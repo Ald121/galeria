@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('prodsCtrl', function (categoriaService,$rootScope,tallasService,colorService,alertsService,$scope,productsServices,generalService,toastr,$uibModal) {
+  .controller('prodsCtrl', function (userService,categoriaService,$rootScope,tallasService,colorService,alertsService,$scope,productsServices,generalService,toastr,$uibModal) {
     $scope.rolForRoute = 'ADMIN';
     if ($rootScope.user.datos.userType != $scope.rolForRoute) {
       var toast = toastr.error('Acesso denegado', 'Error',{
@@ -30,10 +30,11 @@ angular.module('fotosApp')
           $scope.loading = false;
           }
         }).catch(function(e){
-          var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
-            closeButton: true,
-             timeOut: 2000,
-          });
+          userService.catchError(e);
+          // var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+          //   closeButton: true,
+          //    timeOut: 2000,
+          // });
           $scope.loading = false;
         });
       };
@@ -91,6 +92,9 @@ angular.module('fotosApp')
               $scope.productsList = [];
               $scope.getProds();
             }
+          }else{
+            $scope.productsList = [];
+            $scope.getProds();
           }
         });
       };
@@ -121,6 +125,7 @@ angular.module('fotosApp')
           $scope.colorList = r.data.list;
           $scope.loading = false;
         }).catch(function(e){
+          userService.catchError(e);
           $scope.loading = false;
         });
       };
@@ -132,6 +137,7 @@ angular.module('fotosApp')
           $scope.categoriasList = r.data.list;
           $scope.loading = false;
         }).catch(function(e){
+          userService.catchError(e);
           $scope.loading = false;
         });
       };
@@ -287,6 +293,7 @@ angular.module('fotosApp')
           $scope.tallasList = r.data.list;
           $scope.loading = false;
         }).catch(function(e){
+          userService.catchError(e);
           $scope.loading = false;
         });
       };

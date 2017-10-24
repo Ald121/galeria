@@ -7,8 +7,19 @@ angular.module('fotosApp').factory('pedidosServices',['$q', '$timeout', '$http',
       addPedido:addPedido,
       PedidoDetails:PedidoDetails,
       procesPedido:procesPedido,
-      pedidosListCliente:pedidosListCliente
+      pedidosListCliente:pedidosListCliente,
+      getClientData:getClientData
     });
+
+    function getClientData(dataSend) {
+      if ($localStorage.user) {
+        if (!dataSend) {
+          dataSend = {};
+        }
+        dataSend.token = $localStorage.user.token;
+      }
+       return $http.post(generalService.dir() + 'getClientData', dataSend);
+    }
 
     function pedidosList(dataSend) {
       if ($localStorage.user) {

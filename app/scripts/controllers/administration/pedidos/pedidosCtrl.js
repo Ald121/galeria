@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('pedidosCtrl', function ($rootScope,alertsService,$uibModal,bancosServices,$mdDialog,toastr,$location,$localStorage,$scope,$mdSidenav,pedidosServices,$rootScope) {
+  .controller('pedidosCtrl', function (userService,$rootScope,alertsService,$uibModal,bancosServices,$mdDialog,toastr,$location,$localStorage,$scope,$mdSidenav,pedidosServices,$rootScope) {
     $scope.rolForRoute = 'ADMIN';
     if ($rootScope.user.datos.userType != $scope.rolForRoute) {
       var toast = toastr.error('Acesso denegado', 'Error',{
@@ -22,6 +22,7 @@ angular.module('fotosApp')
 	          $scope.loading = false;
 	          }
 	        }).catch(function(e){
+            userService.catchError(e);
 	          var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
 	            closeButton: true,
 	             timeOut: 2000,
@@ -48,9 +49,26 @@ angular.module('fotosApp')
 
       var modalDetailsController = function(generalService,pedido,$scope,$localStorage,$mdDialog,userService,$location){
 	      $scope.pedido = pedido;
-	       angular.forEach($scope.pedido.detalles,function(value){
-	            value.image = generalService.pathImgProds() + value.image;
-           });
+        console.log(pedido);
+	      angular.forEach($scope.pedido.detalles,function(value){
+          value.image = generalService.pathImgProds() + value.image;
+        });
+
+        $scope.getClientData = function(){
+          pedidosServices.getClientData({id:pedido.idusuarios}).then(function(r){
+            $scope.user = r.data.datos;
+          }).catch(function(e){
+            userService.catchError(e);
+            var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+              closeButton: true,
+               timeOut: 2000,
+            });
+            $scope.loading = false;
+          });
+        }
+
+        $scope.getClientData();
+
 	      $scope.cancel = function(){
 	        $mdDialog.hide();
 	      }
@@ -70,6 +88,7 @@ angular.module('fotosApp')
           $scope.loading = false;
           }
         }).catch(function(e){
+          userService.catchError(e);
           var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
             closeButton: true,
              timeOut: 2000,
@@ -123,6 +142,7 @@ angular.module('fotosApp')
                   }
                 }
               }).catch(function(e){
+                userService.catchError(e);
                 toastr.error(alertsService.alerts.error.delete, 'Error !',{
                     closeButton: true,
                     timeOut: 2000,
@@ -158,6 +178,7 @@ angular.module('fotosApp')
                   }
                 }
               }).catch(function(e){
+                userService.catchError(e);
                 toastr.error(alertsService.alerts.error.processPedido, 'Error !',{
                     closeButton: true,
                     timeOut: 2000,

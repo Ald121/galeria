@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('addProdCtrl', function (categoriaService,$rootScope,tallasService,colorService,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,productsServices) {
+  .controller('addProdCtrl', function (userService,categoriaService,$rootScope,tallasService,colorService,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,productsServices) {
     $scope.rolForRoute = 'ADMIN';
     if ($rootScope.user.datos.userType != $scope.rolForRoute) {
       var toast = toastr.error('Acesso denegado', 'Error',{
@@ -50,9 +50,9 @@ angular.module('fotosApp')
         colorService.colorList().then(function(r){
           $scope.colorList = r.data.list;
           if (item) {
-            console.log(item);
           }
         }).catch(function(e){
+          userService.catchError(e);
 
         });
     };
@@ -62,6 +62,7 @@ angular.module('fotosApp')
         tallasService.tallasList().then(function(r){
           $scope.tallasList = r.data.list;
         }).catch(function(e){
+          userService.catchError(e);
 
         });
     };
@@ -73,6 +74,7 @@ angular.module('fotosApp')
           $scope.categoriasList = r.data.list;
           $scope.loading = false;
         }).catch(function(e){
+          userService.catchError(e);
           $scope.loading = false;
         });
       };
@@ -121,36 +123,38 @@ angular.module('fotosApp')
 
     $scope.save = function() {
       if ($scope.typeSave == 'ADD') {
-        $scope.loading = true;
+        $scope.saving = true;
         $scope.item.token = $localStorage.user.token;
         productsServices.addProd($scope.item).then(function(r){
           $scope.item = r.data.row;
           $scope.uploader.uploadAll();
         }).catch(function(e){
-          $scope.loading = false;
+          userService.catchError(e);
+          $scope.saving = false;
           toastr.error(alertsService.alerts.error.save, 'Error !',{
               closeButton: true,
               timeOut: 2000,
           });
         });
       }else{
-        $scope.loading = true;
+        $scope.saving = true;
         $scope.item.token = $localStorage.user.token;
         productsServices.updateProd($scope.item).then(function(r){
           if (r.data.respuesta) {
             $scope.item = r.data.row;
             var result = {respuesta:'Y',data:$scope.item};
             $uibModalInstance.close(result);
-            $scope.loading = false;
+            $scope.saving = false;
           }else{
-            $scope.loading = false;
+            $scope.saving = false;
             toastr.error(alertsService.alerts.error.save, 'Error !',{
                 closeButton: true,
                 timeOut: 2000,
             });
           }
         }).catch(function(e){
-          $scope.loading = false;
+          userService.catchError(e);
+          $scope.saving = false;
           toastr.error(alertsService.alerts.error.save, 'Error !',{
               closeButton: true,
               timeOut: 2000,

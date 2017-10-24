@@ -8,12 +8,11 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('mysticHomeCtrl', function ($location,$rootScope,userService,$window,$scope,$mdDialog,toastr,carService,$localStorage) {
+  .controller('mysticHomeCtrl', function (categoriaService,$location,$rootScope,userService,$window,$scope,$mdDialog,toastr,carService,$localStorage) {
       $scope.$watch(function () { return $localStorage.car; },function(newVal,oldVal){
            if($localStorage.car){
             $rootScope.carList = $localStorage.car;
           }
-          console.log($rootScope.carList);
         },true);
       var modalCarListController = function(locationService,bancosServices,$rootScope,$scope,$mdDialog,userService,pedidosServices){
         $scope.carList = $localStorage.car;
@@ -38,6 +37,7 @@ angular.module('fotosApp')
             }
           })
           .catch(function(e){
+            userService.catchError(e);
             var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
                           closeButton: true,
                            timeOut: 2000,
@@ -70,6 +70,7 @@ angular.module('fotosApp')
                 $scope.saving = false;
               }
             }).catch(function(e){
+              userService.catchError(e);
               $scope.loadingCiudades = false;
               var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
                 closeButton: true,
@@ -101,6 +102,7 @@ angular.module('fotosApp')
             $scope.saving = false;
           }
         }).catch(function(e){
+          userService.catchError(e);
           $scope.lodingProv = false;
           var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
             closeButton: true,
@@ -147,6 +149,7 @@ angular.module('fotosApp')
                       $scope.loading = false;
             }
            }).catch(function(e){
+            userService.catchError(e);
               var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
                 closeButton: true,
                  timeOut: 2000,
@@ -168,6 +171,7 @@ angular.module('fotosApp')
           $window.location.reload();
         }
       }).catch(function(e){
+        userService.catchError(e);
         $scope.loading = false;
         $localStorage.$reset();
         $window.location.reload();
@@ -206,11 +210,29 @@ angular.module('fotosApp')
         });
     }
 
-    $scope.menuSuperior = [
-                      {nombre:'Inicio',link:'/mytic',icon:'fa-home',child:[]},
-                      {nombre:'Camisas',link:'/camisas',icon:'fa-shopping-bag',child:[]},
-                      {nombre:'Accesorios',link:'/accesorios',icon:'fa-shopping-bag',child:[]}
-                    ];
+    // $scope.menuSuperior = [
+    //                   {nombre:'Inicio',link:'/mystic',icon:'fa-home',child:[]},
+    //                   {nombre:'Camisas',link:'/mystic/camisas',icon:'fa-shopping-bag',child:[]},
+    //                   {nombre:'Accesorios',link:'/mystic/accesorios',icon:'fa-shopping-bag',child:[]}
+    //                 ];
+
+    $scope.getCategorias = function () {
+        $scope.loadingCat = true;
+        categoriaService.categoriasList().then(function(r){
+          $scope.menuSuperior = r.data.list;
+          angular.forEach($scope.menuSuperior,function(value,key){
+            $scope.menuSuperior[key].link = '/mystic/' + $scope.menuSuperior[key].key;
+            $scope.menuSuperior[key].icon = 'fa-shopping-bag';
+            $scope.menuSuperior[key].child = [];
+          });
+          $scope.loadingCat = false;
+        }).catch(function(e){
+          userService.catchError(e);
+          $scope.loadingCat = false;
+        });
+      };
+    $scope.getCategorias();
+
     $scope.openLoginModal = function(ev){
       $mdDialog.show({
         controller: modalLoginController,
@@ -247,6 +269,7 @@ angular.module('fotosApp')
             $scope.saving = false;
           }
         }).catch(function(e){
+          userService.catchError(e);
           var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
             closeButton: true,
              timeOut: 2000,
@@ -289,6 +312,7 @@ angular.module('fotosApp')
             $scope.saving = false;
           }
         }).catch(function(e){
+          userService.catchError(e);
           var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
             closeButton: true,
              timeOut: 2000,

@@ -57,7 +57,14 @@
 	                    </table>
 	</div>
 	<div class="modal-footer">
-	    <button class="btn btn-danger" type="button" ng-click="close()">Cancelar</button>
-	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || !uploader.getNotUploadedItems().length || uploading " ><i class="fa fa-spinner fa-spin fa-fw" ng-show="uploading"></i> OK</button>
+	    <button class="btn btn-danger" type="button" ng-click="close()">
+	    	Cancelar
+	    </button>
+	    <button class="btn btn-warning" type="submit" ng-disabled="form.$invalid || !uploader.getNotUploadedItems().length || uploading " >
+	    	<span ng-show="uploading">
+	    		<i class="fa fa-spinner fa-spin fa-fw"></i>
+	    	</span> 
+	    	OK
+		</button>
 	</div>
 </form>

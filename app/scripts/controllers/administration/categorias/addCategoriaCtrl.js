@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('addCategoriaCtrl', function ($rootScope,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,categoriaService) {
+  .controller('addCategoriaCtrl', function (userService,$rootScope,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,categoriaService) {
 
     $scope.rolForRoute = 'ADMIN';
     if ($rootScope.user.datos.userType != $scope.rolForRoute) {
@@ -32,6 +32,7 @@ angular.module('fotosApp')
           var result = {respuesta:'Y',data:$scope.item};
           $uibModalInstance.close(result);
         }).catch(function(e){
+          userService.catchError(e);
           $scope.loading = false;
           toastr.error(alertsService.alerts.error.save, 'Error !',{
               closeButton: true,

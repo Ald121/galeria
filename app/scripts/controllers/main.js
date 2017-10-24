@@ -28,8 +28,8 @@ angular.module('fotosApp')
                       // {nombre:'Ingreso ',link:'/',icon:'fa-user-circle',child:[]},
                     ];
     $rootScope.logos = [
-                      {image:'images/cofradiaB.png',link:'/',active:false},
-                      {image:'images/mysticB.png',link:'/mystic',active:false}
+                      {image:'images/cofradiaB.png',link:'/',active:true},
+                      {image:'images/mysticB.png',link:'/mystic/ALL',active:false}
                   ];
    $rootScope.setActiveLogo = function(item){
           angular.forEach($rootScope.logos,function(value){

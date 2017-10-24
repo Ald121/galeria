@@ -1,14 +1,13 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name fotosApp.controller:AboutCtrl
- * @description
- * # AboutCtrl
- * Controller of the fotosApp
- */
 angular.module('fotosApp')
-  .controller('mysticInicioCtrl', function ($localStorage,$rootScope,carService,$mdDialog,$location,sliderService,$scope,productsServices,toastr,generalService) {
+  .controller('mysticByCatCtrl', function ($routeParams,$localStorage,$rootScope,carService,$mdDialog,$location,sliderService,$scope,productsServices,toastr,generalService) {
+        
+        if ($routeParams.categoria) {
+          $scope.search = $routeParams.categoria;
+        }else{
+          $scope.search = 'ALL';
+        }
         $scope.productsListSlider = [];
         $scope.productsDestacados = [];
         $scope.loadingDestacados = false;
@@ -35,7 +34,7 @@ angular.module('fotosApp')
         $scope.getProds = function () {
             $scope.loadingRecent = true;
             $scope.loading = true;
-            productsServices.productsList().then(function(r){
+            productsServices.productsList({q:$scope.search}).then(function(r){
                   if (r.data.respuesta == true) {
                      $scope.loading = false;
                      $scope.productsList = r.data.list;
@@ -69,7 +68,7 @@ angular.module('fotosApp')
       $scope.getProductosDestacados = function () {
             $scope.loadingDestacados = true;
             $scope.loading = true;
-            sliderService.sliderProdDestacados().then(function(r){
+            sliderService.sliderProdDestacados({q:$scope.search}).then(function(r){
                   if (r.data.respuesta == true) {
                      $scope.loading = false;
                      $scope.productsDestacados = r.data.list;
@@ -103,7 +102,7 @@ angular.module('fotosApp')
       $scope.getSlider = function () {
             $scope.loadingSlider = true;
             $scope.loading = true;
-            sliderService.sliderList().then(function(r){
+            sliderService.sliderList({q:$scope.search}).then(function(r){
                   if (r.data.respuesta == true) {
                      $scope.loading = false;
                      $scope.productsListSlider = r.data.list;

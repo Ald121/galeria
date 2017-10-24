@@ -28,6 +28,13 @@
 <header style="border-bottom: 1px solid rgba(189, 189, 189, 0.7);">
     <div id="header">
         <ul class="nav" style="margin-left: 15px;">
+            <li ng-show="loadingCat">
+                <a href="" ng-click="openLoginModal($event)">
+                    <div style="color: #5bc0de;">
+                        <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Cargando categorias ......
+                    </div>
+                </a>
+            </li>
             <li ng-repeat="item in menuSuperior">
                 <a href="#!{{item.link}}">
                     <div>

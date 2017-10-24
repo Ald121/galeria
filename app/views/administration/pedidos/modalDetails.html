@@ -40,6 +40,72 @@
                                 </md-table-container>
                             </md-tab-body>
                         </md-tab>
+                        <md-tab>
+                        <md-tab-label>
+                            <i class="fa fa-info"></i> Datos de envio
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-card md-theme-watch>
+                                <md-content layout-padding>
+                                    <div id="gridContainer" ng-cloak>
+                                        <md-content layout-padding>
+                                            <div style="text-align: center;">
+                                                <img src="icons/bag.png" style="width: 10%;">
+                                            </div>
+                                            <div layout="row">
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                    <md-icon class="md-primary">text_fields</md-icon>
+                                                    <label>Nombres</label>
+                                                    <input name="nombres" ng-model="user.nombres" type="text" readonly>
+                                                    <span ng-show="form.nombres.$touched && form.nombres.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+                                                </md-input-container>
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                    <md-icon class="md-primary">text_fields</md-icon>
+                                                    <label>Apellidos</label>
+                                                    <input name="apellidos" ng-model="user.apellidos" type="text" readonly>
+                                                    <span ng-show="form.apellidos.$touched && form.apellidos.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout="row">
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                    <md-icon class="md-primary">location</md-icon>
+                                                    <label>Provincia</label>
+                                                    <input name="provincia" ng-model="user.provincia" type="text" readonly>
+                                                </md-input-container>
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                    <md-icon class="md-primary">location</md-icon>
+                                                    <label>Ciudad</label>
+                                                    <input name="ciudad" ng-model="user.ciudad" type="text" readonly>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout="row">
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                    <md-icon class="md-primary">email</md-icon>
+                                                    <label>Correo / E-mail</label>
+                                                    <input name="email" ng-model="user.email" type="email" readonly>
+                                                    <span ng-show="form.email.$touched && form.email.$invalid" class="errorSpan requiredMsg">Email Incorrecto</span>
+                                                </md-input-container>
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                    <md-icon class="md-primary">phone</md-icon>
+                                                    <label>Telefono / Celular</label>
+                                                    <input name="telefono" ng-model="user.telefono" type="text" readonly>
+                                                    <span ng-show="form.telefono.$touched && form.telefono.$invalid" class="errorSpan requiredMsg">Telefono Incorrecto</span>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout-gt-lg="row">
+                                                <md-input-container class="md-icon-float md-block">
+                                                    <md-icon class="md-primary">home</md-icon>
+                                                    <label>Dirección</label>
+                                                    <input name="direccion" ng-model="user.direccion" type="text" readonly>
+                                                    <span ng-show="form.direccion.$touched && form.direccion.$invalid" class="errorSpan requiredMsg">Dirección Incorrecta</span>
+                                                </md-input-container>
+                                            </div>
+                                        </md-content>
+                                    </div>
+                                </md-content>
+                            </md-card>
+                        </md-tab-body>
+                    </md-tab>
                     </md-tabs>
                 </md-content>
         </md-dialog-content>

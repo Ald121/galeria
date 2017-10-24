@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('addBancoCtrl', function ($rootScope,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,bancosServices) {
+  .controller('addBancoCtrl', function (userService,$rootScope,alertsService,$localStorage,$scope,item,$uibModalInstance,toastr,FileUploader,generalService,bancosServices) {
     $scope.rolForRoute = 'ADMIN';
     if ($rootScope.user.datos.userType != $scope.rolForRoute) {
       var toast = toastr.error('Acesso denegado', 'Error',{
@@ -32,6 +32,7 @@ angular.module('fotosApp')
           var result = {respuesta:'Y',data:$scope.item};
           $uibModalInstance.close(result);
         }).catch(function(e){
+          userService.catchError(e);
           $scope.loading = false;
           toastr.error(alertsService.alerts.error.save, 'Error !',{
               closeButton: true,
@@ -50,6 +51,7 @@ angular.module('fotosApp')
           var result = {respuesta:'Y',data:$scope.item};
           $uibModalInstance.close(result);
         }).catch(function(e){
+          userService.catchError(e);
           $scope.loading = false;
           toastr.error(alertsService.alerts.error.update, 'Error !',{
               closeButton: true,

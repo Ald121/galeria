@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('clientPedidosCtrl', function ($rootScope,alertsService,$uibModal,bancosServices,$mdDialog,toastr,$location,$localStorage,$scope,$mdSidenav,pedidosServices,$rootScope) {
+  .controller('clientPedidosCtrl', function (userService,$rootScope,alertsService,$uibModal,bancosServices,$mdDialog,toastr,$location,$localStorage,$scope,$mdSidenav,pedidosServices,$rootScope) {
     $scope.rolForRoute = 'CLIENTE';
     if (!$rootScope.user) {
       var toast = toastr.error(alertsService.alerts.error.session, 'Error',{
@@ -30,6 +30,7 @@ angular.module('fotosApp')
             $scope.loading = false;
             }
           }).catch(function(e){
+            userService.catchError(e);
             var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
               closeButton: true,
                timeOut: 2000,

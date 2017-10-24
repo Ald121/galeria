@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('administrationImagesCtrl', function ($location,$rootScope,$scope,Lightbox,$uibModal,imageServices,generalService,toastr) {
+  .controller('administrationImagesCtrl', function (userService,$location,$rootScope,$scope,Lightbox,$uibModal,imageServices,generalService,toastr) {
     $scope.imgsList = [];
     $scope.rolForRoute = 'ADMIN';
     if ($rootScope.user.datos.userType != $scope.rolForRoute) {
@@ -26,6 +26,7 @@ angular.module('fotosApp')
           $scope.loading = false;
           }
         }).catch(function(e){
+          userService.catchError(e);
           var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
             closeButton: true,
              timeOut: 2000,
@@ -77,7 +78,7 @@ angular.module('fotosApp')
                 $scope.loading = false;
                 }
               }).catch(function(e){
-                console.log(e);
+                userService.catchError(e);
                 var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
                   closeButton: true,
                    timeOut: 2000,
