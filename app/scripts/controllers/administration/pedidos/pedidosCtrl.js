@@ -42,7 +42,9 @@ angular.module('fotosApp')
 	        locals:{
 	        	pedido:pedido
 	        }
-	     });
+	     }).then(function(){
+        $scope.getPedidos();
+       });
       };
 
       $scope.getPedidos();
