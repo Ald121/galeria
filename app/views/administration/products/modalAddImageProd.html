@@ -6,11 +6,18 @@
 	<div layout="row">
 		<button ng-show="deleting"class="btn btn-info" type="submit">Eliminando ... <i class="fa fa-spinner fa-spin fa-fw"></i></button>
 	</div>
+	<div layout="row">
+		<button ng-show="changing" class="btn btn-info" type="submit">Cambiando ... <i class="fa fa-spinner fa-spin fa-fw"></i></button>
+	</div>
 	<div layout="row" flex="75">
 			<md-card ng-repeat="img in item.images" flex="25" >
 		        <img ng-src="{{img.image}}" class="md-card-image" alt="Washed Out">
 		        <md-card-actions layout="row" layout-align="end center">
-		          <md-button uib-tooltip="Eliminar" ng-click="removeImage($index,img)" ng-show="item.images.length >1"></i><i class="fa fa-trash"></i>
+		          <md-button uib-tooltip="Eliminar" ng-click="removeImage($index,img)" ng-show="item.images.length >1" aria-label="delete" style="min-width: 42px !important;">
+		          	<i class="fa fa-trash"></i>
+		          </md-button>
+		          <md-button uib-tooltip="Colocar como imagen de producto" ng-click="setPreviewImage(img)" ng-show="item.images.length >1" aria-label="change" style="min-width: 42px !important;">
+		          	<i class="fa fa-check"></i>
 		          </md-button>
 		        </md-card-actions>
 	      	</md-card>

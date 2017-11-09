@@ -8,7 +8,7 @@
  * Controller of the fotosApp
  */
 angular.module('fotosApp')
-  .controller('accountActivationCtrl', function ($scope,$mdDialog) {
+  .controller('accountActivationCtrl', function ($scope,$mdDialog,$location) {
   	   $scope.imgs = [
 		    	{url:'styles/images/21.jpg'},
 		    	{url:'styles/images/22.png'},
@@ -46,6 +46,7 @@ angular.module('fotosApp')
               timeOut: 3000,
             });
              $mdDialog.hide();
+             $location.path('/');
              $scope.saving = false;
           }else{
             var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{

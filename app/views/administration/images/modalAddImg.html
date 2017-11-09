@@ -46,7 +46,7 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-danger" type="button" ng-click="close()">Cancelar</button>
-    <button class="btn btn-warning" type="button" ng-click="uploadImage()" ng-disabled="!uploader.getNotUploadedItems().length || uploading">
+    <button class="btn btn-warning" type="button" ng-click="uploadImage()" ng-disabled="!uploader.getNotUploadedItems().length || uploading || !selected.category">
         <span ng-show="uploading">
             <i class="fa fa-spinner fa-spin fa-fw" ></i>
         </span>

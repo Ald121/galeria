@@ -1,5 +1,5 @@
 angular.module('fotosApp')
-  .controller('administrationImagesCtrl', function (userService,$location,$rootScope,$scope,Lightbox,$uibModal,imageServices,generalService,toastr) {
+  .controller('administrationImagesCtrl', function (alertsService,userService,$location,$rootScope,$scope,Lightbox,$uibModal,imageServices,generalService,toastr) {
     $scope.imgsList = [];
     $scope.rolForRoute = 'ADMIN';
     if ($rootScope.user.datos.userType != $scope.rolForRoute) {
@@ -67,19 +67,23 @@ angular.module('fotosApp')
             if (result == 'Y') {
               imageServices.deleteImg({id:item.idpictures,img:item.src}).then(function(r){
                 if (r.data.respuesta == true) {
+                    var toast = toastr.success(alertsService.alerts.ok.delete, 'Correcto',{
+                      closeButton: true,
+                       timeOut: 2000,
+                    });
                    var indexObj = $scope.imgsList.indexOf(item);
                    $scope.imgsList = [];
                    $scope.getImgs();
                 }else{
-                  var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
-                  closeButton: true,
-                   timeOut: 2000,
-                });
+                  var toast = toastr.error(alertsService.alerts.error.delete, 'Error',{
+                    closeButton: true,
+                     timeOut: 2000,
+                  });
                 $scope.loading = false;
                 }
               }).catch(function(e){
                 userService.catchError(e);
-                var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                var toast = toastr.error(alertsService.alerts.error.delete, 'Error',{
                   closeButton: true,
                    timeOut: 2000,
                 });

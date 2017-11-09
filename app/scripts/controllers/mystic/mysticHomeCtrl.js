@@ -142,11 +142,12 @@ angular.module('fotosApp')
               });
               
             }else{
-              var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
-                        closeButton: true,
-                         timeOut: 2000,
-                      });
-                      $scope.loading = false;
+              userService.catchError(r);
+              // var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+              //           closeButton: true,
+              //            timeOut: 2000,
+              //         });
+              $scope.loading = false;
             }
            }).catch(function(e){
             userService.catchError(e);

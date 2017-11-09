@@ -110,10 +110,21 @@ angular.module('fotosApp')
              }
              
           }else{
-            var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
-              closeButton: true,
-              timeOut: 2000,
-            });
+            if (r.data.error == 'userExist') {
+              swal({
+                 title: 'Error !!',
+                 text: 'El correo ingresado ya se encuentra registrado',
+                 type: 'error',
+                 showCancelButton: false,
+                 confirmButtonText: 'Aceptar',
+                 closeOnConfirm: true
+               });
+            }else{
+              var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
+                closeButton: true,
+                timeOut: 2000,
+              });
+            }
             $scope.saving = false;
           }
         }).catch(function(e){

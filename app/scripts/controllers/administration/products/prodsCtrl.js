@@ -10,7 +10,7 @@ angular.module('fotosApp')
     }
    $scope.getProds = function () {
     $scope.loading = true;
-    productsServices.productsList().then(function(r){
+    productsServices.productsList({q:'ALL'}).then(function(r){
           if (r.data.respuesta == true) {
              $scope.loading = false;
              $scope.productsList = r.data.list;

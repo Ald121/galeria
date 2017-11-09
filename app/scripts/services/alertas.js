@@ -9,14 +9,16 @@ var app = angular.module('fotosApp');
             save:'Ups !! No se pudo guardar el registro, Intentalo nuevamente',
             update:'Ups !! No se pudo actualizar el registro, Intentalo nuevamente',
             delete:'Ups !! No se pudo eliminar el registro, Intentalo nuevamente',
-            processPedido:'Ups !! No se pudo procesar el pedido, Intentalo nuevamente'
+            processPedido:'Ups !! No se pudo procesar el pedido, Intentalo nuevamente',
+            changeImageDefault:'Ups !! No se pudo cambiar la imagen de vista previa, Intentalo nuevamente'
         },
         ok :{
           upload:'Imagenes subidas correctamente',
           save:'Registro guardado correctamente',
           update:'Registro actualizado correctamente',
           delete:'Registro eliminado correctamente',
-          processPedido:'Pedido procesado correctamente'
+          processPedido:'Pedido procesado correctamente',
+          changeImageDefault:'Imagen de vista previa cambiada correctamente'
         }
     }
 

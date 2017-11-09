@@ -87,14 +87,14 @@ angular.module('fotosApp').factory('carService',['$q', '$timeout', '$http',
       $localStorage.car.total = sum.toFixed(2);
     }
 
-    function addPedido(){
+    function addPedido(dataCar){
       if ($localStorage.user) {
         if (!dataSend) {
           dataSend = {};
         }
         dataSend.token = $localStorage.user.token;
       }
-      return $http.post(generalService.dir() + 'addPedido', $localStorage.car);
+      return $http.post(generalService.dir() + 'addPedido', dataCar);
     }
 
     function viewDetails(ev,item,mdDialog){

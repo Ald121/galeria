@@ -34,7 +34,7 @@ angular.module('fotosApp')
     $scope.deleteArrayToSend = [];
     $scope.removeImage = function(index,item){
       $scope.deleting = true;
-      imageServices.deleteImg({img:item.url,idImage:item.idproductos_imagenes}).then(function(r){
+      imageServices.deleteImgProd({img:item.url,idImage:item.idproductos_imagenes}).then(function(r){
         if (r.data.respuesta) {
             $scope.item.images.splice(index,1);
             toastr.success(alertsService.alerts.ok.delete, 'Correcto !',{
@@ -43,7 +43,7 @@ angular.module('fotosApp')
           });
             $scope.deleting = false;
         }else{
-          toastr.success(alertsService.alerts.error.delete, 'Correcto !',{
+          toastr.error(alertsService.alerts.error.delete, 'Error !',{
             closeButton: true,
             timeOut: 2000,
           });
@@ -51,11 +51,39 @@ angular.module('fotosApp')
         }
       }).catch(function(e){
         userService.catchError(e);
-        toastr.success(alertsService.alerts.error.delete, 'Correcto !',{
+        toastr.error(alertsService.alerts.error.delete, 'Error !',{
           closeButton: true,
           timeOut: 2000,
         });
         $scope.deleting = false;
+      });
+    }
+
+    $scope.setPreviewImage = function(item){
+      $scope.changing = true;
+      imageServices.setPreviewProdImage({idProd:$scope.item.idproductos,idImage:item.idproductos_imagenes}).then(function(r){
+        if (r.data.respuesta == true) {
+            toastr.success(alertsService.alerts.ok.changeImageDefault, 'Correcto !',{
+            closeButton: true,
+            timeOut: 2000,
+          });
+            $scope.changing = false;
+            var result = {respuesta:'Y'};
+            $uibModalInstance.close(result);
+        }else{
+          $scope.changing = false;
+          toastr.error(alertsService.alerts.error.changeImageDefault, 'Error !',{
+            closeButton: true,
+            timeOut: 2000,
+          });
+        }
+      }).catch(function(e){
+        userService.catchError(e);
+        toastr.error(alertsService.alerts.error.changeImageDefault, 'Error !',{
+          closeButton: true,
+          timeOut: 2000,
+        });
+        $scope.changing = false;
       });
     }
 

@@ -4,7 +4,9 @@ angular.module('fotosApp').factory('imageServices',['$q', '$timeout', '$http','g
     return ({
       imageList: imageList,
       deleteImg:deleteImg,
-      imagesListByCat:imagesListByCat
+      imagesListByCat:imagesListByCat,
+      deleteImgProd:deleteImgProd,
+      setPreviewProdImage:setPreviewProdImage
     });
 
     function imageList(dataSend) {
@@ -35,6 +37,26 @@ angular.module('fotosApp').factory('imageServices',['$q', '$timeout', '$http','g
         dataSend.token = $localStorage.user.token;
       }
        return $http.post(generalService.dir() + 'deleteImg', dataSend);
+    }
+
+    function deleteImgProd(dataSend) {
+      if ($localStorage.user) {
+        if (!dataSend) {
+          dataSend = {};
+        }
+        dataSend.token = $localStorage.user.token;
+      }
+       return $http.post(generalService.dir() + 'deleteImgProd', dataSend);
+    }
+
+    function setPreviewProdImage(dataSend) {
+      if ($localStorage.user) {
+        if (!dataSend) {
+          dataSend = {};
+        }
+        dataSend.token = $localStorage.user.token;
+      }
+       return $http.post(generalService.dir() + 'setPreviewProdImage', dataSend);
     }
 
     }])

@@ -25,14 +25,22 @@
             <div class="row" style="padding-left: 2%;  padding-right: 2%;">
                 <div class="col-sm-3 col-md-3" ng-repeat="prod in productsList">
                     <div class="thumbnail">
-                        <img ng-src="{{prod.picDefault}}" style="width: 100%;
-            min-height: 200px !important;
-            max-height: 230px !important;" />
-                        <span class="label label-info" style="float: right;
-            font-size: 20px;
-            position: absolute;
-            top: 16px;
-            right: 28px;"> $ {{prod.precio}}</span>
+                        <div class="container-image-previe-admin">
+                            <div style="background: url({{prod.picDefault}});
+                                    background-repeat: no-repeat;
+                                    background-size: 100% auto;
+                                    width: 100%;
+                                    height: 225px;">
+                                
+                            </div>
+                             <!-- <img ng-src="{{prod.picDefault}}" /> -->
+                            <span class="label label-info" style="float: right;
+                                font-size: 20px;
+                                position: absolute;
+                                top: 16px;
+                                right: 28px;"> $ {{prod.precio}}
+                            </span>
+                        </div>
                         <div class="caption">
                             <h4>
                 <strong>{{prod.nombre}}</strong>
