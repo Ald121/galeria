@@ -46,6 +46,7 @@ module.exports = function(config) {
       'bower_components/underscore/underscore.js',
       'bower_components/angular-underscore-module/angular-underscore-module.js',
       'bower_components/bootstrap-sweetalert/dist/sweetalert.js',
+      'bower_components/ng-videosharing-embed/build/ng-videosharing-embed.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

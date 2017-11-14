@@ -52,7 +52,7 @@
                                     <tbody md-body>
                                         <tr md-row md-select="prod" md-select-id="name" md-auto-select ng-repeat="prod in carList.items">
                                             <td md-cell>
-                                                <img ng-src="{{prod.picDefault}}" width="50" alt="{{item.who}}"></td>
+                                                <img ng-src="{{prod.picDefault}}" width="50" alt="{{user.who}}"></td>
                                             <td md-cell>{{prod.nombre}}</td>
                                             <td md-cell>{{prod.precio}}</td>
                                             <td md-cell width="150">
@@ -84,7 +84,14 @@
                                             <div style="text-align: center;">
                                                 <img src="icons/bag.png" style="width: 10%;">
                                             </div>
+                                            <br>
                                             <div layout="row">
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                    <md-icon class="md-primary">text_fields</md-icon>
+                                                    <label>Numero de identificación (cedula,Id)</label>
+                                                    <input name="id_card" ng-model="user.id_card" type="text" required>
+                                                    <span ng-show="form.id_card.$touched && form.id_card.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+                                                </md-input-container>
                                                 <md-input-container class="md-icon-float md-block" flex="50">
                                                     <md-icon class="md-primary">text_fields</md-icon>
                                                     <label>Nombres</label>
@@ -101,6 +108,11 @@
                                             <div layout="row">
                                                 <md-input-container class="md-icon-float md-block" flex="50">
                                                     <md-icon class="md-primary">location</md-icon>
+                                                    <label>Pais</label>
+                                                    <input name="pais" ng-model="user.pais" type="text" readonly>
+                                                </md-input-container>
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                    <md-icon class="md-primary">location</md-icon>
                                                     <label>Provincia</label>
                                                     <input name="provincia" ng-model="user.provincia" type="text" readonly>
                                                 </md-input-container>
@@ -111,6 +123,11 @@
                                                 </md-input-container>
                                             </div>
                                             <div layout="row">
+                                                <md-input-container class="md-icon-float md-block" flex="25">
+                                                      <md-icon class="md-primary">home</md-icon>
+                                                      <label>Codigo Postal</label>
+                                                      <input name="codigo_postal" ng-model="user.codigo_postal" type="text" min="0" readonly>
+                                                </md-input-container>
                                                 <md-input-container class="md-icon-float md-block" flex="50">
                                                     <md-icon class="md-primary">email</md-icon>
                                                     <label>Correo / E-mail</label>
@@ -124,12 +141,16 @@
                                                     <span ng-show="form.telefono.$touched && form.telefono.$invalid" class="errorSpan requiredMsg">Telefono Incorrecto</span>
                                                 </md-input-container>
                                             </div>
-                                            <div layout-gt-lg="row">
-                                                <md-input-container class="md-icon-float md-block">
-                                                    <md-icon class="md-primary">home</md-icon>
-                                                    <label>Dirección</label>
-                                                    <input name="direccion" ng-model="user.direccion" type="text" readonly>
-                                                    <span ng-show="form.direccion.$touched && form.direccion.$invalid" class="errorSpan requiredMsg">Dirección Incorrecta</span>
+                                            <div layout="row">
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                      <md-icon class="md-primary">add_location</md-icon>
+                                                      <label>Calle 1</label>
+                                                      <input name="calle2" ng-model="user.calle2" type="text" readonly>
+                                                </md-input-container>
+                                                <md-input-container class="md-icon-float md-block" flex="50">
+                                                      <md-icon class="md-primary">add_location</md-icon>
+                                                      <label>Calle 2</label>
+                                                      <input name="calle1" ng-model="user.calle1" type="text" readonly>
                                                 </md-input-container>
                                             </div>
                                         </md-content>

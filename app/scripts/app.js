@@ -32,7 +32,8 @@ var app = angular
     'ui.select', 
     'ngSanitize',
     'colorpicker.module',
-    'underscore'
+    'underscore',
+    'videosharing-embed'
   ]);
 
 app.run(function($rootScope,$window,userService,toastr,$localStorage,$location,$routeSegment) {
@@ -64,6 +65,7 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
             // Administracion
             .when('/administration',    'administration')
             .when('/administration/images',    'administration.images')
+            .when('/administration/videos',    'administration.videos')
             .when('/administration/products',    'administration.products')
             .when('/administration/slider',    'administration.slider')
             .when('/administration/pedidos',    'administration.pedidos')
@@ -72,6 +74,7 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
             .when('/client/pedidos',    'client.pedidos')
             // Cofradia
             .when('/fotografia/:categoria',    'main.fotografia')
+            .when('/videos',    'main.videos')
             // Activar cuenta
             .when('/activarcuenta/:code',    'main.activarcuenta')
 
@@ -93,6 +96,10 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                     templateUrl: 'views/administration/images/index.html',
                     controller: 'administrationImagesCtrl',
                     default: true
+                })
+                .segment('videos', {
+                    templateUrl: 'views/administration/video/index.html',
+                    controller: 'videosCtrl'
                 })
                 .segment('products', {
                     templateUrl: 'views/administration/products/index.html',
@@ -119,6 +126,10 @@ app.config(function ($routeSegmentProvider, $routeProvider,$locationProvider) {
                     templateUrl: 'views/fotografia/main.html',
                     controller: 'FotografiaCtrl',
                     dependencies:['categoria']
+                })
+                .segment('videos', {
+                    templateUrl: 'views/fotografia/videos.html',
+                    controller: 'videosCtrl'
                 }) 
                 .segment('activarcuenta', {
                     templateUrl: 'views/main/inicio.html',

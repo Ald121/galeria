@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title"> <i class="fa fa-video-camera"></i> Añadir video</h3>
+</div>
+<form name="form" ng-submit="saveVideo()">
+<div class="modal-body" id="modal-body">
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label><i class="fa fa-font"></i> URL</label>
+            <input type="text" name="url" class="form-control" placeholder="url" ng-model="item.url" required>
+        </div>
+        <div class="form-group col-md-12">
+            <label><i class="fa fa-bars"></i> Descripción</label>
+            <textarea rows="5" ng-model="item.descripcion" class="form-control" placeholder="descripciòn del video" required></textarea>
+        </div> 
+        <div class="form-group col-md-12" ng-show="item.url">
+            <label><i class="fa fa-bars"></i> Vista previa</label><br>
+            <embed-video ng-href="{{item.url}}"><a href="{{item.url}}">Watch</a></embed-video>
+        </div>       
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" type="button" ng-click="close()" ng-disabled="savingVideo">Cancelar</button>
+        <button class="btn btn-warning" type="submit" ng-disabled="savingVideo || form.$invalid">
+            <span ng-show="loading">
+                <i class="fa fa-spinner fa-spin fa-fw" ></i>
+            </span>
+            OK
+        </button>
+    </div>
+</form>

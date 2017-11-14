@@ -1,0 +1,16 @@
+<md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+        <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="addVideo()">
+            <i class="fa fa-video-camera"></i> <i class="fa fa-plus"></i> Añadir Video
+        </button>
+    </div>
+</md-toolbar>
+<hr>
+<!-- exact table from live demo -->
+<div style="width: 100%;text-align: center;" ng-show="loadingVideoList">
+    <img src="icons/loading.svg" width="30">
+</div>
+
+<div class="row" style="padding-left: 2%;  padding-right: 2%;" ng-show="!loadingVideoList">
+    <embed-video ng-href="{{video.url}}" ng-repeat="video in videoList" width="320" height="215" style="margin-right: 10px;"><a href="{{video.url}}">Watch</a></embed-video>
+</div>

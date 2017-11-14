@@ -9,8 +9,10 @@ angular.module('fotosApp')
         });
       $location.path('/');
     }
+    
     $scope.getImgs = function () {
-         $scope.loading = true;
+        $scope.loading = true;
+        $scope.imgsList = [];
         imageServices.imageList().then(function(r){
           if (r.data.respuesta == true) {
              $scope.loading = false;
