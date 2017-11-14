@@ -92,55 +92,71 @@ var app = angular.module('fotosApp');
           $mdDialog.hide();
         }
         $scope.item = {};
-        
-        $scope.lodingProv = true;
-        locationService.provinciasList()
+        console.log('aq');
+        $scope.disablePaises = true;
+        $scope.disableProv = true;
+        $scope.disableCiudades = true;
+        $scope.spinnerCiudades = false;
+        $scope.spinerProv = false;
+        locationService.paisesList()
+        .then(function(r){
+          if (r.data.respuesta == true) {
+            $scope.disablePaises = false;
+            $scope.paisesList = r.data.paises;
+          }else{
+              var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+                closeButton: true,
+                timeOut: 2000,
+              });
+          }
+        }).catch(function(e){
+          $scope.disablePaises = false;
+          var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
+            closeButton: true,
+             timeOut: 2000,
+          });
+        });
+
+        $scope.getProvincias = function(pais){
+        $scope.disableProv = true;
+        $scope.disableCiudades = true;
+        $scope.spinerProv = true;
+        locationService.provinciasList({pais:pais})
         .then(function(r){
             if (r.data.respuesta == true) {
-              $scope.lodingProv = false;
+              $scope.disableProv = false;
+              $scope.spinerProv = false;
               $scope.provinciasList = r.data.provincias;
-            }else{
-                var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
-                  closeButton: true,
-                  timeOut: 2000,
-                });
-              $scope.saving = false;
             }
           }).catch(function(e){
-            $scope.lodingProv = false;
+            $scope.disableProv = true;
             var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
               closeButton: true,
                timeOut: 2000,
             });
-            $scope.saving = false;
           });
+        }
+
 
         $scope.getCiudades = function(prov){
-          $scope.loadingCiudades = true;
+          $scope.disableCiudades = true;
+           $scope.spinnerCiudades = true;
           locationService.ciudadesList({provincia:prov})
           .then(function(r){
               if (r.data.respuesta == true) {
                 $scope.ciudadesList = r.data.ciudades;
-                $scope.loadingCiudades = false;
-              }else{
-                $scope.loadingCiudades = false;
-                var toast = toastr.error('Usuario o contraseña incorrecto', 'Error',{
-                  closeButton: true,
-                  timeOut: 2000,
-                });
-                $scope.saving = false;
+                $scope.disableCiudades = false;
+                $scope.spinnerCiudades = false;
               }
             }).catch(function(e){
-              $scope.loadingCiudades = false;
+              $scope.disableCiudades = true;
               var toast = toastr.error('Ups! intentalo nuevamente', 'Error',{
                 closeButton: true,
                  timeOut: 2000,
               });
-              $scope.saving = false;
             });
         } 
         $scope.setCiudad = function(item){
-          console.log(item);
           $scope.item.ciudad = item;
         }
 

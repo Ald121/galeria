@@ -17,6 +17,12 @@
             <div layout="row">
               <md-input-container class="md-icon-float md-block" flex="50">
                 <md-icon class="md-primary">text_fields</md-icon>
+                <label>Numero de identificación (cedula,Id)</label>
+                <input name="id_card" ng-model="item.id_card" type="number" required>
+                <span ng-show="form.id_card.$touched && form.id_card.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                <md-icon class="md-primary">text_fields</md-icon>
                 <label>Nombres</label>
                 <input name="nombres" ng-model="item.nombres" type="text" required>
                 <span ng-show="form.nombres.$touched && form.nombres.$invalid" class="errorSpan requiredMsg">Campo Requerido</span>
@@ -31,8 +37,18 @@
             <div layout="row">
               <md-input-container class="md-icon-float md-block" flex="50">
                 <md-icon class="md-primary">adress</md-icon>
-                <label>Provincia</label>
-                 <ui-select ng-model="selected.provincia" theme="bootstrap" ng-change="getCiudades($select.selected.nombre)" ng-disabled="loadingProv">
+                <label>Pais</label>
+                 <ui-select ng-model="selected.pais" theme="bootstrap" ng-change="getProvincias($select.selected.nombre)" ng-disabled="disablePaises">
+                    <ui-select-match placeholder="Selecione su pais...">{{$select.selected.nombre}}</ui-select-match>
+                    <ui-select-choices repeat="item in paisesList | filter: $select.search">
+                      <span ng-bind-html="item.nombre | highlight: $select.search"></span>
+                    </ui-select-choices>
+                </ui-select>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                <md-icon class="md-primary">adress</md-icon>
+                <label>Provincia/Estado <span style="color: blue;" ng-show="spinerProv"><i class="fa fa-spinner fa-spin"></i></span></label>
+                 <ui-select ng-model="selected.provincia" theme="bootstrap" ng-change="getCiudades($select.selected.nombre)" ng-disabled="disableProv">
                     <ui-select-match placeholder="Selecione la Provincia...">{{$select.selected.nombre}}</ui-select-match>
                     <ui-select-choices repeat="item in provinciasList | filter: $select.search">
                       <span ng-bind-html="item.nombre | highlight: $select.search"></span>
@@ -41,8 +57,8 @@
               </md-input-container>
               <md-input-container class="md-icon-float md-block" flex="50">
                 <md-icon class="md-primary">adress</md-icon>
-                <label>Ciudad</label>
-                 <ui-select ng-model="selected.ciudad" theme="bootstrap" ng-change="setCiudad($select.selected.nombre)">
+                <label>Ciudad/Municipio <span style="color: blue;" ng-show="spinnerCiudades"><i class="fa fa-spinner fa-spin"></i></span></label>
+                 <ui-select ng-model="selected.ciudad" theme="bootstrap" ng-change="setCiudad($select.selected.nombre)" ng-disabled="disableCiudades">
                     <ui-select-match placeholder="Selecione la Ciudad..." >{{$select.selected.nombre}}</ui-select-match>
                     <ui-select-choices repeat="item in ciudadesList | filter: $select.search">
                       <span ng-bind-html="item.nombre | highlight: $select.search"></span>
@@ -51,25 +67,36 @@
               </md-input-container>
             </div>
             <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="25">
+                  <md-icon class="md-primary">home</md-icon>
+                  <label>Codigo Postal</label>
+                  <input name="codigo_postal" ng-model="item.codigo_postal" type="number" min="0" required>
+              </md-input-container>
               <md-input-container class="md-icon-float md-block" flex="50">
                 <md-icon class="md-primary">email</md-icon>
                 <label>Correo / E-mail</label>
                 <input name="email" ng-model="item.email" type="email" required>
                 <span ng-show="form.email.$touched && form.email.$invalid" class="errorSpan requiredMsg">Email Incorrecto</span>
               </md-input-container>
-              <md-input-container class="md-icon-float md-block" flex="50">
+              <md-input-container class="md-icon-float md-block" flex="45">
                   <md-icon class="md-primary">phone</md-icon>
                   <label>Telefono / Celular</label>
-                  <input name="telefono" ng-model="item.telefono" type="number" required>
+                  <input name="telefono" ng-model="item.telefono" type="number" min="0" required>
                   <span ng-show="form.telefono.$touched && form.telefono.$invalid" class="errorSpan requiredMsg">Telefono Incorrecto</span>
               </md-input-container>
             </div>
-            <div layout-gt-lg="row">
-              <md-input-container class="md-icon-float md-block" >
-                  <md-icon class="md-primary">home</md-icon>
-                  <label>Dirección</label>
-                  <input name="direccion" ng-model="item.direccion" type="text" required>
-                  <span ng-show="form.direccion.$touched && form.direccion.$invalid" class="errorSpan requiredMsg">Dirección Incorrecta</span>
+            <div layout="row">
+              <md-input-container class="md-icon-float md-block" flex="50">
+                  <md-icon class="md-primary">add_location</md-icon>
+                  <label>Calle 1</label>
+                  <input name="calle2" ng-model="item.calle2" type="text" required>
+                  <span ng-show="form.calle2.$touched && form.calle2.$invalid" class="errorSpan requiredMsg">Dirección Incorrecta</span>
+              </md-input-container>
+              <md-input-container class="md-icon-float md-block" flex="50">
+                  <md-icon class="md-primary">add_location</md-icon>
+                  <label>Calle 2</label>
+                  <input name="calle1" ng-model="item.calle1" type="text" required>
+                  <span ng-show="form.calle1.$touched && form.calle1.$invalid" class="errorSpan requiredMsg">Dirección Incorrecta</span>
               </md-input-container>
             </div>
             <div layout="row">

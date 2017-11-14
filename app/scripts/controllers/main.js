@@ -23,7 +23,7 @@ angular.module('fotosApp')
                         {nombre:'Editorial',link:'/fotografia/Editorial',icon:'fa-picture-o',child:[]}
                       ]},
                       {nombre:'Workshop',link:'/',icon:'fa-home',child:[]},
-                      {nombre:'Videos',link:'/',icon:'fa-video-camera',child:[]},
+                      {nombre:'Videos',link:'/videos',icon:'fa-video-camera',child:[]},
                       {nombre:'Productos',link:'/',icon:'fa-product-hunt',child:[]}
                       // {nombre:'Ingreso ',link:'/',icon:'fa-user-circle',child:[]},
                     ];

@@ -14,7 +14,8 @@ angular.module('fotosApp')
     }
 
     $scope.menuAdministration = [
-    							  {rol:'ADMIN',nombre:'Galeria',icon:'fa-picture-o',link:'/administration/images',child:[]},
+                    {rol:'ADMIN',nombre:'Galeria',icon:'fa-picture-o',link:'/administration/images',child:[]},
+    							  {rol:'ADMIN',nombre:'videos',icon:'fa-video-camera',link:'/administration/videos',child:[]},
                     {rol:'ADMIN',nombre:'Productos',icon:'fa-shopping-bag',link:'/administration/products',child:[]},
                     {rol:'ADMIN',nombre:'Pedidos',icon:'fa-archive',link:'/administration/pedidos',child:[]},
                     {rol:'CLIENTE',nombre:'Mis Pedidos',icon:'fa-archive',link:'/client/pedidos',child:[]}
